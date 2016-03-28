@@ -13,19 +13,14 @@
         <li><a href="#" id="<?php echo $algo; ?>" onclick="Filter(id)">FILTER</a></li>
         <li class="divider" ></li>
         <li role="presentation" class="dropdown-header">TRIPLE</li>
-        <li><a href="#" id="<?php echo $algo;?>" onclick="Triple(id,'vcv')">V-C-V</a></li>
-        <li><a href="#" id="<?php echo $algo;?>" onclick="Triple(id,'V-C-C')">V-C-C</a></li>
+        <li><a href="#" id="<?php echo $algo;?>" onclick="Triple(id,'V-C-V')">V-C-V</a></li>
         <li><a href="#" id="<?php echo $algo;?>" onclick="Triple(id,'C-C-V')">C-C-V</a></li>
-        <li><a href="#" id="<?php echo $algo;?>" onclick="Triple(id)">V-U-V</a></li>
-        <li><a href="#" id="<?php echo $algo;?>" onclick="Triple(id)">V-U-V</a></li>
-        <li><a href="#" id="<?php echo $algo;?>" onclick="Triple(id)">V-U-V</a></li>
-        <li><a href="#" id="<?php echo $algo;?>" onclick="Triple(id)">V-U-V</a></li>
-        <li><a href="#" id="<?php echo $algo;?>" onclick="Triple(id)">V-U-V</a></li>
-        <li><a href="#" id="<?php echo $algo;?>" onclick="Triple(id)">V-U-V</a></li>
-        <li><a href="#" id="<?php echo $algo;?>" onclick="Triple(id)">V-U-V</a></li>
-        <li><a href="#" id="<?php echo $algo;?>" onclick="Triple(id)">V-U-V</a></li>
-        <li><a href="#" id="<?php echo $algo;?>" onclick="Triple(id)">V-x-V</a></li>
-
+        <li><a href="#" id="<?php echo $algo;?>" onclick="Triple(id,'V-C-C')">V-C-C</a></li>
+        <li><a href="#" id="<?php echo $algo;?>" onclick="Triple(id,'V-V-C')">V-V-C</a></li>
+        <li><a href="#" id="<?php echo $algo;?>" onclick="Triple(id,'C-V-V')">C-V-V</a></li>
+        <li><a href="#" id="<?php echo $algo;?>" onclick="Triple(id,'C-V-C')">C-V-C</a></li>
+        <li><a href="#" id="<?php echo $algo;?>" onclick="Triple(id,'V-V-V')">V-V-V</a></li>
+        <li><a href="#" id="<?php echo $algo;?>" onclick="Triple(id,'C-C-C')">C-C-C</a></li>
     </ul>
 </div>
 <script type='text/javascript' src='CargarBoton.js'></script>

@@ -1,4 +1,4 @@
-<!-- Este es el archivo Triple V-C-V -->
+<!-- Este es el archivo Triple aaaa -->
 <?php 
     $algo =$_REQUEST['valor'];
 ?>

@@ -28,13 +28,12 @@ var valorNext;//para la paginación
 var valorConsulta;//para la consulta de la paginación
 var booleanNext=true;//para saber que fue llamado de next
 var prefijos =""; 
-var prefixArray =  new Array(2);
-prefixArray[0] = new Array("rdf:","http://www.w3.org/1999/02/22-rdf-syntax-ns#");
-prefixArray[1] = new Array("rdfs:","http://www.w3.org/2000/01/rdf-schema#/");
+var prefixArray =  new Array();
 var variablesArray = new Array(1);
 variablesArray[0] = new Array("?x");
 variablesArray[1] = new Array("?z");
 variablesArray[2] = new Array("?y");
+
 
 window.onload = function()
 {
@@ -52,9 +51,23 @@ window.onload = function()
     property();//cargar la lista del ?y
     clases();//carga las clases
 }
+
+// Action on Click
+
+$( ".btn" ).click(function() {
+    setTimeout(function(){
+       
+    },1000);
+
+});
+
+
+
+
 //funcion para cargar las clases
 function clases()
 {
+    //<i class='icon-spinner icon-spin icon-large'></i>
     var querySparql = "select distinct ?c where{?x rdf:type ?c }";
     console.log(querySparql);
     var ipServer = document.getElementById("ipServer").value;
@@ -69,6 +82,7 @@ function clases()
         success:
         function(datos)
         {
+            // $('.alert').css('display','none');
            var rtArray = datos.results.bindings;
             var respuesta ="";
                 //obtener el  cuerpo de la lista
@@ -87,12 +101,12 @@ function clases()
                     //console.log(cortar(res));
                     var valorprefix = uriPrefix2(res);
                     agregarclases(valorprefix);
-
+                    
                 }
             }
         }
-    });
 
+    });
 }
 //funcion para cargar las property
 function property()
@@ -133,6 +147,7 @@ function property()
             }
         }
     });
+
 }
 //funcion cuando sale del campo de la variables
 function salio(id,xyz)
@@ -492,13 +507,13 @@ function precionarTeclaz(id)
     }
     max = max+1;
 }); */
-    var campoid = "y1";
+    var campoid = "y"+id;
     respuesta = " <option value ='nada'/> " ;
     console.log("RESPUESTA DE LA HACION yyyy "+respuesta);     
     $("#"+campoid).html(respuesta);
 
     //$("#"+campoid).html(respuesta);
-    console.log($("#"+campoid).value);
+    console.log($("#"+campoid));
     return;
  }
 /**
@@ -508,9 +523,16 @@ function borrarPanel(id)
 {
     var alerta = "Elimino panel "+id;
     console.log(alerta);
-    var x ="#"+id;
-    var valor = id;
-    $(x).load('Opciones.php',{valor:valor});
+   
+        bootbox.confirm("¿Está seguro que desea eliminar el elemento "+id +"?", function(result) {
+        if(result== true)
+        {
+            var x ="#"+id;
+            var valor = id;
+            $(x).load('Opciones.php',{valor:valor});
+            
+        }
+        }); 
 }
 /**
 */
@@ -526,17 +548,17 @@ alert("Seleccionaste cancelar")
 */
 function borrarPanel2(id,id2)
 {
-   /*jbootbox.confirm("¿ Desea eliminar ?", function(result) {
-    if (result) {
-        console.log("User declined dialog");
-    } else {
-        console.log("User declined dialog");
-    } */
     var alerta = "Elimino panel "+id;
         console.log(alerta);
-        var x ="#"+id+id2;
-        var valor = id;
-        $(x).load('Opciones.php',{valor:valor});    
+        bootbox.confirm("¿Está seguro que desea eliminar el elemento "+id +"?", function(result) {
+            if(result== true)
+            {
+                var x ="#"+id+id2;
+                var valor = id;
+                $(x).load('Opciones.php',{valor:valor});
+            }
+        }); 
+            
 }
 
 function GetCampos()
@@ -548,7 +570,9 @@ function GetCampos()
         {            
             if(ValidarCampo(CamposImput[i]) == false)
             {
-                $("#Modal").modal("show");
+                bootbox.alert("Debe completar todos los campos", function() {
+
+                });
                 return;
             }           
         }
@@ -658,7 +682,9 @@ function iniciarConsulta(consulta)
     // debo limpiar el div 
     document.getElementById("principal").innerHTML="";
     document.getElementById("principal1").innerHTML="";
+    console.log("consulta sin tranformar "+consulta);
     consulta =prefixuri(consulta);
+    console.log("consulta tranformada  "+consulta);
     var querySparql = consulta +" LIMIT "+10+" OFFSET "+(valorNext*10);
     var ipServer = document.getElementById("ipServer").value;
     var grafo = document.getElementById("grafo").value;
@@ -704,8 +730,8 @@ function iniciarConsulta(consulta)
                     k = JSON.stringify(auxCA[lista[objetos]]);
                     var cortada = k.split('"value":');
                     var cortadas = cortada[1].slice(1,cortada[1].length-2);
-                    //console.log(cortadas);
-                    respuesta = respuesta + "<td>"+cortadas + "</td>" ;
+                    //console.log("Es esto"+cortadas);
+                    respuesta = respuesta + "<td>"+uriPrefix2(cortadas) + "</td>" ;
                 }
                 //por el momento doy el x y z manual
                     // respuesta =respuesta+"<tr><td> "+auxCA.x.value + "</td><td> " 
@@ -902,19 +928,7 @@ function Filter(i)
     $(oID).load("filter.php",{valor:valor}); 
 }
 /* Cargar archivo PHP
- * Carag archivo php de la opcion(operador) Condicion
- * @param {type} i identificador del div
- * @returns archivo php
- */
-function Triple(i)
-{
-    var oID ="#"+ i;
-    var valor = i;
-    $(oID).load("Triple.php",{valor:valor}); 
-
-}
-/* Cargar archivo PHP
- * Carag archivo php de la opcion(operador) Condicion
+ * Carag archivo php de la opcion(operador y index) Condicion
  * @param {type} i identificador del div
  * @returns archivo php
  */
@@ -922,18 +936,10 @@ function Triple(i,tipo)
 {
     var oID ="#"+ i;
     var valor = i;
-    console.log("a"+tipo+"a");
-    if(tipo == 'vcv')
-    {
-        console.log("V-C-V");
-        $(oID).load("V-C-V.php",{valor:valor});
-    }
-    else
-    {
-        console.log("carge el otro");
-        $(oID).load("Triple.php",{valor:valor});
-        cargarlistay(i); 
-    }
+    console.log(tipo);
+    var ubicacion = "./triples/"+tipo+".php";
+    $(oID).load(ubicacion,{valor:valor});
+    
 }
 /* Pasar a la siguiente tabla
 *   
@@ -953,9 +959,10 @@ function previous()
         booleanNext=true;
     }
 }
-// funcion para destranformar los prefijos a uri, intento 0
+// funcion para destranformar los prefijos a uri, intento 1
 function prefixuri(consulta)
 {
+    console.log("+++++++++++++++++"+consulta);
     var listac = consulta.split(" ");
     consulta="";
     for (var j = 0; j < listac.length; j++) 
@@ -963,10 +970,20 @@ function prefixuri(consulta)
 
         for (var i = 0; i < prefixArray.length; i++) 
         {
-            if(listac[j].indexOf(prefixArray[i][0]) != -1)
+            var corta = prefixArray[i][0];//georss:point
+            var corta1 = corta.split(":");
+            var corta2 = corta1[0]+":";// georss:
+            var list1 = listac[j].split(":");//georss:point
+            var valora = prefixArray[i][1];
+
+            //console.log(corta2+"-"+list1[0]+":"+valora);
+            if (corta2==(list1[0]+":"))
             {
-                listac[j] =listac[j].replace(prefixArray[i][0],"<"+prefixArray[i][1]) +">" ;
-            }      
+                console.log("Encontr el prefijo "+ corta2);
+                var res  =listac[j].replace(corta2,valora);
+                listac[j] = "<"+res+">";
+                console.log(listac[j]);
+            }    
         }
     }
     for (var i = 0; i < listac.length; i++) 
@@ -992,17 +1009,6 @@ function agregarclases(uris ){
     $('#tablaclases').append(cadena);
 }
 
-function eliminarcaracteres(stringToReplace){
-    var specialChars = "!@$^&%*()+=-[]{}|:<>?,.";
-    for (var i = 0; i < specialChars.length; i++) {
-        stringToReplace = stringToReplace.replace(new RegExp("\\" + specialChars[i], 'g'), '');
-    }
-    //specialChars = "jhjh008767n870";
-
- stringToReplace=stringToReplace.replace(new RegExp("[0-9]", "g"), "");
-
-    return stringToReplace;
-}
 
 function eliminarcaracteres(stringToReplace){
     var specialChars = "!@$^&%*()+=-[]{}|:<>?,.";
@@ -1069,7 +1075,15 @@ var original=uri;
     }
     return false;
 }
+/* 
+*   funcion escargada de tranformar 
+*   las uri a valor con prefijo
+*/
 function uriPrefix2(uri){
+    if(uri.indexOf('http') == -1)
+    {
+        return uri;
+    }
     var nameprefix = "";
     //console.log(uri);
     var elemento=new Array();
@@ -1124,17 +1138,51 @@ function uriPrefix2(uri){
     for (var i = 0; i < prefixArray.length; i++) {
         if(prefixArray[i][1]== elemento[1])
         {
-           return elemento[0]; 
+            if((nameprefix+':') == prefixArray[i][0])
+            {
+                //console.log("elemento ya agregado "+ elemento[1]);
+                return elemento[0]; 
+            }
+            else // debo cambiar el nameprefix
+            {
+                elemento[0] = prefixArray[i][0]+elemento[0].split(':')[1];
+            }
+            
+        }
+    };
+    //verificar el nombre
+    for (var i = 0; i < prefixArray.length; i++) {
+        if(prefixArray[i][0]== (nameprefix+":"))
+        {
+           nameprefix=nameprefix+"a"; 
         }
     };
     //no esta debo agregar
-
+    //console.log("Agrege "+ elemento[1]);
+     var cadenab=nameprefix.replace(/ /g,'&nbsp');
+    if(elemento[1]== 'undefined' || elemento[1] =='<>' || cadenab == ":")
+    {
+        return elemento[0];
+    }
     prefixArray[prefixArray.length]= new Array(nameprefix+':',elemento[1]) ;
-    //debo agregar el prefijo 
+    //debo agregar el prefijo
+    //console.log("Este fue agregado "+nameprefix);
     prefijos = prefijos+ " prefix "+prefixArray[prefixArray.length-1][0]+" <"+ prefixArray[prefixArray.length-1][1]+">";
     agregarFila(prefixArray[prefixArray.length-1][0],prefixArray[prefixArray.length-1][1]);
 
     //console.log("elemento: "+elemento);
 
     return elemento[0];
+}
+function YO(id,tipo)
+{
+    var oID ="#"+ id;
+    var valor = id;
+    $(oID).load("./contition/"+tipo+".php",{valor:valor}); 
+}
+function Basica(id,tipo)
+{
+    var oID ="#"+ id;
+    var valor = id;
+    $(oID).load("./contition/"+tipo+".php",{valor:valor}); 
 }

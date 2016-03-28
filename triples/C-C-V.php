@@ -1,4 +1,4 @@
-<!-- Este es el archivo Triple V-C-V -->
+<!-- Este es el archivo Triple ccv-->
 <?php 
     $algo =$_REQUEST['valor'];
 ?>
@@ -7,7 +7,7 @@
     	<button type="button" class="close" aria-hidden="true" onclick="borrarPanel(<?php echo $algo; ?>)">&times;</button>
     	<br> 
     	<div class="row">       
-			<div class="col-md-12 "><input class="form-control" type="text"  style="background-color:#D6EEF7" placeholder="?x" id="<?php echo $algo; ?> x" value="?x" onchange="cambioTexto()"  onblur="salio(<?php echo $algo; ?>,'x')" onkeyup="precionaTeclavariable(<?php echo $algo; ?>,'x')"list="x<?php echo $algo; ?>"></div>
+			<div class="col-md-12"><input class="form-control"  type="text" placeholder="?x" id="<?php echo $algo; ?> x" value="?x" onchange="cambioTexto()" onkeyup="precionarTeclax(<?php echo $algo; ?>)"list="x<?php echo $algo; ?>"></div>
 	        </br>
 	        <div class="col-md-12"><input class="form-control"  type="text" placeholder="?y" id="<?php echo $algo; ?> y" value="?y" onchange="cambioTexto()" onkeyup="precionarTeclay(<?php echo $algo; ?>)"list="y<?php echo $algo; ?>"></div>
 	    	</br>

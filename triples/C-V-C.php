@@ -1,15 +1,15 @@
-<!-- Este es el archivo Triple V 1.0 -->
+<!-- Este es el archivo Triple C-V-C -->
 <?php 
     $algo =$_REQUEST['valor'];
 ?>
 <div class="btn-group" id="<?php echo $algo; ?>">
-    <div class="thumbnail" id="<?php echo $algo; ?>_TRIPLE" ><strong>Triple <?php echo $algo;?></strong>
+    <div class="thumbnail" id="<?php echo $algo; ?>_TRIPLE" ><strong>Triple <?php echo $algo;?> C-V-C</strong>
     	<button type="button" class="close" aria-hidden="true" onclick="borrarPanel(<?php echo $algo; ?>)">&times;</button>
     	<br> 
     	<div class="row">       
 			<div class="col-md-12"><input class="form-control"  type="text" placeholder="?x" id="<?php echo $algo; ?> x" value="?x" onchange="cambioTexto()"  onkeyup="precionarTeclax(<?php echo $algo; ?>)"list="x<?php echo $algo; ?>"></div>
 	        </br>
-	        <div class="col-md-12"><input class="form-control"  type="text" placeholder="?y" id="<?php echo $algo; ?> y" value="?y" onchange="cambioTexto()" onkeyup="precionarTeclay(<?php echo $algo; ?>)"list="y<?php echo $algo; ?>"></div>
+	        <div class="col-md-12"><input class="form-control"  type="text" style="background-color:#D6EEF7" placeholder="?y" id="<?php echo $algo; ?> y" value="?y" onchange="cambioTexto()" onblur="salio(<?php echo $algo; ?>,'y')" onkeyup="precionaTeclavariable(<?php echo $algo; ?>,'y')"list="y<?php echo $algo; ?>"></div>
 	    	</br>
 	        <div class="col-md-12"><input class="form-control"  type="text" placeholder="?z" id="<?php echo $algo; ?> z" value="?z" onchange="cambioTexto()"  onkeyup="precionarTeclaz(<?php echo $algo; ?>)"list="z<?php echo $algo; ?>"></div>
         </div>
