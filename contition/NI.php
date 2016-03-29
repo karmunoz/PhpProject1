@@ -4,7 +4,7 @@
 ?>
 <div class="btn-group" id="<?php echo $algo; ?>">
     <div class="thumbnail" id="<?php echo $algo; ?>_NI" ><strong>&#33;&#61; <?php echo $algo;?></strong>
-    	<button type="button" class="close" aria-hidden="true" onclick="borrarPanel(<?php echo $algo; ?>)">&times;</button>
+    	<button type="button" class="close" aria-hidden="true" onclick="borrarPanelfilter(<?php echo $algo; ?>)">&times;</button>
     	<br> 
     	<div class="row">       
 			<div class="col-md-12"><input class="form-control" type="text"  style="background-color:#D6EEF7" placeholder="?x" id="<?php echo $algo; ?> x" value="?x" onchange="cambioTexto()"  onblur="salio(<?php echo $algo; ?>,'x')" onkeyup="precionaTeclavariable(<?php echo $algo; ?>,'x')"list="x<?php echo $algo; ?>"></div>

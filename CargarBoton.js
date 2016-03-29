@@ -550,6 +550,37 @@ function borrarPanel2(id,id2)
         }
     });             
 }
+/*
+*   borrar panel de filter
+*/
+function borrarPanelfilter(id)
+{
+    var alerta = "Elimino panel "+id;
+    console.log(alerta);
+   
+        bootbox.confirm("¿Está seguro que desea eliminar el elemento "+id +"?", function(result) {
+        if(result== true)
+        {
+            var x ="#"+id;
+            var valor = id;
+            $(x).load('Condition.php',{valor:valor});
+            
+        }
+        });              
+}
+function borrarPanelfilter2(id,id2)
+{
+    var alerta = "Elimino panel "+id;
+    console.log(alerta);
+    bootbox.confirm("¿Está seguro que desea eliminar el elemento "+id +"?", function(result) {
+        if(result== true)
+        {
+            var x ="#"+id+"_"+id2;
+            var valor = id;
+            $(x).load('Condition.php',{valor:valor});
+        }
+    });             
+}
 
 function GetCampos()
 {
