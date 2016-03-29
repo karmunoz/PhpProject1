@@ -12,6 +12,14 @@
         <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
         <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
         <link rel="icon" type="image/png" href="icono.png" />
+        <!-- Para las tablas -->
+        <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">   
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+        <link rel="stylesheet" href="http://cdn.datatables.net/1.10.2/css/jquery.dataTables.min.css"></style>
+        <script type="text/javascript"  src="http://cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"></script>
+        <script type="text/javascript" src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+
         
     </head>
     <body>
@@ -38,6 +46,7 @@
                             <div class="panel-body" >
                                 <div class="col-lg-15"><!---->
                                         <div class="panel-heading">
+                                                
                                                 <ul class="nav nav-tabs">
                                                     <li class="active"><a href="#tab1primary" data-toggle="tab">Class</a></li>
                                                     <li><a href="#tab2primary" data-toggle="tab">Property</a></li>
@@ -48,7 +57,12 @@
                                             <div class="tab-content">
                                                 <div class="tab-pane fade in active" id="tab1primary">
                                                     <div class="table-responsive" style="height:300px; max-height: 10 ;overflow-y: scroll;">
-                                                        <table class="table" id="tablaclases">
+                                                        <div class="form-group has-feedback">
+                                                            <label class="control-label" for="search"></label>
+                                                            <input type="text" class="form-control" id="search" data-type="search" placeholder="buscar..."/>
+                                                            <span class="glyphicon glyphicon-search form-control-feedback"></span>
+                                                        </div>
+                                                        <table  id="tablaclases" class="table">
                                                           <!-- Aplicadas en las celdas (<td> o <th>) -->
                                                             <tr>
                                                             </tr>
@@ -57,7 +71,12 @@
                                                 </div>
                                                 <div class="tab-pane fade" id="tab2primary">
                                                     <div class="table-responsive" style="height:300px; max-height: 10 ;overflow-y: scroll;">
-                                                        <table class="table" id="tablaproperty">
+                                                        <div class="form-group has-feedback">
+                                                            <label class="control-label" for="search1"></label>
+                                                            <input type="text" class="form-control" id="search1" data-type="search" placeholder="buscar..."/>
+                                                            <span class="glyphicon glyphicon-search form-control-feedback"></span>
+                                                        </div>
+                                                        <table class="order-table table" id="tablaproperty">
                                                           <!-- Aplicadas en las celdas (<td> o <th>) -->
                                                             <tr>
                                                             </tr>
@@ -81,6 +100,12 @@
                                     <div class="panel-body">
 
                                        <div class="table-responsive" style="height:300px; max-height: 10 ;overflow-y: scroll;">
+                                        <div class="form-group has-feedback">
+                                            <label class="control-label" for="search2"></label>
+                                            <input type="text" class="form-control" id="search2" data-type="search" placeholder="buscar..."/>
+                                            <span class="glyphicon glyphicon-search form-control-feedback"></span>
+                                        </div>
+
                                         <table class="table" id="tablaprefix">  
 
                                           <!-- Aplicadas en las filas -->
