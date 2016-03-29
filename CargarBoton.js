@@ -710,8 +710,10 @@ function iniciarConsulta(consulta)
     var ipServer = document.getElementById("ipServer").value;
     var grafo = document.getElementById("grafo").value;
     var endPoint = document.getElementById("endPoint").value;
+
     var datos = "q=" + querySparql +"###"+ipServer+"###"+grafo+"###"+endPoint;
     console.log("----------------------"+datos);
+    
     $.ajax({
         type: "POST",
         url:"peticionHTTP.php",
@@ -979,7 +981,7 @@ function Funcion(lista,i)
     }
     if(lista[i]=="Y")
     {
-        return  Funcion(lista,i*2)+ " && " + Funcion(lista,(i*2)+1)+ " ";
+        return  Funcion(lista,i*2)+ " ***** " + Funcion(lista,(i*2)+1)+ " ";
     }
     if(lista[i]=="O")
     {
