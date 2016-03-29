@@ -535,30 +535,20 @@ function borrarPanel(id)
         }); 
 }
 /**
-*/
-function mi_alerta(){
-confirmar=confirm("Pulsa sobre las siguientes opciones.");
-if (confirmar)
-alert("Seleccionaste aceptar")
-else
-alert("Seleccionaste cancelar")
-}
-/**
 * Eliminar el panel con un id que no sea numero
 */
 function borrarPanel2(id,id2)
 {
     var alerta = "Elimino panel "+id;
-        console.log(alerta);
-        bootbox.confirm("¿Está seguro que desea eliminar el elemento "+id +"?", function(result) {
-            if(result== true)
-            {
-                var x ="#"+id+id2;
-                var valor = id;
-                $(x).load('Opciones.php',{valor:valor});
-            }
-        }); 
-            
+    console.log(alerta);
+    bootbox.confirm("¿Está seguro que desea eliminar el elemento "+id +"?", function(result) {
+        if(result== true)
+        {
+            var x ="#"+id+id2;
+            var valor = id;
+            $(x).load('Opciones.php',{valor:valor});
+        }
+    });             
 }
 
 function GetCampos()
@@ -775,6 +765,7 @@ function iniciarConsulta(consulta)
  */
 function Funcion2(lista,i)
 {
+    console.log(lista+"-"+i+" funcion2");
     if(lista[i]== "TRIPLE")
     {
         var valor = i+" x" 
@@ -802,6 +793,62 @@ function Funcion2(lista,i)
         retorno = retorno+" "+ret;
         console.log(retorno);
         return retorno;
+    }
+    if (lista[i]=="NI")
+    {
+        var valor = i +" x";
+        var retorno = document.getElementById(valor).value;
+        valor = i+" y";
+        var retorno = retorno + " != "+document.getElementById(valor).value;
+        return retorno;
+    }
+    if (lista[i]=="meI")
+    {
+        var valor = i +" x";
+        var retorno = document.getElementById(valor).value;
+        valor = i+" y";
+        var retorno = retorno + " <= "+document.getElementById(valor).value;
+        return retorno;
+    }
+    if (lista[i]=="MI")
+    {
+        var valor = i +" x";
+        var retorno = document.getElementById(valor).value;
+        valor = i+" y";
+        var retorno = retorno + " >= "+document.getElementById(valor).value;
+        return retorno;
+    }
+    if (lista[i]=="I")
+    {
+        var valor = i +" x";
+        var retorno = document.getElementById(valor).value;
+        valor = i+" y";
+        var retorno = retorno + " = "+document.getElementById(valor).value;
+        return retorno;
+    }
+    if (lista[i]=="me")
+    {
+        var valor = i +" x";
+        var retorno = document.getElementById(valor).value;
+        valor = i+" y";
+        var retorno = retorno + " < "+document.getElementById(valor).value;
+        return retorno;
+    }
+    if (lista[i]=="M")
+    {
+        var valor = i +" x";
+        var retorno = document.getElementById(valor).value;
+        valor = i+" y";
+        var retorno = retorno + " > "+document.getElementById(valor).value;
+        return retorno;
+    }
+    if(lista[i]=="Y")
+    {
+        return  Funcion2(lista,i*2)+ " && " + Funcion2(lista,(i*2)+1)+" ";
+    }
+    if(lista[i]=="O")
+    {
+        return  Funcion2(lista,i*2)+ " || " + Funcion2(lista,(i*2)+1)+" ";
     }
     if(lista[i]== "CONDITION")
     {
@@ -835,6 +882,7 @@ function Funcion2(lista,i)
  */
 function Funcion(lista,i)
 {
+    console.log(lista+"-"+i+" funcion");
     if(lista[i]== "TRIPLE")
     {
         var valor = i+" x" 
@@ -845,11 +893,68 @@ function Funcion(lista,i)
         retorno = retorno +" "+ document.getElementById(valor).value;
         return retorno;
     }
+    if(lista[i]=="NI")
+    {
+        var valor = i +" x";
+        var retorno = document.getElementById(valor).value;
+        valor = i+" y";
+        var retorno = retorno + " != "+document.getElementById(valor).value;
+        return retorno;
+    }
+    if (lista[i]=="meI")
+    {
+        var valor = i +" x";
+        var retorno = document.getElementById(valor).value;
+        valor = i+" y";
+        var retorno = retorno + " <= "+document.getElementById(valor).value;
+        return retorno;
+    }
+    if (lista[i]=="MI")
+    {
+        var valor = i +" x";
+        var retorno = document.getElementById(valor).value;
+        valor = i+" y";
+        var retorno = retorno + " >= "+document.getElementById(valor).value;
+        return retorno;
+    }
+    if (lista[i]=="I")
+    {
+        var valor = i +" x";
+        var retorno = document.getElementById(valor).value;
+        valor = i+" y";
+        var retorno = retorno + " = "+document.getElementById(valor).value;
+        return retorno;
+    }
+    if (lista[i]=="me")
+    {
+        var valor = i +" x";
+        var retorno = document.getElementById(valor).value;
+        valor = i+" y";
+        var retorno = retorno + " < "+document.getElementById(valor).value;
+        return retorno;
+    }
+    if (lista[i]=="M")
+    {
+        var valor = i +" x";
+        var retorno = document.getElementById(valor).value;
+        valor = i+" y";
+        var retorno = retorno + " > "+document.getElementById(valor).value;
+        return retorno;
+    }
     if(lista[i]== "CONDITION")
     {
         var valor = i+" v" 
         return document.getElementById(valor).value;
     }
+    if(lista[i]=="Y")
+    {
+        return  Funcion(lista,i*2)+ " && " + Funcion(lista,(i*2)+1)+ " ";
+    }
+    if(lista[i]=="O")
+    {
+        return  Funcion(lista,i*2)+ " || " + Funcion(lista,(i*2)+1)+ " ";
+    }
+
     if(lista[i]== "AND")
     {
         return "{ "+Funcion(lista,i*2)+" . "+Funcion(lista,(i*2)+1)+" }";

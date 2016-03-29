@@ -6,8 +6,8 @@
     <button type="button" class="close" aria-hidden="true" onclick="borrarPanel2(<?php echo $algo; ?>,'_FILTER')">&times;</button>
     <ul>
         <li><strong> Filter <?php echo $algo; ?></strong>
-            <ul>              
-                <ul>                
+            <ul>
+                <ul>
                     <!-- Archivo HTML de boton opciones desplegables 1-->
                     <div id= <?php echo ($algo=($algo*2)); ?>> <?php echo $algo;?>
                         <script>
@@ -16,7 +16,7 @@
                             $(x).load('Opciones.php',{valor:valor});
                         </script>
                     </div>
-                </ul>            
+                </ul>
                     <!-- Archivo HTML de boton opciones desplegables 2 -->
                 <ul>
                     <div id="<?php echo ($algo=$algo+1); ?>"> <?php echo $algo;?>
