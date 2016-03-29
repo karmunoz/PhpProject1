@@ -798,7 +798,7 @@ function iniciarConsulta(consulta)
  */
 function Funcion2(lista,i)
 {
-    console.log(lista+"-"+i+" funcion2");
+    //console.log(lista+"-"+i+" funcion2");
     if(lista[i]== "TRIPLE")
     {
         var valor = i+" x" 
@@ -915,7 +915,7 @@ function Funcion2(lista,i)
  */
 function Funcion(lista,i)
 {
-    console.log(lista+"-"+i+" funcion");
+    //console.log(lista+"-"+i+" funcion");
     if(lista[i]== "TRIPLE")
     {
         var valor = i+" x" 
