@@ -667,8 +667,8 @@ function GetCampos()
     //confecionar la lista
     var consulta;
     var select = document.getElementById("select").value;
-    consulta = " select "+select +" where{"+Funcion(lista,1)+" }";
-    var Consulta = "select "+select+ "<br> where{ <br><p>"+Funcion2(lista,1)+"</p><br> }";
+    consulta = " select "+select +" where { "+Funcion(lista,1)+" }";
+    var Consulta = "select "+select+ "<br> where { <br><p>"+Funcion2(lista,1)+"</p><br> }";
     //consulta solo el cuerpo
     //alert("Consulta "+consulta);
     $("#Consulta").append('<h4 class="bg-primary"> Consulta </h4> ');
@@ -710,8 +710,8 @@ function GetCampos()
     //confecionar la lista
     var consulta;
     var select = document.getElementById("select").value;
-    consulta = " select "+select +" where{"+Funcion(lista,1)+"} ";
-    var Consulta = "select "+select+ "<br> where{ <br>"+Funcion2(lista,1)+"<br> }";
+    consulta = " select "+select +" where { "+Funcion(lista,1)+"} ";
+    var Consulta = "select "+select+ "<br> where { <br>"+Funcion2(lista,1)+"<br> }";
     //consulta solo el cuerpo
     //alert("Consulta "+consulta);
     $("#Consulta").append('<h4 class="bg-primary"> Consulta </h4> ');
@@ -1145,7 +1145,7 @@ function prefixuri(consulta)
             var list1 = listac[j].split(":");//georss:point
             var valora = prefixArray[i][1];
 
-            //console.log(corta2+"-"+list1[0]+":"+valora);
+            //console.log(corta2+"//////"+list1[0]+"///////"+valora);
             if (corta2==(list1[0]+":"))
             {
                 console.log("Encontr el prefijo "+ corta2);
