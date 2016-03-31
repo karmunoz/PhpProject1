@@ -921,6 +921,12 @@ function Funcion2(lista,i)
         var retorno = retorno + " > "+document.getElementById(valor).value;
         return retorno;
     }
+    if(lista[i]=="N")
+    {
+        var valor = i +"x";
+        var retorno = " ! "+ document.getElementById(valor).value;
+        return retorno;
+    }
     if(lista[i]=="Y")
     {
         return  Funcion2(lista,i*2)+ " && " + Funcion2(lista,(i*2)+1)+" ";
@@ -1018,6 +1024,13 @@ function Funcion(lista,i)
         var retorno = document.getElementById(valor).value;
         valor = i+"y";
         var retorno = retorno + " > "+document.getElementById(valor).value;
+        return retorno;
+    }
+    if(lista[i]=="N")
+    {
+        var valor = i +"x";
+        console.log(valor);
+        var retorno = " ! "+ document.getElementById(valor).value;
         return retorno;
     }
     if(lista[i]== "CONDITION")
