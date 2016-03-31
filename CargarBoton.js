@@ -194,7 +194,7 @@ function salio(id,xyz)
     var varvalor="";
     $('input', $('#'+iddetriple)).each(function() 
     {
-        var varubicacion = $(this).attr("id")[2];
+        var varubicacion = $(this).attr("id")[1];
         if(xyz== varubicacion )
         {
             if(this.value.length<1)
@@ -223,17 +223,19 @@ function salio(id,xyz)
 function precionaTeclavariable(id,number)
 {
     document.getElementById("Error").innerHTML="";
-    //console.log(iddetriple);
+    
     var iddetriple = id+"_TRIPLE";
     var contaa = 0;
     $('input', $('#'+iddetriple)).each(function() 
     {
-        var varubicacion = $(this).attr("id")[2];
+        var varubicacion = $(this).attr("id")[1];
+        //console.log("-"+varubicacion+"-");
         if(number== varubicacion )
         {
             console.log("encontre el valor");
-            //console.log("valor "+this.value);
+            
             var varvalue = this.value;
+            //console.log("valor "+varvalue+"---");
             //verificar que empiese con un ?
             if(varvalue[0]=='?')
             {
