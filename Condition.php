@@ -7,7 +7,7 @@
 ?>
 <div class="btn-group" id="<?php echo $algo; ?>">
     <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-    Condition <?php echo $algo;?> <span class="caret"></span>
+    Condition <span class="caret"></span>
   </button>
     <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu2" >
         <li role="presentation" class="dropdown-header">Logicos</li>         

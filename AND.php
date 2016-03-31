@@ -5,7 +5,7 @@
 <div class="btn-group" id="<?php echo ($algo); ?>_AND" >
     <button type="button" class="close" aria-hidden="true" onclick="borrarPanel2(<?php echo $algo; ?>,'_AND')">&times;</button>
     <ul>
-        <li><strong> AND <?php echo $algo; ?></strong>
+        <li><strong> AND </strong>
             <ul>              
                 <ul>                
                     <!-- Archivo HTML de boton opciones desplegables 1-->

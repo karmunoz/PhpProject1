@@ -4,7 +4,7 @@
 ?>
 <div class="btn-group" id="<?php echo $algo; ?>">
     <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-    OPCIONES <?php echo $algo;?> <span class="caret"></span>
+    OPCIONES <span class="caret"></span>
   </button>
     <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu2" >          
         <li><a href="#" id="<?php echo $algo; ?>" onclick="Optional(id)" >OPTIONAL</a></li>               

@@ -3,7 +3,7 @@
     $algo =$_REQUEST['valor'];
 ?>
 <div class="btn-group" id="<?php echo $algo; ?>">
-    <div class="thumbnail" id="<?php echo $algo; ?>_NI" ><strong>&#33;&#61; <?php echo $algo;?></strong>
+    <div class="thumbnail" id="<?php echo $algo; ?>_NI" ><strong>&#33;&#61;</strong>
     	<button type="button" class="close" aria-hidden="true" onclick="borrarPanelfilter(<?php echo $algo; ?>)">&times;</button>
     	<br> 
     	<div class="row">       

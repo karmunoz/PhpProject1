@@ -5,7 +5,7 @@
 <div class="btn-group" id="<?php echo $algo; ?>_Y" >
     <button type="button" class="close" aria-hidden="true" onclick="borrarPanelfilter2(<?php echo $algo; ?>,'Y')">&times;</button>
     <ul>
-        <li><strong> &#38;&#38; <?php echo $algo; ?></strong>
+        <li><strong> &#38;&#38; </strong>
             <ul>              
                 <ul>                
                     <!-- Archivo HTML de boton condition desplegables 1-->

@@ -5,7 +5,7 @@
 <div class="btn-group" id="<?php echo $algo; ?>_OPTIONAL" >
     <button type="button" class="close" aria-hidden="true" onclick="borrarPanel2(<?php echo $algo; ?>,'_OPTIONAL')">&times;</button>
     <ul>
-        <li><strong> Optional <?php echo $algo; ?></strong>
+        <li><strong> Optional </strong>
             <ul>              
                 <ul>                
                     <!-- Archivo HTML de boton opciones desplegables 1-->

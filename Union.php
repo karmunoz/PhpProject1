@@ -5,7 +5,7 @@
 <div class="btn-group" id="<?php echo $algo; ?>_UNION">
     <button type="button" class="close" aria-hidden="true" onclick="borrarPanel2(<?php echo $algo; ?>,'_UNION')">&times;</button>
     <ul>
-        <li> <strong>Union <?php echo $algo; ?></strong>
+        <li> <strong>Union</strong>
             <ul>              
                 <ul>                
                     <!-- Archivo HTML de boton opciones desplegables 1-->
