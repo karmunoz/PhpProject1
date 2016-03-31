@@ -7,11 +7,11 @@
     	<button type="button" class="close" aria-hidden="true" onclick="borrarPanel(<?php echo $algo; ?>)">&times;</button>
     	<br> 
     	<div class="row">       
-			<div class="col-md-10"><input class="form-control" class="glyphicon glyphicon-search" type="text" placeholder="?x" id="<?php echo $algo; ?> x" value="?x" onchange="cambioTexto()"  onkeyup="precionarTeclax(<?php echo $algo; ?>)"list="x<?php echo $algo; ?>"></div>
+			<div class="col-md-10"><input class="form-control" class="glyphicon glyphicon-search" type="text" placeholder="?x" id="<?php echo $algo; ?>x" value="?x" onchange="cambioTexto()"  onkeyup="precionarTeclax(<?php echo $algo; ?>)"list="x<?php echo $algo; ?>"></div>
 	        </br>
-	        <div class="col-md-10"><input class="form-control"  type="text" placeholder="?y" id="<?php echo $algo; ?> y" value="?y" onchange="cambioTexto()" onkeyup="precionarTeclay(<?php echo $algo; ?>)"list="y<?php echo $algo; ?>"></div>
+	        <div class="col-md-10"><input class="form-control"  type="text" placeholder="?y" id="<?php echo $algo; ?>y" value="?y" onchange="cambioTexto()" onkeyup="precionarTeclay(<?php echo $algo; ?>)"list="y<?php echo $algo; ?>"></div>
 	    	</br>
-	        <div class="col-md-10"><input class="form-control"  type="text" placeholder="?z" id="<?php echo $algo; ?> z" value="?z" onchange="cambioTexto()"  onkeyup="precionarTeclaz(<?php echo $algo; ?>)"list="z<?php echo $algo; ?>"></div>
+	        <div class="col-md-10"><input class="form-control"  type="text" placeholder="?z" id="<?php echo $algo; ?>z" value="?z" onchange="cambioTexto()"  onkeyup="precionarTeclaz(<?php echo $algo; ?>)"list="z<?php echo $algo; ?>"></div>
         </div>
     </div>
 </div>

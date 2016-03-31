@@ -192,7 +192,7 @@
                                         </div>
                                     </form> 
                                 </div>
-                            </div>
+                            </div> <!-- Fin cuerpo modal -->
                                 <p ALIGN=center>.</p>
                             
                             <div class="modal-footer">
@@ -201,6 +201,7 @@
                         </div>
                     </div>
                 </div>
+                <!-- Fin Modal -->
             </div>
         </div>
             <div  class="col-xs-12" >            
@@ -252,6 +253,10 @@
         <script type="text/javascript" src="bootbox.js" ></script>
         <script type="text/javascript" src="bootbox.min.js" ></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
+        <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" type="text/css" />
 
     </body>
 </html>

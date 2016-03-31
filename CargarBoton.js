@@ -16,7 +16,9 @@
     });
 */
 //});
-
+/*
+* Para la busqueda en las tabla de prefijo, class and property
+*/
 $(document).ready(function()
 {
     $('#search').keyup(function()
@@ -32,7 +34,9 @@ $(document).ready(function()
         searchTable($(this).val(),'tablaprefix');
     });
 });
-
+/*
+* Para la busqueda en las tabla de prefijo, class and property
+*/
 function searchTable(inputVal,id)
 {
     var idt = '#'+id;
@@ -401,9 +405,10 @@ function precionarTeclaz(id)
 
  function precionarTeclax(id)
  {
-    for (var i = 0; i < prefixArray.length; i++) {
-    console.log(prefixArray[i][0]+"--"+prefixArray[i][1]);
-};
+    // for (var i = 0; i < prefixArray.length; i++)
+    // {
+    //     console.log(prefixArray[i][0]+"--"+prefixArray[i][1]);
+    // };
     //verificar que los campos ?x e ?y no este bacios
     // Si el tipo de campo es una caja de texto
     var iddetriple = id+"_TRIPLE";
@@ -506,15 +511,23 @@ function precionarTeclaz(id)
                     var cortadas = uriPrefix2(cortadas);
                      respuesta = respuesta + " <option value ='"+cortadas +"'/> " 
                 }
-
             }
             var campoid = "x"+id;
             console.log("RESPUESTA DE LA HACION "+respuesta);     
             $("#"+campoid).html(respuesta);
+            
+               
         }
         ,error: function (obj, error, objError){         
         }
     });
+
+            var campox = '#'+id+"x";
+            var campoid = "x"+id;
+            var availableTags = $("#"+campoid).find('option').map(function () {
+            return this.value;
+            }).get();
+            $(campox).autocomplete({ source: availableTags });
    return;
  }
  //
@@ -832,14 +845,14 @@ function Funcion2(lista,i)
     //console.log(lista+"-"+i+" funcion2");
     if(lista[i]== "TRIPLE")
     {
-        var valor = i+" x" 
+        var valor = i+"x" 
         var retorno = document.getElementById(valor).value;
         var n = retorno.search("http");
         if(n == 0)
         {
             retorno = '"&#139'+retorno+'&rsaquo"';
         }
-        valor = i+" y" 
+        valor = i+"y" 
         var ret = document.getElementById(valor).value;
         var n = ret.search("http");
         if(n == 0)
@@ -847,7 +860,7 @@ function Funcion2(lista,i)
             ret = '"&#139'+retorno+'&rsaquo"';
         }
         retorno = retorno+" "+ret;
-        valor = i+" z" 
+        valor = i+"z" 
         var ret = document.getElementById(valor).value;
         var n = ret.search("http");
         if(n == 0)
@@ -860,49 +873,49 @@ function Funcion2(lista,i)
     }
     if (lista[i]=="NI")
     {
-        var valor = i +" x";
+        var valor = i +"x";
         var retorno = document.getElementById(valor).value;
-        valor = i+" y";
+        valor = i+"y";
         var retorno = retorno + " != "+document.getElementById(valor).value;
         return retorno;
     }
     if (lista[i]=="meI")
     {
-        var valor = i +" x";
+        var valor = i +"x";
         var retorno = document.getElementById(valor).value;
-        valor = i+" y";
+        valor = i+"y";
         var retorno = retorno + " <= "+document.getElementById(valor).value;
         return retorno;
     }
     if (lista[i]=="MI")
     {
-        var valor = i +" x";
+        var valor = i +"x";
         var retorno = document.getElementById(valor).value;
-        valor = i+" y";
+        valor = i+"y";
         var retorno = retorno + " >= "+document.getElementById(valor).value;
         return retorno;
     }
     if (lista[i]=="I")
     {
-        var valor = i +" x";
+        var valor = i +"x";
         var retorno = document.getElementById(valor).value;
-        valor = i+" y";
+        valor = i+"y";
         var retorno = retorno + " = "+document.getElementById(valor).value;
         return retorno;
     }
     if (lista[i]=="me")
     {
-        var valor = i +" x";
+        var valor = i +"x";
         var retorno = document.getElementById(valor).value;
-        valor = i+" y";
+        valor = i+"y";
         var retorno = retorno + " < "+document.getElementById(valor).value;
         return retorno;
     }
     if (lista[i]=="M")
     {
-        var valor = i +" x";
+        var valor = i +"x";
         var retorno = document.getElementById(valor).value;
-        valor = i+" y";
+        valor = i+"y";
         var retorno = retorno + " > "+document.getElementById(valor).value;
         return retorno;
     }
@@ -949,59 +962,59 @@ function Funcion(lista,i)
     //console.log(lista+"-"+i+" funcion");
     if(lista[i]== "TRIPLE")
     {
-        var valor = i+" x" 
+        var valor = i+"x" 
         var retorno = document.getElementById(valor).value;
-        valor = i+" y" 
+        valor = i+"y" 
         retorno = retorno+" "+document.getElementById(valor).value;
-        valor = i+" z" 
+        valor = i+"z" 
         retorno = retorno +" "+ document.getElementById(valor).value;
         return retorno;
     }
     if(lista[i]=="NI")
     {
-        var valor = i +" x";
+        var valor = i +"x";
         var retorno = document.getElementById(valor).value;
-        valor = i+" y";
+        valor = i+"y";
         var retorno = retorno + " != "+document.getElementById(valor).value;
         return retorno;
     }
     if (lista[i]=="meI")
     {
-        var valor = i +" x";
+        var valor = i +"x";
         var retorno = document.getElementById(valor).value;
-        valor = i+" y";
+        valor = i+"y";
         var retorno = retorno + " <= "+document.getElementById(valor).value;
         return retorno;
     }
     if (lista[i]=="MI")
     {
-        var valor = i +" x";
+        var valor = i +"x";
         var retorno = document.getElementById(valor).value;
-        valor = i+" y";
+        valor = i+"y";
         var retorno = retorno + " >= "+document.getElementById(valor).value;
         return retorno;
     }
     if (lista[i]=="I")
     {
-        var valor = i +" x";
+        var valor = i +"x";
         var retorno = document.getElementById(valor).value;
-        valor = i+" y";
+        valor = i+"y";
         var retorno = retorno + " = "+document.getElementById(valor).value;
         return retorno;
     }
     if (lista[i]=="me")
     {
-        var valor = i +" x";
+        var valor = i +"x";
         var retorno = document.getElementById(valor).value;
-        valor = i+" y";
+        valor = i+"y";
         var retorno = retorno + " < "+document.getElementById(valor).value;
         return retorno;
     }
     if (lista[i]=="M")
     {
-        var valor = i +" x";
+        var valor = i +"x";
         var retorno = document.getElementById(valor).value;
-        valor = i+" y";
+        valor = i+"y";
         var retorno = retorno + " > "+document.getElementById(valor).value;
         return retorno;
     }
