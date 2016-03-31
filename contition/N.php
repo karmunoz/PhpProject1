@@ -2,8 +2,8 @@
 <?php 
     $algo =$_REQUEST['valor'];
 ?>
-<div class="btn-group" id="<?php echo $algo; ?>">
-    <div class="thumbnail" id="<?php echo $algo; ?>_N" ><strong> ! </strong>
+<div class="btn-group" id="<?php echo $algo; ?>" >
+    <div class="thumbnail" id="<?php echo $algo; ?>_N" ><strong> NOT </strong>
     	<button type="button" class="close" aria-hidden="true" onclick="borrarPanelfilter(<?php echo $algo; ?>)">&times;</button>
     	<br> 
     	<div class="row">       

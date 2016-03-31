@@ -2,10 +2,10 @@
 <?php 
     $algo =   $_REQUEST['valor'];
 ?>
-<div class="btn-group" id="<?php echo $algo; ?>_UNION">
+<div class="btn-group" id="<?php echo $algo; ?>_UNION" style="background-color: lightblue">
     <button type="button" class="close" aria-hidden="true" onclick="borrarPanel2(<?php echo $algo; ?>,'_UNION')">&times;</button>
     <ul>
-        <li> <strong>Union</strong>
+        <li> <strong>UNION</strong>
             <ul>              
                 <ul>                
                     <!-- Archivo HTML de boton opciones desplegables 1-->
