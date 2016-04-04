@@ -637,9 +637,7 @@ function GetCampos()
         {            
             if(ValidarCampo(CamposImput[i]) == false)
             {
-                bootbox.alert("Debe completar todos los campos", function() {
-
-                });
+                bootbox.alert("Debe completar todos los campos", function() {});
                 return;
             }           
         }
@@ -663,7 +661,7 @@ function GetCampos()
             //es decir que no esten las Opciones
             if(palabra=="OPCIONES")
             {
-                $("#Modal").modal("show");
+                bootbox.alert("Debe completar todos los campos", function() {});
                 return;
             }
             //en caso contrario creo la lista para hacer la consulta
@@ -676,7 +674,7 @@ function GetCampos()
     if(lista.length==0)
     {
         //alert("Lista vacia");
-        $("#Modal").modal("show");
+        bootbox.alert("Debe completar todos los campos", function() {});
         return;
     }
     //confecionar la lista
