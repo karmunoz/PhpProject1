@@ -65,6 +65,7 @@ function searchTable(inputVal,id)
  * @param {type} i
  * @returns {undefined}
  */
+var agregarcampox = 1;
 var formulario;
 var CamposImput;
 var Campos;
@@ -94,9 +95,16 @@ window.onload = function()
     valorConsulta="";
     property();//cargar la lista del ?y
     clases();//carga las clases
+    selectbody();
 }
 
-
+/**
+*   Caragar el panel de select
+*/
+function selectbody()
+{
+    $('#selectbody').load('./select/body.php');
+}
 
 
 //funcion para cargar las clases
@@ -1380,4 +1388,19 @@ function Basica(id,tipo)
     var oID ="#"+ id;
     var valor = id;
     $(oID).load("./contition/"+tipo+".php",{valor:valor}); 
+}
+function Agregarcampox()
+{
+    console.log("agrego otro cuadrito"+ agregarcampox);
+    var idcam = "campo"+agregarcampox;
+    var capa = document.getElementById("selcampo");
+    var x = document.createElement("INPUT");
+    //<input class="form-control" id="campo0" type="text" placeholder="variable" value="">
+    x.setAttribute("class", "form-control");
+    x.setAttribute("id", idcam);
+    x.setAttribute("type","text");
+    x.setAttribute("placeholder","variable");
+    x.setAttribute("value","");
+    capa.appendChild(x);
+    agregarcampox=agregarcampox+1;
 }

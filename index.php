@@ -120,13 +120,13 @@
                                 <button type="button" class="btn btn-primary" id="boton" onclick="GetCampos()">Revisar</button>
                                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#Modal1">Conexión</button>
                                 <button type="button" class="btn btn-primary" onclick="window.location.reload()" >Recargar página</button> 
-                                <hr>
-                                <label class="col-sm-2 control-label"> SELECT</label>
-                                <div class="col-sm-4 ">                                
-                                    <input class="form-control" id="select" value="*">
-                                </div> 
-                                <br> 
+                                <hr>                                
                             </div>
+                            <div class="from-group">
+
+                                <div id="selectbody"></div>
+                            </div>
+                            <br>
                             <hr>
                         </div>
                     </div>
