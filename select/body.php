@@ -4,7 +4,7 @@
 <!--  DISTINCT -->
 <div class="checkbox">
   <label>
-    <input type="checkbox" id="DISTINCT" value="">
+    <input type="checkbox" id="disti">
      DISTINCT
   </label>
   <label>
@@ -39,7 +39,7 @@
 		<input class="form-control" id="valueas" placeholder="variable" type="text" value="">
 </div>
 <div class="form-inline">
-	<input type="radio" id="radio2" name="optradio">
+	<input type="radio" id="radio3" name="optradio">
 	<input class="form-control" id="selultima" type="text" placeholder="variable" value="">
 </div>
 <!-- Fin Menu opciones-->

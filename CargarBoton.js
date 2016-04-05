@@ -65,7 +65,7 @@ function searchTable(inputVal,id)
  * @param {type} i
  * @returns {undefined}
  */
-var agregarcampox = 1;
+var agregarcampox = 1;//variable para el botom +
 var formulario;
 var CamposImput;
 var Campos;
@@ -78,6 +78,7 @@ var variablesArray = new Array(1);
 variablesArray[0] = new Array("?x");
 variablesArray[1] = new Array("?z");
 variablesArray[2] = new Array("?y");
+
 
 
 window.onload = function()
@@ -104,6 +105,7 @@ window.onload = function()
 function selectbody()
 {
     $('#selectbody').load('./select/body.php');
+    
 }
 
 
@@ -686,10 +688,11 @@ function GetCampos()
         return;
     }
     //confecionar la lista
+
     var consulta;
-    var select = document.getElementById("select").value;
-    consulta = " select "+select +" where { "+Funcion(lista,1)+" }";
-    var Consulta = "select "+select+ "<br> where { <br><p>"+Funcion2(lista,1)+"</p><br> }";
+    var select = stringSelect();
+    consulta = select +" where { "+Funcion(lista,1)+" }";
+    var Consulta = select+ "<br> where { <br><p>"+Funcion2(lista,1)+"</p><br> }";
     //consulta solo el cuerpo
     //alert("Consulta "+consulta);
     $("#Consulta").append('<h4 class="bg-primary"> Consulta </h4> ');
@@ -728,16 +731,90 @@ function GetCampos()
         $("#Modal").modal("show");
         return;
     }
+    
     //confecionar la lista
     var consulta;
-    var select = document.getElementById("select").value;
-    consulta = " select "+select +" where { "+Funcion(lista,1)+"} ";
-    var Consulta = "select "+select+ "<br> where { <br>"+Funcion2(lista,1)+"<br> }";
+    var select = stringSelect();
+    consulta = select +" where { "+Funcion(lista,1)+"} ";
+    var Consulta = select+ "<br> where { <br>"+Funcion2(lista,1)+"<br> }";
     //consulta solo el cuerpo
     //alert("Consulta "+consulta);
     $("#Consulta").append('<h4 class="bg-primary"> Consulta </h4> ');
     $("#Consulta").append('<font face="Comic Sans MS"  size="3">'+Consulta +'</font>');
  }
+function stringSelect()
+{
+    var select ="select  ";
+    var valordis = document.getElementById("disti").checked;
+    if(valordis==true)
+    {
+        select = select+"DISTINCT ";
+    }
+    var vartodo = document.getElementById("asterisco").checked;
+    if(vartodo == true)
+    {
+        select = select +"* "
+        return select;
+    }
+    var varvariable = document.getElementById("radio1").checked;
+    if(varvariable== true)
+    {
+        var varcount=0;
+        for (var i = 0; i < agregarcampox; i++) {
+            var varnombre ="campo"+ i;
+            var varx = document.getElementById(varnombre).value;
+            select = select +varx+" ";
+            if(varx=="" || varx=="undefined")
+            {
+                varcount=varcount+1;
+            }
+        }
+        console.log(varcount+" "+(agregarcampox));
+        if(varcount == (agregarcampox))
+        {
+            return "select * ";
+        }
+        return select;
+    }
+    var radio2 = document.getElementById("radio2").checked;
+    if (radio2==true)
+    {
+        var oper = document.getElementById("sel1").value;
+        var varop= document.getElementById("valueop").value;
+        var varas = document.getElementById("valueas").value;
+        if(oper =="Operador")
+        {
+            bootbox.alert("Debe selecionar un operador", function() {});
+        return "select * ";
+        }
+        if(varop=="")
+        {
+            bootbox.alert("Debe agregar una variable", function() {});
+            return "select * ";
+        }
+        select = select + oper+" "+varop+" ";
+        if(varas=="" || varas=="undefined")
+        {}
+        else{
+            select = select + "AS "+ varas+" ";
+        }
+        return select;
+    }
+    var varlibre =document.getElementById("radio3").checked; 
+    if(varlibre==true)
+    {
+        var varas = document.getElementById("selultima").value;
+        if(varas=="" || varas=="undefined")
+        {
+            bootbox.alert("Debe agregar una variable", function() {});
+            return "select * ";
+        }
+        return select+" "+ varas+" ";
+
+    }
+    return "select * ";
+}
+
 /** Encargada de llamaar a peticionHTTP
  * Nesecito el String de la consulta para mostar la respuesta
  * @param {type} String
@@ -745,7 +822,6 @@ function GetCampos()
 
 function iniciarConsulta(consulta)
 {
-   // alert("ENTRE");
    if(booleanNext==true)
    {
         valorConsulta = consulta;
@@ -1149,6 +1225,7 @@ function Triple(i,tipo)
 */
 function next()
 {
+    //console.log("valor del next: "+valorConsulta);
     valorNext = valorNext +1;
     iniciarConsulta(valorConsulta);
     booleanNext=true;
