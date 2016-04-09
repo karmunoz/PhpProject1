@@ -72,7 +72,9 @@ var Campos;
 var valorNext;//para la paginación
 var valorConsulta;//para la consulta de la paginación
 var booleanNext=true;//para saber que fue llamado de next
-var prefijos =""; 
+var prefijos ="";
+var tipobusqueda ="";
+var idbusqueda ="";
 var prefixArray =  new Array();
 var variablesArray = new Array(1);
 variablesArray[0] = new Array("?x");
@@ -531,12 +533,12 @@ function precionarTeclaz(id)
                 }
             }
             var campoid = "x"+id;
-            console.log("RESPUESTA DE LA HACION "+respuesta);     
+            console.log("RESPUESTA DE LA HACION "+respuesta);
             $("#"+campoid).html(respuesta);
             
                
         }
-        ,error: function (obj, error, objError){         
+        ,error: function (obj, error, objError){
         }
     });
 
@@ -1278,7 +1280,6 @@ function prefixuri(consulta)
     }
     return consulta;
 }
-
 //funcion para agregar una fila a la tabla de prefijos
 function agregarFila(name, uris ){
     var cadena = '<tr><td>'+name+'</td><td>'+uris+'</td></tr>';
@@ -1472,6 +1473,7 @@ function Basica(id,tipo)
     var valor = id;
     $(oID).load("./contition/"+tipo+".php",{valor:valor}); 
 }
+// funcion para agregar otro campo en el select
 function Agregarcampox()
 {
     console.log("agrego otro cuadrito"+ agregarcampox);
@@ -1486,4 +1488,73 @@ function Agregarcampox()
     x.setAttribute("value","");
     capa.appendChild(x);
     agregarcampox=agregarcampox+1;
+}
+function valordex(idx, tipot)
+{
+    tipobusqueda = tipot;
+    idbusqueda = idx+tipot;
+    console.log("valor de id "+idx+"-"+tipot);
+}
+function uriabuscar()
+{
+    var buscaera = document.getElementById("busqueda1").value;
+    console.log(buscaera);
+    var consulltaa = "select ?"+tipobusqueda+" where {?x ?y ?z  FILTER regex(?"+tipobusqueda+" ,'"+buscaera+"')}";
+    //enviar la consulta
+    console.log("Consulta busqueda "+consulltaa);
+    var querySparql = consulltaa +"  LIMIT 10";
+    var ipServer = document.getElementById("ipServer").value;
+    var grafo = document.getElementById("grafo").value;
+    var endPoint = document.getElementById("endPoint").value;
+    var datos = "q=" + querySparql +"###"+ipServer+"###"+grafo+"###"+endPoint;
+    console.log("Datos: "+datos);
+    $.ajax({
+        type: "POST",
+        url:"peticionHTTP.php",
+        async: true,
+        data:datos ,
+        success:
+        function(datos){
+            console.log(datos);
+            var rtArray = datos.results.bindings;
+            console.log(rtArray);
+            var respuesta ="";
+                //obtener el  cuerpo de la lista
+            for(var i=0; i<rtArray.length; i++){
+                var auxCA = rtArray[i];
+                //Se extraen los valores
+                
+                var lista = Object.keys(auxCA);
+                var k ;
+                 var iji =0;            
+                for (var objetos in lista){
+                    k = JSON.stringify(auxCA[lista[objetos]]);
+                    var cortada = k.split('"value":');
+                    var cortadas = cortada[1].slice(1,cortada[1].length-2);
+                    var cortadas = uriPrefix2(cortadas);
+                    agregarFilabusqueda(cortadas,iji);
+                    iji=iji+1;
+                }
+                document.getElementById("idantes").style.display="block";
+                document.getElementById("idsiguiente").style.display="block";
+            }
+        }
+        ,error: function (obj, error, objError){         
+        }
+    });
+
+}
+//funcion para agregar una fila a la tabla de busqueda
+function agregarFilabusqueda(name,iji){
+    var aaa = '<div class="radio"><label><input type="radio" id="iji" name="optradio">'+name+'</label></div>'
+    var cadena = '<tr><td>'+aaa+'</td></tr>';
+    $('#tablabusqueda').append(cadena);
+}
+//borrar contenido de modal
+function borarModal()
+{
+    $("#tablabusqueda tr").remove();//tabla
+    document.getElementById("busqueda1").value ="";//imput
+    document.getElementById("idantes").style.display="none";//boton
+    document.getElementById("idsiguiente").style.display="none";//boton
 }
