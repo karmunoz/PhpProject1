@@ -89,22 +89,25 @@ window.onload = function()
     CamposImput = formulario.getElementsByTagName("input");	
     //Obtener todos los tags que sean "div"
     Campos = formulario.getElementsByTagName("DIV");
-    //esconder boton de las tablas
+    //esconder boton de las tablas de consulta
     var next = document.getElementById("next").style.display = 'none';
-    //para manejar la paginación 
+    //esconder botones de modal 
+    //para manejar la paginación
     valorNext = 0;
     valorConsulta="";
     property();//cargar la lista del ?y
     clases();//carga las clases
-    selectbody();
+    cargarphp();//cargar archivos php a la vista
+    
 }
 
 /**
-*   Caragar el panel de select
+*   Caragar el panel de select y modal
 */
-function selectbody()
+function cargarphp()
 {
     $('#selectbody').load('./select/body.php');
+    $('#modal1').load('./modal/modalx.php');
     
 }
 
@@ -170,7 +173,9 @@ function property()
         success:
         function(datos)
         {
+
            var rtArray = datos.results.bindings;
+           //console.log("Datos: "+rtArray);
             var respuesta ="";
                 //obtener el  cuerpo de la lista
             for(var i=0; i<rtArray.length; i++)
@@ -178,7 +183,8 @@ function property()
                 var auxCA = rtArray[i];
                 //Se extraen los valores
                 var lista = Object.keys(auxCA);
-                var k ;                             
+                var k ;  
+
                 for (var objetos in lista)
                 {
                     k = JSON.stringify(auxCA[lista[objetos]]);
@@ -792,7 +798,7 @@ function stringSelect()
             bootbox.alert("Debe agregar una variable", function() {});
             return "select * ";
         }
-        select = select + oper+" "+varop+" ";
+        select = select + oper+" ( "+varop+" ) ";
         if(varas=="" || varas=="undefined")
         {}
         else{

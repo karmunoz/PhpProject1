@@ -10,7 +10,7 @@
             <div class="col-md-12">
                 <div class="form-inline">
                     <input class="form-control"  type="text" placeholder="Uri" id="<?php echo $algo; ?>x" value="?x" onchange="cambioTexto()"  onkeyup="precionarTeclax(<?php echo $algo; ?>)"list="x<?php echo $algo; ?>">
-                    <button type="button" class="btn btn-primary">
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalx">
                         <span class="glyphicon glyphicon-search"></span> 
                     </button>
                 </div>

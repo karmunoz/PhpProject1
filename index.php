@@ -133,7 +133,6 @@
                     <br>
                                     <!-- boton desplegable -->
         <?php 
-            set_time_limit(50);
             $algo = 1;
         ?>
 
@@ -232,7 +231,9 @@
                     </div>
                 </div>
             </div>
-          </div>  
+            <div id="modal1">
+            </div>
+          </div>  <!-- div conteiner -->
         
 
         

@@ -8,7 +8,7 @@
      DISTINCT
   </label>
   <label>
-    <input type="radio" id="asterisco" name="optradio">
+    <input type="radio" id="asterisco" name="optradio" checked="checked">
      *(Todo)
   </label>
 </div>
