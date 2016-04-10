@@ -1484,6 +1484,7 @@ function valordex(idx, tipot)
 function uriabuscar1()
 {
     consultaModal ="";
+    $("#tablabusqueda tr").remove();//tabla
     uriabuscar();
 }
 function uriabuscar()
