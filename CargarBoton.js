@@ -1,21 +1,3 @@
-/* 
- * Cargar el archivo html de boton dependiendo de lo que se precione
- */
-//$(document).ready(function() {
-//    $("#AND").click(function() {
-//        alert("Entre Al AND");
-//        var oID ="#"+ $(this).attr("name");
-//        var valor = $(this).attr("name");
-//        $(oID).load("AND.php",{valor:valor});
-//    }); 
-/*el datapicker es para el calendario :D
-    $("#dp").datepicker({
-        changeMonth: true,
-        changeYear: true,
-        language: 'es'
-    });
-*/
-//});
 /*
 * Para la busqueda en las tabla de prefijo, class and property
 */
@@ -72,6 +54,9 @@ var Campos;
 var valorNext;//para la paginación
 var valorConsulta;//para la consulta de la paginación
 var booleanNext=true;//para saber que fue llamado de next
+var paginaModal=-1;
+var iji =0; //para llevar la cuenta de los radio en modal
+var consultaModal="";
 var prefijos ="";
 var tipobusqueda ="";
 var idbusqueda ="";
@@ -1451,6 +1436,7 @@ function uriPrefix2(uri){
     {
         return elemento[0];
     }
+
     prefixArray[prefixArray.length]= new Array(nameprefix+':',elemento[1]) ;
     //debo agregar el prefijo
     //console.log("Este fue agregado "+nameprefix);
@@ -1495,14 +1481,31 @@ function valordex(idx, tipot)
     idbusqueda = idx+tipot;
     console.log("valor de id "+idx+"-"+tipot);
 }
+function uriabuscar1()
+{
+    consultaModal ="";
+    uriabuscar();
+}
 function uriabuscar()
 {
-    var buscaera = document.getElementById("busqueda1").value;
-    console.log(buscaera);
-    var consulltaa = "select ?"+tipobusqueda+" where {?x ?y ?z  FILTER regex(?"+tipobusqueda+" ,'"+buscaera+"')}";
-    //enviar la consulta
-    console.log("Consulta busqueda "+consulltaa);
-    var querySparql = consulltaa +"  LIMIT 10";
+    if(consultaModal=="")
+    {
+        paginaModal=0;
+        consultaModal="";
+        var buscaera = document.getElementById("busqueda1").value;
+        console.log(buscaera);
+        var consulltaa = "select DISTINCT ?"+tipobusqueda+" where {?x ?y ?z  FILTER regex(?"+tipobusqueda+" ,'"+buscaera+"')}";
+        //enviar la consulta
+        console.log("Consulta busqueda "+consulltaa);
+        consultaModal = consulltaa +" LIMIT 10 OFFSET ";
+        var querySparql = consulltaa +"  LIMIT 10";
+        iji =0;
+    }
+    else
+    {
+        var querySparql = consultaModal + (10*paginaModal);
+        
+    }    
     var ipServer = document.getElementById("ipServer").value;
     var grafo = document.getElementById("grafo").value;
     var endPoint = document.getElementById("endPoint").value;
@@ -1519,6 +1522,7 @@ function uriabuscar()
             var rtArray = datos.results.bindings;
             console.log(rtArray);
             var respuesta ="";
+            
                 //obtener el  cuerpo de la lista
             for(var i=0; i<rtArray.length; i++){
                 var auxCA = rtArray[i];
@@ -1526,7 +1530,7 @@ function uriabuscar()
                 
                 var lista = Object.keys(auxCA);
                 var k ;
-                 var iji =0;            
+                            
                 for (var objetos in lista){
                     k = JSON.stringify(auxCA[lista[objetos]]);
                     var cortada = k.split('"value":');
@@ -1535,7 +1539,6 @@ function uriabuscar()
                     agregarFilabusqueda(cortadas,iji);
                     iji=iji+1;
                 }
-                document.getElementById("idantes").style.display="block";
                 document.getElementById("idsiguiente").style.display="block";
             }
         }
@@ -1546,7 +1549,7 @@ function uriabuscar()
 }
 //funcion para agregar una fila a la tabla de busqueda
 function agregarFilabusqueda(name,iji){
-    var aaa = '<div class="radio"><label><input type="radio" id="iji" name="optradio">'+name+'</label></div>'
+    var aaa = '<div class="radio"><label><input type="radio" id="'+iji+'" name="deacuerdo">'+name+'</label></div>'
     var cadena = '<tr><td>'+aaa+'</td></tr>';
     $('#tablabusqueda').append(cadena);
 }
@@ -1555,6 +1558,40 @@ function borarModal()
 {
     $("#tablabusqueda tr").remove();//tabla
     document.getElementById("busqueda1").value ="";//imput
-    document.getElementById("idantes").style.display="none";//boton
     document.getElementById("idsiguiente").style.display="none";//boton
+}
+//cuando se tiene selecionado una dusqueda en el modal
+function aceptarModal()
+{
+    var resultadom=""; 
+    var porNombre=document.getElementsByName("deacuerdo");
+    // Recorremos todos los valores del radio button para encontrar el
+    // seleccionado
+    var selwect = true;
+    for(var i=0;i<porNombre.length;i++)
+    {
+        if(porNombre[i].checked)
+        {
+            resultadom=porNombre[i].id;
+            selwect = false;
+        }
+    }
+    if (selwect == false)
+    {
+        console.log("resultado: "+ resultadom );
+        var t=document.getElementById('tablabusqueda'); 
+        var f=t.getElementsByTagName('td');
+        var lotengo = f[resultadom].childNodes[0].innerText;
+        document.getElementById(idbusqueda).value = lotengo;
+    }
+    borarModal();
+}
+function paginasmodal()
+{
+    if(paginaModal >= 0)
+    {
+        paginaModal = paginaModal + 1;
+        uriabuscar();
+    }
+    console.log(paginaModal);
 }
