@@ -1477,6 +1477,8 @@ function Agregarcampox()
 }
 function valordex(idx, tipot)
 {
+    $("#tablabusqueda tr").remove();//tabla
+    $( "#infomodal" ).html('');//mensaje informacion
     tipobusqueda = tipot;
     idbusqueda = idx+tipot;
     console.log("valor de id "+idx+"-"+tipot);
@@ -1485,15 +1487,23 @@ function uriabuscar1()
 {
     consultaModal ="";
     $("#tablabusqueda tr").remove();//tabla
+
     uriabuscar();
 }
 function uriabuscar()
 {
+    $( "#infomodal" ).html('');//mensaje informacion
     if(consultaModal=="")
     {
         paginaModal=0;
         consultaModal="";
         var buscaera = document.getElementById("busqueda1").value;
+        buscaera = buscaera.replace(/"/g, "");
+        buscaera = buscaera.replace(/'/g, "");
+        if(buscaera=="")
+        {
+          return;  
+        }
         console.log(buscaera);
         var consulltaa = "select DISTINCT ?"+tipobusqueda+" where {?x ?y ?z  FILTER regex(?"+tipobusqueda+" ,'"+buscaera+"')}";
         //enviar la consulta
@@ -1501,10 +1511,13 @@ function uriabuscar()
         consultaModal = consulltaa +" LIMIT 10 OFFSET ";
         var querySparql = consulltaa +"  LIMIT 10";
         iji =0;
+        //
+        $( "#infomodal" ).append('<div class="alert alert-success">Realizando consulta... </div>');
     }
     else
     {
         var querySparql = consultaModal + (10*paginaModal);
+        $( "#infomodal" ).append('<div class="alert alert-success">Realizando consulta... </div>');
         
     }    
     var ipServer = document.getElementById("ipServer").value;
@@ -1542,9 +1555,11 @@ function uriabuscar()
                 }
                 document.getElementById("idsiguiente").style.display="block";
             }
+             $( "#infomodal" ).html('');//
         }
         ,error: function (obj, error, objError){         
         }
+
     });
 
 }

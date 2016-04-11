@@ -14,6 +14,7 @@
                 <input class="form-control" id="busqueda1" value="">
                 <button type="button" class="btn btn-primary" onclick="uriabuscar1()">Buscar</button>
             </div>
+            <div id="infomodal"></div>
             <div class="table-responsive ">
                 <table class="table"  id="tablabusqueda">
                 </table>
