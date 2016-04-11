@@ -1511,15 +1511,13 @@ function uriabuscar()
         consultaModal = consulltaa +" LIMIT 10 OFFSET ";
         var querySparql = consulltaa +"  LIMIT 10";
         iji =0;
-        //
-        $( "#infomodal" ).append('<div class="alert alert-success">Realizando consulta... </div>');
     }
     else
     {
-        var querySparql = consultaModal + (10*paginaModal);
-        $( "#infomodal" ).append('<div class="alert alert-success">Realizando consulta... </div>');
-        
-    }    
+        var querySparql = consultaModal + (10*paginaModal);        
+    } 
+    setInterval("reloj()",31000);
+    $( "#infomodal" ).append('<div class="alert alert-success" id="reloj">Realizando consulta... </div>');
     var ipServer = document.getElementById("ipServer").value;
     var grafo = document.getElementById("grafo").value;
     var endPoint = document.getElementById("endPoint").value;
@@ -1561,6 +1559,17 @@ function uriabuscar()
         }
 
     });
+
+}
+//funcion para ver que paso el tiempo que corresponde
+function reloj()
+{
+    if(document.getElementById('reloj'))
+    {
+        $( "#infomodal" ).html('');
+        $( "#infomodal" ).append('<div class="alert alert-danger" id="reloj">Base de datos no respondio ... </div>');
+
+    }
 
 }
 //funcion para agregar una fila a la tabla de busqueda
