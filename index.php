@@ -118,8 +118,8 @@
                         <div class="container-fluid"  >
                             <div class="from-group">
                                 <button type="button" class="btn btn-primary" id="boton" onclick="GetCampos()">Revisar</button>
-                                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#Modal1">Conexión</button>
-                                <button type="button" class="btn btn-primary" onclick="window.location.reload()" >Recargar página</button> 
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#Modal1">Conexión</button>
+                                <!-- <button type="button" class="btn btn-primary" onclick="window.location.reload()" >Recargar página</button>  -->
                                 <hr>                                
                             </div>
                             <div class="from-group">
