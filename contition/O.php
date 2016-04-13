@@ -2,7 +2,7 @@
 <?php 
     $algo =   $_REQUEST['valor'];
 ?>
-<div class="btn-group" id="<?php echo $algo; ?>_O" style="background-color: #66FF99" >
+<div class="btn-group" id="<?php echo $algo; ?>_O" style="background-color: #558EFE" >
     <button type="button" class="close" aria-hidden="true" onclick="borrarPanelfilter2(<?php echo $algo; ?>,'O')">&times;</button>
     <ul>
         <li><strong> || </strong>

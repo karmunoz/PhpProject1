@@ -60,6 +60,7 @@ var consultaModal="";
 var prefijos ="";
 var tipobusqueda ="";
 var idbusqueda ="";
+var completo = 0;//para los name en prefijos que se repiten
 var prefixArray =  new Array();
 var variablesArray = new Array(1);
 variablesArray[0] = new Array("?x");
@@ -79,12 +80,13 @@ window.onload = function()
     //esconder boton de las tablas de consulta
     var next = document.getElementById("next").style.display = 'none';
     //esconder botones de modal 
+    cargarphp();//cargar archivos php a la vista
     //para manejar la paginación
     valorNext = 0;
     valorConsulta="";
     property();//cargar la lista del ?y
     clases();//carga las clases
-    cargarphp();//cargar archivos php a la vista
+    
     
 }
 
@@ -179,6 +181,7 @@ function property()
                     var varr = k.split(",");
                     var res = varr[1].slice(9,varr[1].length-2);
                     var valorprefix = uriPrefix2(res);
+                    
                     agregarProperty(valorprefix);
 
                 }
@@ -391,7 +394,7 @@ function precionarTeclaz(id)
                         var remplazo = leng[2].replace('\"','');
                         remplazo = remplazo.replace('\"','');
                         respuesta = respuesta + " <option value ='\""+cortadas +"\"@"+remplazo+"'/> " ;
-                    }    
+                    }
                 }
             }
             var campoid = "z"+id;
@@ -1407,26 +1410,41 @@ function uriPrefix2(uri){
         }
     }
     //ver si esta en el arreglo
+    if(uri=="http://dbpedia.org/property/8v5W/l")
+            {
+                console.log(nameprefix+" "+" "+elemento[1]+" "+" "+elemento[0]);
+            }
     for (var i = 0; i < prefixArray.length; i++) {
-        if(prefixArray[i][1]== elemento[1])
+
+
+        if(prefixArray[i][1].toString() === elemento[1].toString())
         {
-            if((nameprefix+':') == prefixArray[i][0])
+              //console.log("elemento ya agregado "+ elemento[1]);
+            // if((nameprefix+':') === prefixArray[i][0].toString())
+            // {
+            //     //console.log("elemento ya agregado "+ elemento[1]);
+            //     return elemento[0]; 
+            // }
+            // else // debo cambiar el nameprefix
+            // {
+            //     elemento[0] = prefixArray[i][0]+elemento[0].split(':')[1];
+            // }
+            if(elemento[1].toString()==="http://dbpedia.org/property/8v5W/")
             {
-                //console.log("elemento ya agregado "+ elemento[1]);
-                return elemento[0]; 
+                console.log(nameprefix+" "+prefixArray[i][1]+" "+elemento[1]+" "+prefixArray[i][0]+" "+elemento[0]);
             }
-            else // debo cambiar el nameprefix
-            {
-                elemento[0] = prefixArray[i][0]+elemento[0].split(':')[1];
-            }
-            
+            var namee = elemento[0].split(':');
+            return prefixArray[i][0].toString()+namee[1];     
         }
     };
     //verificar el nombre
     for (var i = 0; i < prefixArray.length; i++) {
         if(prefixArray[i][0]== (nameprefix+":"))
         {
-           nameprefix=nameprefix+"a"; 
+            var nameprefixv = nameprefix;
+            nameprefix=nameprefix+completo;
+            completo =completo+1;
+            elemento[0] = elemento[0].replace(nameprefixv,nameprefix);
         }
     };
     //no esta debo agregar
@@ -1544,12 +1562,39 @@ function uriabuscar()
                 var k ;
                             
                 for (var objetos in lista){
+                    // k = JSON.stringify(auxCA[lista[objetos]]);
+                    // var cortada = k.split('"value":');
+                    // var cortadas = cortada[1].slice(1,cortada[1].length-2);
+                    // var cortadas = uriPrefix2(cortadas);
+                    // agregarFilabusqueda(cortadas,iji);
+                    // iji=iji+1;
+                    //
                     k = JSON.stringify(auxCA[lista[objetos]]);
                     var cortada = k.split('"value":');
-                    var cortadas = cortada[1].slice(1,cortada[1].length-2);
-                    var cortadas = uriPrefix2(cortadas);
-                    agregarFilabusqueda(cortadas,iji);
-                    iji=iji+1;
+                    console.log(k+"tipo");
+                    var varr = k.split(",");
+                    var var2 = varr[0].split(":");//obtener el tipo
+                    var pr = var2[1];
+                    if((var2[1]).length == 5)
+                    {
+                        var cortadas = cortada[1].slice(1,cortada[1].length-2);
+                        var cortadasz = uriPrefix2(cortadas);
+                        agregarFilabusqueda(cortadasz,iji);
+                        iji=iji+1;
+                    }
+                    else if((var2[1]).length == 9)
+                    {
+                        console.log("literal");
+                        var var3 = k.split(",");
+                        var var4 = var3[1].split(":");
+                        var leng = varr[1].split(":");
+                        var cortadas = cortada[1].slice(1,cortada[1].length-2);
+                        var remplazo = leng[2].replace('\"','');
+                        remplazo = remplazo.replace('\"','');
+                        var cortadasz = cortadas +"\"@"+remplazo;
+                        agregarFilabusqueda(cortadasz,iji);
+                        iji=iji+1;
+                    }
                 }
                 document.getElementById("idsiguiente").style.display="block";
             }

@@ -79,7 +79,6 @@
                                                         </table>
                                                     </div> 
                                                 </div>
-                                                <div class="tab-pane fade" id="tab3primary">Primary 3</div>
                                             </div>
                                         </div>
                                     </div>
@@ -141,7 +140,7 @@
             <div class="container-fluid"  >
                 <div class="btn-group" id="<?php echo $algo; ?>">
                     <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-                        PATTERN <span class="caret"></span>
+                        OPCIONES <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu2">
                         <li><a href="#" id="<?php echo $algo; ?>" onclick="Optional(id)">OPTIONAL</a></li>

@@ -2,7 +2,7 @@
 <?php 
     $algo =   $_REQUEST['valor'];
 ?>
-<div class="btn-group" id="<?php echo $algo; ?>_OPTIONAL" style="background-color: #339966" >
+<div class="btn-group" id="<?php echo $algo; ?>_OPTIONAL" style="background-color: #C9DBFF" >
     <button type="button" class="close" aria-hidden="true" onclick="borrarPanel2(<?php echo $algo; ?>,'_OPTIONAL')">&times;</button>
     <ul>
         <li><strong> OPTIONAL </strong>
