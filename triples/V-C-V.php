@@ -2,8 +2,8 @@
 <?php 
     $algo =$_REQUEST['valor'];
 ?>
-<div class="btn-group" id="<?php echo $algo; ?>">
-    <div class="thumbnail" id="<?php echo $algo; ?>_TRIPLE" ><strong>TRIPLE V-C-V</strong>
+<div class="col-md-12" id="<?php echo $algo; ?>">
+    <div class="thumbnail" id="<?php echo $algo; ?>_TRIPLE" ><strong>TRIPLE PATTERN  V-C-V</strong>
     	<button type="button" class="close" aria-hidden="true" onclick="borrarPanel(<?php echo $algo; ?>)">&times;</button>
     	<br> 
     	<div class="row">       

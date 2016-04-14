@@ -60,6 +60,9 @@ var consultaModal="";
 var prefijos ="";
 var tipobusqueda ="";
 var idbusqueda ="";
+var vartipox="";
+var vartipoy="";
+var vartipoz="";
 var completo = 0;//para los name en prefijos que se repiten
 var prefixArray =  new Array();
 var variablesArray = new Array(1);
@@ -1533,15 +1536,58 @@ function valordex(idx, tipot)
 {
     $("#tablabusqueda tr").remove();//tabla
     $( "#infomodal" ).html('');//mensaje informacion
-    tipobusqueda = tipot;
+    document.getElementById("busqueda1").value ="";//vaciar cuabro
+    tipobusqueda = tipot+ tipot;
     idbusqueda = idx+tipot;
+    document.getElementById("busqueda1").value = document.getElementById(idbusqueda).value;
+    if(tipobusqueda =="x")
+    {
+        vartipox ="?xx";
+        vartipoy = document.getElementById((idx+"y")).value;
+        vartipoz = document.getElementById((idx+"z")).value;
+    }
+    if(tipobusqueda =="y")
+    {
+        vartipoy ="?yy";
+        vartipox = document.getElementById((idx+"x")).value;
+        vartipoz = document.getElementById((idx+"z")).value;
+    }
+    if(tipobusqueda =="z")
+    {
+        vartipoz ="?zz";
+        vartipoy = document.getElementById((idx+"y")).value;
+        vartipox = document.getElementById((idx+"x")).value;
+    }
+    if( vartipox=="undefined" || vartipox === "" )
+    {
+       vartipox="?xx"; 
+    }
+    else
+    {
+        vartipox = prefixuri(vartipox);
+    }
+    if(vartipoy === "" || vartipoy=="undefined")
+    {
+       vartipoy="?yy"; 
+    }
+    else
+    {
+        vartipoy = prefixuri(vartipoy);
+    }
+    if(vartipoz === "" || vartipoz=="undefined")
+    {
+       vartipoz="?zz"; 
+    }
+    else
+    {
+        vartipoz = prefixuri(vartipoz);
+    }       
     console.log("valor de id "+idx+"-"+tipot);
 }
 function uriabuscar1()
 {
     consultaModal ="";
     $("#tablabusqueda tr").remove();//tabla
-
     uriabuscar();
 }
 function uriabuscar()
@@ -1559,7 +1605,7 @@ function uriabuscar()
           return;  
         }
         console.log(buscaera);
-        var consulltaa = "select DISTINCT ?"+tipobusqueda+" where {?x ?y ?z  FILTER regex(?"+tipobusqueda+" ,'"+buscaera+"')}";
+        var consulltaa = "select DISTINCT ?"+tipobusqueda+" where {"+vartipox+" "+vartipoy+" "+vartipoz+"  FILTER regex(?"+tipobusqueda+" ,'"+buscaera+"')}";
         //enviar la consulta
         console.log("Consulta busqueda "+consulltaa);
         consultaModal = consulltaa +" LIMIT 10 OFFSET ";

@@ -1,6 +1,6 @@
 <?php
 ?>
-<label class="col-sm-2 control-label"> SELECT</label>
+<label class="col-sm-2 control-label">SELECT</label>
 <!--  DISTINCT -->
 <div class="checkbox">
   <label>
