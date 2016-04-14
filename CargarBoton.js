@@ -277,8 +277,7 @@ function precionarTeclaz(id)
     var iddetriple = id+"_TRIPLE";
     var consulta = " select DISTINCT ?zzzzzz where{ ";
     var idqueva=0;
-    var comilla="";
-    var comilla2="";
+    var salir= false;
     //console.log(iddetriple);
     $('input', $('#'+iddetriple)).each(function () 
     {
@@ -287,34 +286,20 @@ function precionarTeclaz(id)
         //console.log(this.value);
         idqueva++;        
         var variabley="";
+        console.log("**"+this.value+"**");
         if(idqueva==3)
         {
-            if(this.value=="" || this.value=="undefined")
+            if(this.value==="" || this.value==="undefined")
             {
-                console.log("Campo vacio");
-                return;
+                console.log("Campo vacio ++");
+                salir =true;
+                return false;
             }
             variabley=this.value;
-            var txtx = variabley.split("\"");
-            var txtx2 = variabley.split("'");
-            if (txtx.length>1) 
-            {
-                console.log("Tiene comillas");
-                comilla="'";
-                comilla2="&quot";
-                variabley =  this.value.replace ("\"","");
-            }
-            if ( txtx2.length>1) 
-            {
-                console.log("Tiene comillas");
-                comilla="\"";
-                comilla2="&quot";
-                variabley =  variabley.replace ("'","");
-            }
-            console.log("Texto split "+txtx);
+            variabley = variabley.replace(/\"/g,"");
+            variabley = variabley.replace(/'/g,"");
 
-            consulta =consulta+ " ?zzzzzz FILTER regex(?zzzzzz, "+comilla+ variabley+comilla+")";
-            //consulta =consulta+ " ?zzzzzz FILTER regex(?zzzzzz, "+"'"+ variabley+"'"+")";
+            consulta =consulta+ " ?zzzzzz FILTER regex(?zzzzzz, '"+ variabley+"' )";
         }
         else if(idqueva==1)
         {
@@ -341,73 +326,76 @@ function precionarTeclaz(id)
     });
     console.log(consulta); 
     consulta = prefixuri(consulta);
-    
-    var querySparql = consulta +" } LIMIT 5";
-    console.log(querySparql);
-    var ipServer = document.getElementById("ipServer").value;
-    var grafo = document.getElementById("grafo").value;
-    var endPoint = document.getElementById("endPoint").value;
-    var datos = "q=" + querySparql +"###"+ipServer+"###"+grafo+"###"+endPoint;
-    console.log("aqui");
-    $.ajax({
-        type: "POST",
-        url:"peticionHTTP.php",
-        async: true,
-        data:datos,
-        success:
-        function(datos)
-        {
-            var rtArray = datos.results.bindings;
-            var respuesta ="";
-            console.log("no se que es ");
-                //obtener el  cuerpo de la lista
-            for(var i=0; i<rtArray.length; i++)
+    if(salir==false)
+    {
+        var querySparql = consulta +" } LIMIT 5";
+        console.log("consulta en z "+querySparql);
+        var ipServer = document.getElementById("ipServer").value;
+        var grafo = document.getElementById("grafo").value;
+        var endPoint = document.getElementById("endPoint").value;
+        var datos = "q=" + querySparql +"###"+ipServer+"###"+grafo+"###"+endPoint;
+        console.log("aqui");
+        $.ajax({
+            type: "POST",
+            url:"peticionHTTP.php",
+            async: true,
+            data:datos,
+            success:
+            function(datos)
             {
-                var auxCA = rtArray[i];
-                //Se extraen los valores
-                
-                var lista = Object.keys(auxCA);
-                var k ;
-                comilla2="";
-                             
-                for (var objetos in lista)
+                var rtArray = datos.results.bindings;
+                var respuesta ="";
+                console.log("no se que es ");
+                    //obtener el  cuerpo de la lista
+                for(var i=0; i<rtArray.length; i++)
                 {
-                    k = JSON.stringify(auxCA[lista[objetos]]);
-                    var cortada = k.split('"value":');
-                    console.log(k+"tipo");
-                    var varr = k.split(",");
-                    var var2 = varr[0].split(":");//obtener el tipo
-                    var pr = var2[1];
-                    if((var2[1]).length == 5)
+                    var auxCA = rtArray[i];
+                    //Se extraen los valores
+                    
+                    var lista = Object.keys(auxCA);
+                    var k ;
+                    comilla2="";
+                                 
+                    for (var objetos in lista)
                     {
-                        var cortadas = cortada[1].slice(1,cortada[1].length-2);
-                        var cortadasz = uriPrefix2(cortadas);
-                        respuesta = respuesta + " <option value ='"+cortadasz+"'/> " ;
-                    }
-                    else if((var2[1]).length == 9)
-                    {
-                        console.log("literal");
-                        var var3 = k.split(",");
-                        var var4 = var3[1].split(":");
-                        var leng = varr[1].split(":");
-                        var cortadas = cortada[1].slice(1,cortada[1].length-2);
-                        var remplazo = leng[2].replace('\"','');
-                        remplazo = remplazo.replace('\"','');
-                        respuesta = respuesta + " <option value ='\""+cortadas +"\"@"+remplazo+"'/> " ;
+                        k = JSON.stringify(auxCA[lista[objetos]]);
+                        var cortada = k.split('"value":');
+                        console.log(k+"tipo");
+                        var varr = k.split(",");
+                        var var2 = varr[0].split(":");//obtener el tipo
+                        var pr = var2[1];
+                        if((var2[1]).length == 5)
+                        {
+                            var cortadas = cortada[1].slice(1,cortada[1].length-2);
+                            var cortadasz = uriPrefix2(cortadas);
+                            respuesta = respuesta + " <option value ='"+cortadasz+"'/> " ;
+                        }
+                        else if((var2[1]).length == 9)
+                        {
+                            console.log("literal");
+                            var var3 = k.split(",");
+                            var var4 = var3[1].split(":");
+                            var leng = varr[1].split(":");
+                            var cortadas = cortada[1].slice(1,cortada[1].length-2);
+                            var remplazo = leng[2].replace('\"','');
+                            remplazo = remplazo.replace('\"','');
+                            respuesta = respuesta + " <option value ='\""+cortadas +"\"@"+remplazo+"'/> " ;
+                        }
                     }
                 }
+                var campoid = "z"+id;
+                console.log("RESPUESTA DE LA HACION "+respuesta);     
+                $("#"+campoid).html(respuesta);
             }
-            var campoid = "z"+id;
-            console.log("RESPUESTA DE LA HACION "+respuesta);     
-            $("#"+campoid).html(respuesta);
-        }
-        ,error: function (obj, error, objError)
-        {
-            console.log(error+" aaaaaaaaaaaaaa");
-            console.log(objError+" eeee");
-            console.log(obj+" aaaaaaaaaaaaaa");
-        }
-    });
+            ,error: function (obj, error, objError)
+            {
+                console.log(error+" aaaaaaaaaaaaaa");
+                console.log(objError+" eeee");
+                console.log(obj+" aaaaaaaaaaaaaa");
+            }
+        });   
+    }
+    
     console.log("hhhh"); 
 } 
 
@@ -647,6 +635,11 @@ function GetCampos()
                 return;
             }           
         }
+    }
+    console.log("largo campo "+ CamposImput.length);
+    if(CamposImput.length == 0)
+    {
+        return;
     }
     // debo limpiar el div 
     document.getElementById("principal").innerHTML="";
@@ -1151,7 +1144,7 @@ function Funcion(lista,i)
  */
 function ValidarCampo( a)
 {
-    if (a.value != "")
+    if (a.value != "" || a.value =="undefined")
     {
         return true;
     }    
@@ -1270,21 +1263,42 @@ function prefixuri(consulta)
 }
 //funcion para agregar una fila a la tabla de prefijos
 function agregarFila(name, uris ){
-    var cadena = '<tr><td>'+name+'</td><td>'+uris+'</td></tr>';
+    var cadena = '<tr id="'+name+'" draggable="true" ondragstart="drag(event)"><td>'+name+'</td><td>'+uris+'</td></tr>';
     $('#tablaprefix').append(cadena);
 }
 //funcion que agrega fila a tablaproperty
 function agregarProperty(uris ){
-    var cadena = '<tr><td>'+uris+'</td></tr>';
+    var cadena = '<tr id="'+uris+'" draggable="true" ondragstart="drag(event)"><td>'+uris+'</td></tr>';
     $('#tablaproperty').append(cadena);
 }
 //funcion que agrega fila a tablaclase
 function agregarclases(uris ){
-    var cadena = '<tr><td>'+uris+'</td></tr>';
+    var cadena = '<tr id="'+uris+'" draggable="true" ondragstart="drag(event)"><td>'+uris+'</td></tr>';
     $('#tablaclases').append(cadena);
 }
+//funciones para hacer el draque lo que sea
+function allowDrop(ev) {
+    ev.preventDefault();
+}
 
+function drag(ev) {
+    ev.dataTransfer.setData("text", ev.target.id);
+}
 
+function drop(ev) {
+    ev.preventDefault();
+    var data = ev.dataTransfer.getData("text");
+    
+    //ev.target.appendChild(document.getElementById(data));
+    var idinput = document.getElementById(data).id;
+    var idcosa = ev.target.id;
+    var letrs = idcosa.replace(/\d/g,"");
+    console.log(letrs+ " id "+ idcosa);
+    if(letrs =="x" || letrs =="y" || letrs =="z")
+    {
+       document.getElementById(idcosa).value = idinput; 
+    }
+}
 function eliminarcaracteres(stringToReplace){
     var specialChars = "!@$^&%*()+=-[]{}|:<>?,.";
     for (var i = 0; i < specialChars.length; i++) {
@@ -1296,8 +1310,9 @@ function eliminarcaracteres(stringToReplace){
 
     return stringToReplace;
 }
-function verificar(uri,caracteresIn,caraterFin,carater){
-var original=uri;
+function verificar(uri,caracteresIn,caraterFin,carater)
+{
+    var original=uri;
     var pos1=uri.indexOf(caracteresIn);
     var posx=uri.indexOf(carater);
     var pos2=uri.indexOf(caraterFin);
@@ -1410,10 +1425,6 @@ function uriPrefix2(uri){
         }
     }
     //ver si esta en el arreglo
-    if(uri=="http://dbpedia.org/property/8v5W/l")
-            {
-                console.log(nameprefix+" "+" "+elemento[1]+" "+" "+elemento[0]);
-            }
     for (var i = 0; i < prefixArray.length; i++) {
 
 
@@ -1480,7 +1491,7 @@ function Basica(id,tipo)
 // funcion para agregar otro campo en el select
 function Agregarcampox()
 {
-    console.log("agrego otro cuadrito"+ agregarcampox);
+    //console.log("agrego otro cuadrito"+ agregarcampox);
     var idcam = "campo"+agregarcampox;
     var capa = document.getElementById("selcampo");
     var x = document.createElement("INPUT");
@@ -1490,6 +1501,8 @@ function Agregarcampox()
     x.setAttribute("type","text");
     x.setAttribute("placeholder","variable");
     x.setAttribute("value","");
+    x.setAttribute("ondrop","drop(event)");
+    x.setAttribute("ondragover","allowDrop(event)");
     capa.appendChild(x);
     agregarcampox=agregarcampox+1;
 }

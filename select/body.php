@@ -16,7 +16,7 @@
 <div class="form-inline" >
 	<input type="radio" id="radio1" name="optradio">
 	<div id="selcampo">
-		<input class="form-control" id="campo0" type="text" placeholder="variable" value="">
+		<input class="form-control" id="campo0" type="text" placeholder="variable" value="" ondrop="drop(event)" ondragover="allowDrop(event)">
 	</div>
 	<button type="button" class="btn btn-primary" onclick="Agregarcampox()">
     	<span class="glyphicon glyphicon-plus"></span> 
@@ -34,12 +34,12 @@
     	<option>MIN</option>
   	</select>
 	<label>(</label>
-		<input class="form-control" id="valueop" placeholder="variable" type="text" value="">
+		<input class="form-control" id="valueop" placeholder="variable" type="text" value="" ondrop="drop(event)" ondragover="allowDrop(event)">
 		<label>) AS</label> 
-		<input class="form-control" id="valueas" placeholder="variable" type="text" value="">
+		<input class="form-control" id="valueas" placeholder="variable" type="text" value="" ondrop="drop(event)" ondragover="allowDrop(event)">
 </div>
 <div class="form-inline">
 	<input type="radio" id="radio3" name="optradio">
-	<input class="form-control" id="selultima" type="text" placeholder="variable" value="">
+	<input class="form-control" id="selultima" type="text" placeholder="variable" value="" ondrop="drop(event)" ondragover="allowDrop(event)">
 </div>
 <!-- Fin Menu opciones-->

@@ -11,7 +11,7 @@
          <form role="form">
             <div class="form-group">
                 <label>Ingrese valor a buscar</label>
-                <input class="form-control" id="busqueda1" value="">
+                <input class="form-control" id="busqueda1" value="" >
                 <button type="button" class="btn btn-primary" onclick="uriabuscar1()">Buscar</button>
             </div>
             <div id="infomodal"></div>

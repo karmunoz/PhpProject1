@@ -13,7 +13,7 @@
 	    	</br>
 	        <div class="col-md-12">
                 <div class="form-inline">
-                    <input class="form-control"  type="text" placeholder="Uri o literal" id="<?php echo $algo; ?>z" value="?z" onchange="cambioTexto()"  onkeyup="precionarTeclaz(<?php echo $algo; ?>)"list="z<?php echo $algo; ?>">
+                    <input class="form-control" ondrop="drop(event)" ondragover="allowDrop(event)"  type="text" placeholder="Uri o literal" id="<?php echo $algo; ?>z" value="?z" onchange="cambioTexto()"  onkeyup="precionarTeclaz(<?php echo $algo; ?>)"list="z<?php echo $algo; ?>">
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalx" onclick="valordex(<?php echo $algo; ?>,'z')">
                         <span class="glyphicon glyphicon-search"></span>
                     </button>
