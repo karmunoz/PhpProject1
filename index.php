@@ -136,7 +136,8 @@
         ?>
 
                   
-                                                                
+            <b> WHERE</b>
+            <b>{</b>
             <div class="container-fluid"  >
                 <div class="btn-group" id="<?php echo $algo; ?>">
                     <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
@@ -159,6 +160,8 @@
                         <li><a href="#" id="<?php echo $algo;?>" onclick="Triple(id,'C-C-C')">C-C-C</a></li>
                     </ul>
                 </div>
+                <p></p>
+                <b>}</b>
                 
                 <!-- Boton modal por el momento -->
                 

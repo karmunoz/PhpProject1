@@ -1288,8 +1288,6 @@ function drag(ev) {
 function drop(ev) {
     ev.preventDefault();
     var data = ev.dataTransfer.getData("text");
-    
-    //ev.target.appendChild(document.getElementById(data));
     var idinput = document.getElementById(data).id;
     var idcosa = ev.target.id;
     var letrs = idcosa.replace(/\d/g,"");
@@ -1494,17 +1492,42 @@ function Agregarcampox()
     //console.log("agrego otro cuadrito"+ agregarcampox);
     var idcam = "campo"+agregarcampox;
     var capa = document.getElementById("selcampo");
-    var x = document.createElement("INPUT");
-    //<input class="form-control" id="campo0" type="text" placeholder="variable" value="">
-    x.setAttribute("class", "form-control");
-    x.setAttribute("id", idcam);
-    x.setAttribute("type","text");
-    x.setAttribute("placeholder","variable");
-    x.setAttribute("value","");
-    x.setAttribute("ondrop","drop(event)");
-    x.setAttribute("ondragover","allowDrop(event)");
-    capa.appendChild(x);
+    var s = document.createElement("select");
+    s.setAttribute("class", "form-control");
+    s.setAttribute("id",idcam);
+    capa.appendChild(s);
+    var array = ["?s","?p","?o","?x","?y","?z","?a","?b","?c","?d"];
+    for (var i = 0; i < array.length; i++) {
+        var option = document.createElement("option");
+        option.value = array[i];
+        option.text = array[i];
+        s.appendChild(option);
+    }
     agregarcampox=agregarcampox+1;
+    // var idcam = "campo"+agregarcampox;
+    // var capa = document.getElementById("selcampo");
+    // var x = document.createElement("INPUT");
+    // //<input class="form-control" id="campo0" type="text" placeholder="variable" value="">
+    // x.setAttribute("class", "form-control");
+    // x.setAttribute("id", idcam);
+    // x.setAttribute("type","text");
+    // x.setAttribute("placeholder","variable");
+    // x.setAttribute("value","");
+    // x.setAttribute("ondrop","drop(event)");
+    // x.setAttribute("ondragover","allowDrop(event)");
+    // capa.appendChild(x);
+    // agregarcampox=agregarcampox+1;
+}
+// funcion para eliminar un campo en el select
+function Eliminarcampox()
+{
+    var idcampos = "#campo"+(agregarcampox-1);
+    if(idcampos !="#campo0")
+    {
+        $(idcampos).remove();
+        agregarcampox=agregarcampox-1;
+    }
+    
 }
 function valordex(idx, tipot)
 {
