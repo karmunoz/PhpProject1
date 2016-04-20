@@ -8,7 +8,7 @@
     	<br> 
     	<div class="row">       
 			<div class="col-md-12">
-                <select class="form-control" type="text" id="<?php echo $algo; ?>x">
+                <select class="form-control" type="text"  onchange="cambioTexto()" id="<?php echo $algo; ?>x">
                     <option hidden value="Variable">Variable</option>
                     <option value="?s">?s</option>
                     <option value="?p">?p</option>
@@ -24,7 +24,7 @@
             </div>
 	        </br>
 	        <div class="col-md-12">
-                <select class="form-control" type="text" id="<?php echo $algo; ?>y">
+                <select class="form-control" type="text"  onchange="cambioTexto()" id="<?php echo $algo; ?>y">
                     <option hidden value="Variable">Variable</option>
                     <option value="?s">?s</option>
                     <option value="?p">?p</option>

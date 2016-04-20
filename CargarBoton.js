@@ -988,7 +988,7 @@ function Funcion2(lista,i)
             ret = "<"+ret+">";
         }
         retorno = retorno+" "+ret;
-        console.log(retorno);
+        //console.log(retorno);
         return retorno;
     }
     if (lista[i]=="NI")
@@ -1256,7 +1256,7 @@ function Triple(i,tipo)
 {
     var oID ="#"+ i;
     var valor = i;
-    console.log(tipo);
+    //console.log(tipo);
     var ubicacion = "./triples/"+tipo+".php";
     $(oID).load(ubicacion,{valor:valor});
     

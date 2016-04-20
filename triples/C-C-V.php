@@ -26,7 +26,7 @@
             </div>
 	    	</br>
             <div class="col-md-12">
-                <select class="form-control" type="text" id="<?php echo $algo; ?>z">
+                <select class="form-control" type="text" onchange="cambioTexto()" id="<?php echo $algo; ?>z">
                     <option hidden value="Variable">Variable</option>
                     <option value="?s">?s</option>
                     <option value="?p">?p</option>
