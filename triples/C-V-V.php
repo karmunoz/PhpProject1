@@ -9,7 +9,7 @@
     	<div class="row">       
 			<div class="col-md-12">
                 <div class="form-inline">
-                    <input class="form-control" ondrop="drop(event)" ondragover="allowDrop(event)" type="text" placeholder="Uri" id="<?php echo $algo; ?>x" value="?x" onchange="cambioTexto()"  onkeyup="precionarTeclax(<?php echo $algo; ?>)"list="x<?php echo $algo; ?>">
+                    <input class="form-control" ondrop="drop(event)" ondragover="allowDrop(event)" type="text" placeholder="Uri" id="<?php echo $algo; ?>x" value="?x" onchange="cambioTexto()">
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalx" onclick="valordex(<?php echo $algo; ?>,'x')">
                         <span class="glyphicon glyphicon-search"></span>
                     </button>
@@ -50,9 +50,3 @@
         </div>
     </div>
 </div>
-<datalist id="x<?php echo $algo; ?>" >
-</datalist>
-<datalist id="y<?php echo $algo; ?>">
-</datalist>
-<datalist id="z<?php echo $algo; ?>">
-</datalist>

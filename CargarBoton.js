@@ -3,14 +3,6 @@
 */
 $(document).ready(function()
 {
-    $('#search').keyup(function()
-    {
-        searchTable($(this).val(),'tablaclases');
-    });
-    $('#search1').keyup(function()
-    {
-        searchTable($(this).val(),'tablaproperty');
-    });
     $('#search2').keyup(function()
     {
         searchTable($(this).val(),'tablaprefix');
@@ -70,6 +62,7 @@ variablesArray[0] = new Array("?x");
 variablesArray[1] = new Array("?z");
 variablesArray[2] = new Array("?y");
 var classArray = new Array();
+var PropertyArray = new Array();
 
 
 
@@ -90,10 +83,38 @@ window.onload = function()
     //para manejar la paginación
     valorNext = 0;
     valorConsulta="";
-    property();//cargar la lista del ?y
     clases();//carga las clases
-    
-    
+    property();//cargar la lista del ?y
+}
+/**
+* Funcion para buscar en tabla class
+*/
+function busquedaClass()
+{
+    var textoclass = document.getElementById('searchclass').value;
+    var nclass =  -1;
+    $("#tablaclases tr").remove();
+    for (var i = 0; i < classArray.length; i++) {
+        if(classArray[i].search(textoclass) != -1)
+        {
+            agregarclases(classArray[i]);
+        }
+    };     
+}
+/**
+* Funcion para buscar en la tabla de property
+*/
+function busquedaProperty()
+{
+    var textoclass = document.getElementById('searchproperty').value;
+    var nclass =  -1;
+    $("#tablaproperty tr").remove();
+    for (var i = 0; i < PropertyArray.length; i++) {
+        if(PropertyArray[i].search(textoclass) != -1)
+        {
+            agregarProperty(PropertyArray[i]);
+        }
+    };    
 }
 
 /**
@@ -102,8 +123,7 @@ window.onload = function()
 function cargarphp()
 {
     $('#selectbody').load('./select/body.php');
-    $('#modal1').load('./modal/modalx.php');
-    
+    $('#modal1').load('./modal/modalx.php');    
 }
 
 
@@ -187,10 +207,9 @@ function property()
                     var cortada = k.split('"value":'); 
                     var varr = k.split(",");
                     var res = varr[1].slice(9,varr[1].length-2);
-                    var valorprefix = uriPrefix2(res);
-                    
+                    var valorprefix = uriPrefix2(res);                   
                     agregarProperty(valorprefix);
-
+                    PropertyArray.push(valorprefix);
                 }
             }
         }
@@ -577,7 +596,7 @@ function borrarPanel(id)
     var alerta = "Elimino panel "+id;
     console.log(alerta);
    
-        bootbox.confirm("¿Está seguro que desea eliminar el elemento "+id +"?", function(result) {
+        bootbox.confirm("¿Está seguro que desea eliminar el elemento ?", function(result) {
         if(result== true)
         {
             var x ="#"+id;
@@ -594,7 +613,7 @@ function borrarPanel2(id,id2)
 {
     var alerta = "Elimino panel "+id;
     console.log(alerta);
-    bootbox.confirm("¿Está seguro que desea eliminar el elemento "+id +"?", function(result) {
+    bootbox.confirm("¿Está seguro que desea eliminar el elemento ?", function(result) {
         if(result== true)
         {
             var x ="#"+id+id2;
@@ -611,7 +630,7 @@ function borrarPanelfilter(id)
     var alerta = "Elimino panel "+id;
     console.log(alerta);
    
-        bootbox.confirm("¿Está seguro que desea eliminar el elemento "+id +"?", function(result) {
+        bootbox.confirm("¿Está seguro que desea eliminar el elemento ?", function(result) {
         if(result== true)
         {
             var x ="#"+id;
@@ -625,7 +644,7 @@ function borrarPanelfilter2(id,id2)
 {
     var alerta = "Elimino panel "+id;
     console.log(alerta);
-    bootbox.confirm("¿Está seguro que desea eliminar el elemento "+id +"?", function(result) {
+    bootbox.confirm("¿Está seguro que desea eliminar el elemento ?", function(result) {
         if(result== true)
         {
             var x ="#"+id+"_"+id2;

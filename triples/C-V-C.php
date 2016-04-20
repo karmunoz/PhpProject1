@@ -2,14 +2,14 @@
 <?php 
     $algo =$_REQUEST['valor'];
 ?>
-<div class="btn-group" id="<?php echo $algo; ?>">
+<div class="col-md-12" id="<?php echo $algo; ?>">
     <div class="thumbnail" id="<?php echo $algo; ?>_TRIPLE" ><strong>TRIPLE PATTERN  C-V-C</strong>
     	<button type="button" class="close" aria-hidden="true" onclick="borrarPanel(<?php echo $algo; ?>)">&times;</button>
     	<br> 
     	<div class="row">       
 			<div class="col-md-12">
                 <div class="form-inline">
-                    <input class="form-control" type="text" placeholder="Uri" id="<?php echo $algo; ?>x" value="?x" onchange="cambioTexto()"  ondrop="drop(event)" ondragover="allowDrop(event)" onkeyup="precionarTeclax(<?php echo $algo; ?>)"list="x<?php echo $algo; ?>">
+                    <input class="form-control" type="text" placeholder="Uri" id="<?php echo $algo; ?>x" value="?x" onchange="cambioTexto()"  ondrop="drop(event)" ondragover="allowDrop(event)">
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalx" onclick="valordex(<?php echo $algo; ?>,'x')">
                         <span class="glyphicon glyphicon-search"></span>
                     </button>
@@ -34,7 +34,7 @@
 	    	</br>
 	        <div class="col-md-12">
                 <div class="form-inline">
-                    <input class="form-control"  type="text" placeholder="Uri o literal" id="<?php echo $algo; ?>z" value="?z" onchange="cambioTexto()" ondrop="drop(event)" ondragover="allowDrop(event)" onkeyup="precionarTeclaz(<?php echo $algo; ?>)"list="z<?php echo $algo; ?>">
+                    <input class="form-control"  type="text" placeholder="Uri o literal" id="<?php echo $algo; ?>z" value="?z" onchange="cambioTexto()" ondrop="drop(event)" ondragover="allowDrop(event)">
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalx" onclick="valordex(<?php echo $algo; ?>,'z')">
                         <span class="glyphicon glyphicon-search"></span>
                     </button>
@@ -43,9 +43,3 @@
         </div>
     </div>
 </div>
-<datalist id="x<?php echo $algo; ?>" >
-</datalist>
-<datalist id="y<?php echo $algo; ?>">
-</datalist>
-<datalist id="z<?php echo $algo; ?>">
-</datalist>

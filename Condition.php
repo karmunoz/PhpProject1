@@ -1,4 +1,4 @@
-<!-- Este es el archivo Condition -->
+ <!-- Este es el archivo Condition -->
 <?php 
     $algo =$_REQUEST['valor'];
 ?>
@@ -17,7 +17,7 @@
         <li><a href="#" id="<?php echo $algo;?>" onclick="Basica(id,'me')">&#60;</a></li>
         <li><a href="#" id="<?php echo $algo;?>" onclick="Basica(id,'I')">&#61;</a></li>
         <li><a href="#" id="<?php echo $algo;?>" onclick="Basica(id,'MI')">&le;</a></li>
-        <li><a href="#" id="<?php echo $algo;?>" onclick="Basica(id,'mI')">&ge;</a></li>
+        <li><a href="#" id="<?php echo $algo;?>" onclick="Basica(id,'meI')">&ge;</a></li>
         <li><a href="#" id="<?php echo $algo;?>" onclick="Basica(id,'NI')">&#33;&#61;</a></li>
     </ul>
 </div>

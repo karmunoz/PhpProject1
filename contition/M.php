@@ -23,9 +23,7 @@
                 </select>
             </div>
 	        </br>
-	        <div class="col-md-12"><input class="form-control"  type="text" placeholder="?y" id="<?php echo $algo; ?>y" value="?y" onchange="cambioTexto()" ></div>
+	        <div class="col-md-12"><input class="form-control"  type="text" placeholder="10" id="<?php echo $algo; ?>y" value="" onchange="cambioTexto()" ></div>
         </div>
     </div>
 </div>
-<datalist id="x<?php echo $algo; ?>" >
-</datalist>

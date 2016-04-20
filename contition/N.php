@@ -12,13 +12,11 @@
                   <div class="form-group">
                     <label class="control-label col-sm-1">!</label>
                     <div class="col-sm-10">
-                        <input class="form-control" type="text"  style="background-color:#D6EEF7" placeholder="bound(?z)" id="<?php echo $algo; ?>x" value="?x" onchange="cambioTexto()"  onblur="salio(<?php echo $algo; ?>,'x')" onkeyup="precionaTeclavariable(<?php echo $algo; ?>,'x')"list="x<?php echo $algo; ?>">
+                        <input class="form-control" type="text"  placeholder="bound(?z)" id="<?php echo $algo; ?>x" value="" onchange="cambioTexto()">
                     </div>
                   </div>
                 </form>
 	        </div>
+        </div>
     </div>
-
 </div>
-<datalist id="x<?php echo $algo; ?>" >
-</datalist>

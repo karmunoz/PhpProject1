@@ -55,7 +55,7 @@
                                                     <div class="table-responsive" style="height:300px; max-height: 10 ;overflow-y: scroll;">
                                                         <div class="form-group has-feedback">
                                                             <label class="control-label" for="search"></label>
-                                                            <input type="text" class="form-control" id="search" data-type="search" placeholder="buscar..."/>
+                                                            <input type="text" class="form-control" id="searchclass" value="" onkeyup="busquedaClass()" placeholder="buscar..."/>
                                                             <span class="glyphicon glyphicon-search form-control-feedback"></span>
                                                         </div>
                                                         <table  id="tablaclases" class="table">
@@ -69,7 +69,7 @@
                                                     <div class="table-responsive" style="height:300px; max-height: 10 ;overflow-y: scroll;">
                                                         <div class="form-group has-feedback">
                                                             <label class="control-label" for="search1"></label>
-                                                            <input type="text" class="form-control" id="search1" data-type="search" placeholder="buscar..."/>
+                                                            <input type="text" class="form-control" id="searchproperty" value="" onkeyup="busquedaProperty()" placeholder="buscar..."/>
                                                             <span class="glyphicon glyphicon-search form-control-feedback"></span>
                                                         </div>
                                                         <table class="order-table table" id="tablaproperty">

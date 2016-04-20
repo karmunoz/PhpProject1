@@ -9,7 +9,7 @@
     	<div class="row">       
 			<div class="col-md-12">
                 <div class="form-inline">
-                    <input class="form-control" ondrop="drop(event)" ondragover="allowDrop(event)" type="text" placeholder="Uri" id="<?php echo $algo; ?>x" value="?x" onchange="cambioTexto()"  onkeyup="precionarTeclax(<?php echo $algo; ?>)"list="x<?php echo $algo; ?>">
+                    <input class="form-control" ondrop="drop(event)" ondragover="allowDrop(event)" type="text" placeholder="Uri" id="<?php echo $algo; ?>x" value="?x" onchange="cambioTexto()">
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalx" onclick="valordex(<?php echo $algo; ?>,'x')">
                         <span class="glyphicon glyphicon-search"></span>
                     </button>
@@ -18,14 +18,13 @@
             </br>
             <div class="col-md-12">
                 <div class="form-inline">
-                    <input class="form-control" ondrop="drop(event)" ondragover="allowDrop(event)" type="text" placeholder="Uri" id="<?php echo $algo; ?>y" value="?y" onchange="cambioTexto()"  onkeyup="precionarTeclay(<?php echo $algo; ?>)"list="y<?php echo $algo; ?>">
+                    <input class="form-control" ondrop="drop(event)" ondragover="allowDrop(event)" type="text" placeholder="Uri" id="<?php echo $algo; ?>y" value="?y" onchange="cambioTexto()">
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalx" onclick="valordex(<?php echo $algo; ?>,'y')">
                         <span class="glyphicon glyphicon-search"></span>
                     </button>
                 </div>
             </div>
 	    	</br>
-	        <!-- <div class="col-md-12"><input class="form-control"  type="text" style="background-color:#D6EEF7" placeholder="Variable" id="<?php echo $algo; ?>z" value="?z" onchange="cambioTexto()" onblur="salio(<?php echo $algo; ?>,'z')" onkeyup="precionaTeclavariable(<?php echo $algo; ?>,'z')"list="z<?php echo $algo; ?>"></div> -->
             <div class="col-md-12">
                 <select class="form-control" type="text" id="<?php echo $algo; ?>z">
                     <option hidden value="Variable">Variable</option>
@@ -44,9 +43,3 @@
         </div>
     </div>
 </div>
-<datalist id="x<?php echo $algo; ?>" >
-</datalist>
-<datalist id="y<?php echo $algo; ?>">
-</datalist>
-<datalist id="z<?php echo $algo; ?>">
-</datalist>

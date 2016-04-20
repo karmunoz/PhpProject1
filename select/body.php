@@ -1,5 +1,4 @@
-<?php
-?>
+<?php ?>
 <label class="col-sm-2 control-label">SELECT</label>
 <!--  DISTINCT -->
 <div class="checkbox">
@@ -33,15 +32,15 @@
         </select>
 		 <!-- <input class="form-control" id="campo0" type="text" placeholder="variable" value="" ondrop="drop(event)" ondragover="allowDrop(event)"> -->
   	</div>
-  <div class="btn-group">
-    <button type="button" class="btn btn-primary" onclick="Agregarcampox()">
-      <span class="glyphicon glyphicon-plus"></span> 
-    </button>
-    <button type="button" class="btn btn-primary" onclick="Eliminarcampox()">
-      <span class="glyphicon glyphicon-minus"></span> 
-    </button>
+    <div class="btn-group">
+      <button type="button" class="btn btn-primary" onclick="Agregarcampox()">
+        <span class="glyphicon glyphicon-plus"></span> 
+      </button>
+      <button type="button" class="btn btn-primary" onclick="Eliminarcampox()">
+        <span class="glyphicon glyphicon-minus"></span> 
+      </button>
+    </div>	  
   </div>
-	  
 </div>
 <br>
 <!-- fin variables-->
