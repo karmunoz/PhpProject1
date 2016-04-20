@@ -904,6 +904,10 @@ function iniciarConsulta(consulta)
             }
             //$( "#principal" ).append('</tr>');
                 //obtener el  cuerpo de la lista
+                if(rtArray.length ===0)
+                {
+                    $( "#Error" ).append('<label class="control-label" for="inputError">Su consulta no obtuvo resultado</label> ');
+                }
             for(var i=0; i<rtArray.length; i++){
                 var auxCA = rtArray[i];
                 //Se extraen los valores
@@ -923,7 +927,7 @@ function iniciarConsulta(consulta)
                 //por el momento doy el x y z manual
                     // respuesta =respuesta+"<tr><td> "+auxCA.x.value + "</td><td> " 
                     // +auxCA.y.value+ "</td><td> " +auxCA.z.value+"</td></tr>";
-                respuesta = respuesta +"</tr>";            
+                respuesta = respuesta +"</tr>";
                 $( "#principal" ).append(respuesta);
                 document.getElementById("next").style.display = 'block';
                 //console.log(respuesta);
@@ -1589,7 +1593,7 @@ function valordex(idx, tipot)
     tipobusqueda = tipot+ tipot;
     idbusqueda = idx+tipot;
     document.getElementById("busqueda1").value = document.getElementById(idbusqueda).value;
-    console.log("Tipo a buscar "+ tipobusqueda+" idx "+idx);
+    //console.log("Tipo a buscar "+ tipobusqueda+" idx "+idx);
     if(tipobusqueda =="xx")
     {
         vartipox ="?xx";
@@ -1634,8 +1638,8 @@ function valordex(idx, tipot)
     {
         vartipoz = prefixuri(vartipoz);
     }       
-    console.log("valor de id "+idx+"-"+tipot);
-    console.log(vartipox+" "+vartipoy+" "+vartipoz);
+    //console.log("valor de id "+idx+"-"+tipot);
+    //console.log(vartipox+" "+vartipoy+" "+vartipoz);
 }
 function uriabuscar1()
 {
@@ -1675,7 +1679,7 @@ function uriabuscar()
     var grafo = document.getElementById("grafo").value;
     var endPoint = document.getElementById("endPoint").value;
     var datos = "q=" + querySparql +"###"+ipServer+"###"+grafo+"###"+endPoint;
-    console.log("Datos: "+datos);
+    //console.log("Datos: "+datos);
     $.ajax({
         type: "POST",
         url:"peticionHTTP.php",
