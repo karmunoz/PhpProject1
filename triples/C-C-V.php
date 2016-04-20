@@ -25,7 +25,22 @@
                 </div>
             </div>
 	    	</br>
-	        <div class="col-md-12"><input class="form-control"  type="text" style="background-color:#D6EEF7" placeholder="Variable" id="<?php echo $algo; ?>z" value="?z" onchange="cambioTexto()" onblur="salio(<?php echo $algo; ?>,'z')" onkeyup="precionaTeclavariable(<?php echo $algo; ?>,'z')"list="z<?php echo $algo; ?>"></div>
+	        <!-- <div class="col-md-12"><input class="form-control"  type="text" style="background-color:#D6EEF7" placeholder="Variable" id="<?php echo $algo; ?>z" value="?z" onchange="cambioTexto()" onblur="salio(<?php echo $algo; ?>,'z')" onkeyup="precionaTeclavariable(<?php echo $algo; ?>,'z')"list="z<?php echo $algo; ?>"></div> -->
+            <div class="col-md-12">
+                <select class="form-control" type="text" id="<?php echo $algo; ?>z">
+                    <option hidden value="Variable">Variable</option>
+                    <option value="?s">?s</option>
+                    <option value="?p">?p</option>
+                    <option value="?o">?o</option>
+                    <option value="?x">?x</option>
+                    <option value="?y">?y</option>
+                    <option value="?z">?z</option>
+                    <option value="?a">?a</option>
+                    <option value="?b">?b</option>
+                    <option value="?c">?c</option>
+                    <option value="?d">?d</option>
+                </select>
+            </div>
         </div>
     </div>
 </div>

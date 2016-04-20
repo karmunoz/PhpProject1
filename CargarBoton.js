@@ -69,6 +69,7 @@ var variablesArray = new Array(1);
 variablesArray[0] = new Array("?x");
 variablesArray[1] = new Array("?z");
 variablesArray[2] = new Array("?y");
+var classArray = new Array();
 
 
 
@@ -78,6 +79,8 @@ window.onload = function()
     formulario = document.getElementById("1");
     //Obtiene todos los tags que sean "input"
     CamposImput = formulario.getElementsByTagName("input");	
+    //obtener todos los tags que sean select
+    CamposSelect = formulario.getElementsByTagName("select"); 
     //Obtener todos los tags que sean "div"
     Campos = formulario.getElementsByTagName("DIV");
     //esconder boton de las tablas de consulta
@@ -140,6 +143,7 @@ function clases()
                     var res = varr[1].slice(9,varr[1].length-2);
                     //console.log(cortar(res));
                     var valorprefix = uriPrefix2(res);
+                    classArray.push(valorprefix);
                     agregarclases(valorprefix);
                     
                 }
@@ -211,6 +215,12 @@ function salio(id,xyz)
                 console.log("campo vacio");
                 return;
             }
+            if(this.value == "variable")
+            {
+                console.log("campo vacio");
+                return;
+            }
+
             console.log("encontre el valor "+ this.value );
             varvalor=this.value;
         }
@@ -636,14 +646,15 @@ function GetCampos()
             {
                 bootbox.alert("Debe completar todos los campos", function() {});
                 return;
-            }           
+            }         
         }
     }
-    console.log("largo campo "+ CamposImput.length);
-    if(CamposImput.length == 0)
-    {
-        return;
-    }
+    
+    // console.log("largo campo "+ CamposImput.length);
+    // if(CamposImput.length == 0)
+    // {
+    //     return;
+    // }
     // debo limpiar el div 
     document.getElementById("principal").innerHTML="";
     document.getElementById("principal1").innerHTML="";
@@ -689,6 +700,20 @@ function GetCampos()
     //alert("Consulta "+consulta);
     $("#Consulta").append('<h4 class="bg-primary"> Consulta </h4> ');
     $("#Consulta").append('<font face="Comic Sans MS"  size="3">'+Consulta +'</font>');
+    //verificar que no este la palabra variable en la consulta
+    //Variable
+    var bbb = consulta.indexOf(" Variable ");
+    console.log(bbb);
+    if( bbb == -1 )
+    {
+        console.log("no esta Variable");
+    }
+    else
+    {
+        console.log("esta la palabra Variable en la consulta" );
+        bootbox.alert("Debe seleccionar una variable en  todos los campos", function() {});
+        return;
+    }
     iniciarConsulta(consulta);
 
     return;
@@ -1145,9 +1170,14 @@ function Funcion(lista,i)
  * @param {type} i
  * @returns {undefined}
  */
-function ValidarCampo( a)
+function ValidarCampo(a)
 {
-    if (a.value != "" || a.value =="undefined")
+    console.log(" valor de a: "+a.value);
+    if( a.value== "Variable")
+    {
+        return false;
+    }
+    if (a.value != "" || a.value =="undefined" )
     {
         return true;
     }    
