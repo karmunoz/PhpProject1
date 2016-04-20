@@ -9,7 +9,7 @@
     	<div class="row">       
 			<div class="col-md-12">
                 <div class="form-inline">
-                    <input class="form-control" type="text" placeholder="Uri" id="<?php echo $algo; ?>x" value="?x" onchange="cambioTexto()"  ondrop="drop(event)" ondragover="allowDrop(event)">
+                    <input class="form-control" type="text" placeholder="Uri" id="<?php echo $algo; ?>x" value="" onchange="cambioTexto()"  ondrop="drop(event)" ondragover="allowDrop(event)">
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalx" onclick="valordex(<?php echo $algo; ?>,'x')">
                         <span class="glyphicon glyphicon-search"></span>
                     </button>
@@ -34,7 +34,7 @@
 	    	</br>
 	        <div class="col-md-12">
                 <div class="form-inline">
-                    <input class="form-control"  type="text" placeholder="Uri o literal" id="<?php echo $algo; ?>z" value="?z" onchange="cambioTexto()" ondrop="drop(event)" ondragover="allowDrop(event)">
+                    <input class="form-control"  type="text" placeholder="Uri o literal" id="<?php echo $algo; ?>z" value="" onchange="cambioTexto()" ondrop="drop(event)" ondragover="allowDrop(event)">
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalx" onclick="valordex(<?php echo $algo; ?>,'z')">
                         <span class="glyphicon glyphicon-search"></span>
                     </button>
