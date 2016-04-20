@@ -1589,49 +1589,53 @@ function valordex(idx, tipot)
     tipobusqueda = tipot+ tipot;
     idbusqueda = idx+tipot;
     document.getElementById("busqueda1").value = document.getElementById(idbusqueda).value;
-    if(tipobusqueda =="x")
+    console.log("Tipo a buscar "+ tipobusqueda+" idx "+idx);
+    if(tipobusqueda =="xx")
     {
         vartipox ="?xx";
         vartipoy = document.getElementById((idx+"y")).value;
         vartipoz = document.getElementById((idx+"z")).value;
+        
     }
-    if(tipobusqueda =="y")
+    else if(tipobusqueda =="yy")
     {
         vartipoy ="?yy";
         vartipox = document.getElementById((idx+"x")).value;
         vartipoz = document.getElementById((idx+"z")).value;
     }
-    if(tipobusqueda =="z")
+    else if(tipobusqueda =="zz")
     {
         vartipoz ="?zz";
         vartipoy = document.getElementById((idx+"y")).value;
         vartipox = document.getElementById((idx+"x")).value;
     }
-    if( vartipox=="undefined" || vartipox === "" )
+    console.log(vartipox+" "+vartipoy+" "+vartipoz);
+    if( vartipox=="undefined" || vartipox === "Variable" || vartipox === "" )
     {
-       vartipox="?xx"; 
+       vartipox="?xxx"; 
     }
     else
     {
         vartipox = prefixuri(vartipox);
     }
-    if(vartipoy === "" || vartipoy=="undefined")
+    if(vartipoy === "" || vartipoy === "Variable" || vartipoy=="undefined")
     {
-       vartipoy="?yy"; 
+       vartipoy="?yyy"; 
     }
     else
     {
         vartipoy = prefixuri(vartipoy);
     }
-    if(vartipoz === "" || vartipoz=="undefined")
+    if(vartipoz === "" || vartipoz === "Variable" || vartipoz=="undefined")
     {
-       vartipoz="?zz"; 
+       vartipoz="?zzz"; 
     }
     else
     {
         vartipoz = prefixuri(vartipoz);
     }       
     console.log("valor de id "+idx+"-"+tipot);
+    console.log(vartipox+" "+vartipoy+" "+vartipoz);
 }
 function uriabuscar1()
 {
@@ -1679,9 +1683,9 @@ function uriabuscar()
         data:datos ,
         success:
         function(datos){
-            console.log(datos);
+            //console.log(datos);
             var rtArray = datos.results.bindings;
-            console.log(rtArray);
+            //console.log(rtArray);
             var respuesta ="";
             
                 //obtener el  cuerpo de la lista
@@ -1702,7 +1706,7 @@ function uriabuscar()
                     //
                     k = JSON.stringify(auxCA[lista[objetos]]);
                     var cortada = k.split('"value":');
-                    console.log(k+"tipo");
+                    //console.log(k+"tipo");
                     var varr = k.split(",");
                     var var2 = varr[0].split(":");//obtener el tipo
                     var pr = var2[1];
