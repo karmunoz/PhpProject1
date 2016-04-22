@@ -34,11 +34,11 @@ function searchTable(inputVal,id)
         }
     });
 }
-/*
- * 
+/** 
  * @param {type} i
  * @returns {undefined}
  */
+
 var agregarcampox = 1;//variable para el botom +
 var formulario;
 var CamposImput;
@@ -68,6 +68,18 @@ var PropertyArray = new Array();
 
 window.onload = function()
 {
+    clases();//carga las clases
+    property();//cargar la lista del ?y
+    bootbox.dialog({
+    title: "Bienvenido",
+    message: 'Espere mientras carga las Clases y Property. <br> Recuerde que <b>V</b> representa una variable y <b>C</b> representa una constante o literal.',
+    buttons: {
+        main: {
+            label: "Aceptar",
+            className: "btn-primary",
+            callback: function() { }
+            }
+        }});
     // Obtiene el formulario	
     formulario = document.getElementById("1");
     //Obtiene todos los tags que sean "input"
@@ -82,9 +94,51 @@ window.onload = function()
     cargarphp();//cargar archivos php a la vista
     //para manejar la paginación
     valorNext = 0;
-    valorConsulta="";
-    clases();//carga las clases
-    property();//cargar la lista del ?y
+    valorConsulta="";    
+}
+/**
+*   funcion para agregar una prefijo al select de prefijo
+**/
+function andPrefix(prefixname,prefixuri)
+{
+    var x = document.getElementById("selectPrefijos");
+    var option = document.createElement("option");
+    option.setAttribute("value",prefixname);
+    option.text = prefixname +"  "+ prefixuri;
+    x.add(option);
+}
+/**
+* funcion que captura el evento del select prefijo y filtra las tablas de class property
+*/
+function busquedaSPrefijos()
+{
+    var valors = document.getElementById("selectPrefijos").value;
+    if(valors === "Todo")
+    {
+        busquedaClass("");
+        busquedaProperty("");
+    }
+    else
+    {
+        busquedaClass(valors);
+        busquedaProperty(valors);
+    }
+}
+/**
+*   Funcion para filtrar los prefijos
+*/
+function busquedaSPrefijos2()
+{    
+    var textoa = document.getElementById("searchselectPrefijos").value;
+    document.getElementById("selectPrefijos").innerHTML = "";
+    andPrefix("Todo","");
+    for (var i = 0;  i < prefixArray.length; i++)
+     {
+        if(prefixArray[i][0].search(textoa) != -1 || prefixArray[i][1].search(textoa) != -1)
+        {
+            andPrefix(prefixArray[i][0],prefixArray[i][1]);
+        }
+    };
 }
 /**
 * Funcion para buscar en tabla class
@@ -92,14 +146,23 @@ window.onload = function()
 function busquedaClass()
 {
     var textoclass = document.getElementById('searchclass').value;
-    var nclass =  -1;
     $("#tablaclases tr").remove();
     for (var i = 0; i < classArray.length; i++) {
         if(classArray[i].search(textoclass) != -1)
         {
             agregarclases(classArray[i]);
         }
-    };     
+    };
+}
+function busquedaClass(textoclass)
+{
+    $("#tablaclases tr").remove();
+    for (var i = 0; i < classArray.length; i++) {
+        if(classArray[i].search(textoclass) != -1)
+        {
+            agregarclases(classArray[i]);
+        }
+    };
 }
 /**
 * Funcion para buscar en la tabla de property
@@ -107,14 +170,23 @@ function busquedaClass()
 function busquedaProperty()
 {
     var textoclass = document.getElementById('searchproperty').value;
-    var nclass =  -1;
     $("#tablaproperty tr").remove();
     for (var i = 0; i < PropertyArray.length; i++) {
         if(PropertyArray[i].search(textoclass) != -1)
         {
             agregarProperty(PropertyArray[i]);
         }
-    };    
+    };
+}
+function busquedaProperty(textoclass)
+{
+    $("#tablaproperty tr").remove();
+    for (var i = 0; i < PropertyArray.length; i++) {
+        if(PropertyArray[i].search(textoclass) != -1)
+        {
+            agregarProperty(PropertyArray[i]);
+        }
+    };
 }
 
 /**
@@ -125,12 +197,9 @@ function cargarphp()
     $('#selectbody').load('./select/body.php');
     $('#modal1').load('./modal/modalx.php');    
 }
-
-
 //funcion para cargar las clases
 function clases()
 {
-    //<i class='icon-spinner icon-spin icon-large'></i>
     var querySparql = "select distinct ?c where{?x rdf:type ?c }";
     console.log(querySparql);
     var ipServer = document.getElementById("ipServer").value;
@@ -145,16 +214,17 @@ function clases()
         success:
         function(datos)
         {
-            // $('.alert').css('display','none');
-           var rtArray = datos.results.bindings;
+            var rtArray = datos.results.bindings;
             var respuesta ="";
+            //console.log("Respuesta tamaño "+rtArray.length);
                 //obtener el  cuerpo de la lista
             for(var i=0; i<rtArray.length; i++)
             {
                 var auxCA = rtArray[i];
                 //Se extraen los valores
                 var lista = Object.keys(auxCA);
-                var k ;                             
+                var k ; 
+                //console.log(lista.length);
                 for (var objetos in lista)
                 {
                     k = JSON.stringify(auxCA[lista[objetos]]);
@@ -601,8 +671,7 @@ function borrarPanel(id)
         {
             var x ="#"+id;
             var valor = id;
-            $(x).load('Opciones.php',{valor:valor});
-            
+            $(x).load('Opciones.php',{valor:valor});            
         }
         }); 
 }
@@ -718,7 +787,7 @@ function GetCampos()
     //consulta solo el cuerpo
     //alert("Consulta "+consulta);
     $("#Consulta").append('<h4 class="bg-primary"> Consulta </h4> ');
-    $("#Consulta").append('<font face="Comic Sans MS"  size="3">'+Consulta +'</font>');
+    $("#Consulta").append('<font size="3">'+Consulta +'</font>');
     //verificar que no este la palabra variable en la consulta
     //Variable
     var bbb = consulta.indexOf(" Variable ");
@@ -776,7 +845,7 @@ function GetCampos()
     //consulta solo el cuerpo
     //alert("Consulta "+consulta);
     $("#Consulta").append('<h4 class="bg-primary"> Consulta </h4> ');
-    $("#Consulta").append('<font face="Comic Sans MS"  size="3">'+Consulta +'</font>');
+    $("#Consulta").append('<font size="3">'+Consulta +'</font>');
  }
 function stringSelect()
 {
@@ -1287,9 +1356,10 @@ function previous()
 // funcion para destranformar los prefijos a uri, intento 1
 function prefixuri(consulta)
 {
-    console.log("+++++++++++++++++"+consulta);
+    
     var listac = consulta.split(" ");
     consulta="";
+    console.log("+++++++++++++++++"+consulta+" "+listac.length);
     for (var j = 0; j < listac.length; j++) 
     {
 
@@ -1321,6 +1391,7 @@ function prefixuri(consulta)
 function agregarFila(name, uris ){
     var cadena = '<tr id="'+name+'" draggable="true" ondragstart="drag(event)"><td>'+name+'</td><td>'+uris+'</td></tr>';
     $('#tablaprefix').append(cadena);
+    andPrefix(name,uris);
 }
 //funcion que agrega fila a tablaproperty
 function agregarProperty(uris ){
@@ -1691,12 +1762,15 @@ function uriabuscar()
             var rtArray = datos.results.bindings;
             //console.log(rtArray);
             var respuesta ="";
-            
+            $( "#infomodal" ).html("");//
+            if(rtArray.length===0 )
+            {
+                $( "#infomodal" ).append('<div class="alert alert-danger" id="reloj">Base de datos no retorno valor. </div>');
+            }
                 //obtener el  cuerpo de la lista
             for(var i=0; i<rtArray.length; i++){
                 var auxCA = rtArray[i];
                 //Se extraen los valores
-                
                 var lista = Object.keys(auxCA);
                 var k ;
                             
@@ -1737,7 +1811,7 @@ function uriabuscar()
                 }
                 document.getElementById("idsiguiente").style.display="block";
             }
-             $( "#infomodal" ).html('');//
+             
         }
         ,error: function (obj, error, objError){         
         }

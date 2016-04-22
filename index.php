@@ -27,6 +27,25 @@
                              <h1 class="text-primary"> <img alt="center" src="logoflor.jpg" />Interfaz gráfica para consultas SPARQL </h1>     
                     </div>
                 </div>
+                <!-- Para hacer los prefijos -->
+                <div class="col-md-12">
+                    <div class="form-inline">
+                        <div class="form-group has-feedback">
+                            <label class="control-label" for="search">Prefijos  </label>
+                            <input type="text" class="form-control" id="searchselectPrefijos" value="" onkeyup="busquedaSPrefijos2()" placeholder="buscar..."/>
+                            <span class="glyphicon glyphicon-search form-control-feedback"></span>
+                        </div>
+                    </div>
+                    <br>
+                    <div>
+                        <select class="form-control" type="text" onchange="busquedaSPrefijos()" id="selectPrefijos">
+                            <option value="Todo">Todo</option>
+                        </select>
+                    </div>
+                </div>
+                <br>
+                <br>
+                
 
                     <div  class="col-lg-4 pull-left">
                         
@@ -109,14 +128,14 @@
                                     </div>                                     
                                 </div><!---->
                             </div>
-                            </div>
+                        </div>
                     </div><!-- Panel general-->
                            
                             <!-- Botones en la superficie-->
                     <div  class="col-xs-8 ">
                         <div class="container-fluid"  >
                             <div class="from-group">
-                                <button type="button" class="btn btn-primary" id="boton" onclick="GetCampos()">Revisar</button>
+                                <button type="button" class="btn btn-primary" id="boton" onclick="GetCampos()">Ejecutar SPARQL</button>
                                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#Modal1">Conexión</button>
                                 <!-- <button type="button" class="btn btn-primary" onclick="window.location.reload()" >Recargar página</button>  -->
                                 <hr>                                
@@ -138,7 +157,7 @@
                   
             <b> WHERE</b>
             <b>{</b>
-            <div class="container-fluid"  >
+            <div class="container-fluid" >
                 <div class="btn-group" id="<?php echo $algo; ?>">
                     <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
                         OPCIONES <span class="caret"></span>
@@ -223,8 +242,8 @@
                                     </div>
                                     <div id="next">
                                         <ul class="pager">
-                                          <li class="previous"><a href="#" id="idprevious" onclick="previous()">&larr; Older</a></li>
-                                          <li class="next"><a href="#" id="isnext" onclick="next()">Newer &rarr;</a></li>
+                                          <li class="previous"><a href="#" id="idprevious" onclick="previous()">&larr; Anterior</a></li>
+                                          <li class="next"><a href="#" id="isnext" onclick="next()"> Siguiente &rarr;</a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -260,7 +279,5 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
         <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" type="text/css" /> 
-    
-
     </body>
 </html>
