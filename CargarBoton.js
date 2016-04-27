@@ -7,7 +7,54 @@ $(document).ready(function()
     {
         searchTable($(this).val(),'tablaprefix');
     });
+    $('[data-toggle="tooltip"]').tooltip();
+    $("button").attr("aria-expanded","true");
 });
+
+function funcionextra(id)    
+{
+    var idd = id+"s";
+    var x = document.getElementById(idd).value;
+    if(x.charAt(0)=== "V" || x.charAt(0)=="C")
+    {
+        Triple(id,x);
+    }
+    else
+    {
+        switch(x){
+            case "And":
+                And(id);
+                break;
+            case "Optional":
+                Optional(id);
+                break;
+            case "Union":
+                Union(id);
+                break;
+            case "Filter":
+                Filter(id);
+                break;
+        }
+
+    }
+}
+function funcionextra2(id)
+{
+    var idd = id+"s2";
+    var x = document.getElementById(idd).value;
+    if(x==="Y" || x==="O" || x==="N")
+    {
+        YO(id,x);
+    }
+    else
+    {
+        Basica(id,x);
+    }
+}
+
+// $(function () {
+//   $('[data-toggle="tooltip"]').tooltip();
+// })
 /*
 * Para la busqueda en las tabla de prefijo, class and property
 */
@@ -63,13 +110,14 @@ variablesArray[1] = new Array("?z");
 variablesArray[2] = new Array("?y");
 var classArray = new Array();
 var PropertyArray = new Array();
+var ipServer ="";
+var grafo ="";
+var endPoint ="";
 
 
 
 window.onload = function()
 {
-    clases();//carga las clases
-    property();//cargar la lista del ?y
     bootbox.dialog({
     title: "Bienvenido",
     message: 'Espere mientras carga las Clases y Property. <br> Recuerde que <b>V</b> representa una variable y <b>C</b> representa una constante o literal.',
@@ -94,7 +142,48 @@ window.onload = function()
     cargarphp();//cargar archivos php a la vista
     //para manejar la paginación
     valorNext = 0;
-    valorConsulta="";    
+    valorConsulta=""; 
+    //para los cargar datos 
+    ipServer = document.getElementById("ipServer").value;
+    grafo = document.getElementById("grafo").value;
+    endPoint = document.getElementById("endPoint").value;
+    clases();//carga las clases
+    property();//cargar la lista del ?y  
+}
+/**
+*   funcion cuando cancela la carga de datos
+*/
+function cancelardatos()
+{
+    document.getElementById("ipServer").value = ipServer;
+    document.getElementById("grafo").value  = grafo;
+    document.getElementById("endPoint").value =endPoint; 
+}
+function cargardatos()
+{
+    //eliminar div
+    ipServer = document.getElementById("ipServer").value;
+    grafo = document.getElementById("grafo").value;
+    endPoint = document.getElementById("endPoint").value;
+    document.getElementById("principal").innerHTML="";
+    document.getElementById("principal1").innerHTML="";
+    document.getElementById("Consulta").innerHTML="";
+    document.getElementById("Error").innerHTML="";
+    //elimiarc ontenido y listas
+    prefixArray =new Array();
+    document.getElementById("selectPrefijos").innerHTML = "";
+    $("#tablaproperty tr").remove();
+    $("#tablaclases tr").remove();
+    $("#tablaprefix tr").remove();
+    //console.log("debo eliminar");
+    classArray = [];
+    PropertyArray = [];
+    andPrefix("Todo","");
+    completo = 0;
+    //cargar los datos de nuevo
+    clases();
+    property();
+    console.log("prefixArray " +prefixArray);
 }
 /**
 *   funcion para agregar una prefijo al select de prefijo
@@ -202,9 +291,6 @@ function clases()
 {
     var querySparql = "select distinct ?c where{?x rdf:type ?c }";
     console.log(querySparql);
-    var ipServer = document.getElementById("ipServer").value;
-    var grafo = document.getElementById("grafo").value;
-    var endPoint = document.getElementById("endPoint").value;
     var datos = "q=" + querySparql +"###"+ipServer+"###"+grafo+"###"+endPoint;
     $.ajax({
         type: "POST",
@@ -247,9 +333,6 @@ function property()
 {
     var querySparql = "select distinct ?y where{?x ?y ?z}";
     console.log(querySparql);
-    var ipServer = document.getElementById("ipServer").value;
-    var grafo = document.getElementById("grafo").value;
-    var endPoint = document.getElementById("endPoint").value;
     var datos = "q=" + querySparql +"###"+ipServer+"###"+grafo+"###"+endPoint;
     $.ajax({
         type: "POST",
@@ -432,9 +515,6 @@ function precionarTeclaz(id)
     {
         var querySparql = consulta +" } LIMIT 5";
         console.log("consulta en z "+querySparql);
-        var ipServer = document.getElementById("ipServer").value;
-        var grafo = document.getElementById("grafo").value;
-        var endPoint = document.getElementById("endPoint").value;
         var datos = "q=" + querySparql +"###"+ipServer+"###"+grafo+"###"+endPoint;
         console.log("aqui");
         $.ajax({
@@ -578,9 +658,6 @@ function precionarTeclaz(id)
     console.log("Consulta del x "+consulta); 
     consulta = prefixuri(consulta);
     var querySparql = consulta +" } LIMIT 5";
-    var ipServer = document.getElementById("ipServer").value;
-    var grafo = document.getElementById("grafo").value;
-    var endPoint = document.getElementById("endPoint").value;
     var datos = "q=" + querySparql +"###"+ipServer+"###"+grafo+"###"+endPoint;
     console.log("Datos: ----"+datos);
     $.ajax({
@@ -802,6 +879,18 @@ function GetCampos()
         bootbox.alert("Debe seleccionar una variable en  todos los campos", function() {});
         return;
     }
+    var bba = consulta.indexOf(" undefined ");
+    console.log(bba);
+    if( bba == -1 )
+    {
+        console.log("no esta  undefined");
+    }
+    else
+    {
+        console.log("esta la palabra  undefined en la consulta" );
+        bootbox.alert("Debe completar todos los campos", function() {});
+        return;
+    }
     iniciarConsulta(consulta);
 
     return;
@@ -940,10 +1029,6 @@ function iniciarConsulta(consulta)
     consulta =prefixuri(consulta);
     console.log("consulta tranformada  "+consulta);
     var querySparql = consulta +" LIMIT "+10+" OFFSET "+(valorNext*10);
-    var ipServer = document.getElementById("ipServer").value;
-    var grafo = document.getElementById("grafo").value;
-    var endPoint = document.getElementById("endPoint").value;
-
     var datos = "q=" + querySparql +"###"+ipServer+"###"+grafo+"###"+endPoint;
     console.log("----------------------"+datos);
     
@@ -1746,9 +1831,6 @@ function uriabuscar()
     } 
     setInterval("reloj()",31000);
     $( "#infomodal" ).append('<div class="alert alert-success" id="reloj">Realizando consulta... </div>');
-    var ipServer = document.getElementById("ipServer").value;
-    var grafo = document.getElementById("grafo").value;
-    var endPoint = document.getElementById("endPoint").value;
     var datos = "q=" + querySparql +"###"+ipServer+"###"+grafo+"###"+endPoint;
     //console.log("Datos: "+datos);
     $.ajax({

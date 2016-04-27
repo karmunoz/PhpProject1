@@ -3,24 +3,24 @@
     $algo =$_REQUEST['valor'];
 ?>
 <div class="btn-group" id="<?php echo $algo; ?>">
-    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-    OPCIONES <span class="caret"></span>
-  </button>
-    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu2" >          
-        <li><a href="#" id="<?php echo $algo; ?>" onclick="Optional(id)" >OPTIONAL</a></li>               
-        <li><a href="#" id="<?php echo $algo; ?>" onclick="Union(id)">UNION</a></li>
-        <li><a href="#" id="<?php echo $algo; ?>" onclick="And(id)">AND</a></li>
-        <li><a href="#" id="<?php echo $algo; ?>" onclick="Filter(id)">FILTER</a></li>
-        <li class="divider" ></li>
-        <li role="presentation" class="dropdown-header">TRIPLE</li>
-        <li><a href="#" id="<?php echo $algo;?>" onclick="Triple(id,'V-C-V')">V-C-V</a></li>
-        <li><a href="#" id="<?php echo $algo;?>" onclick="Triple(id,'C-C-V')">C-C-V</a></li>
-        <li><a href="#" id="<?php echo $algo;?>" onclick="Triple(id,'V-C-C')">V-C-C</a></li>
-        <li><a href="#" id="<?php echo $algo;?>" onclick="Triple(id,'V-V-C')">V-V-C</a></li>
-        <li><a href="#" id="<?php echo $algo;?>" onclick="Triple(id,'C-V-V')">C-V-V</a></li>
-        <li><a href="#" id="<?php echo $algo;?>" onclick="Triple(id,'C-V-C')">C-V-C</a></li>
-        <li><a href="#" id="<?php echo $algo;?>" onclick="Triple(id,'V-V-V')">V-V-V</a></li>
-        <li><a href="#" id="<?php echo $algo;?>" onclick="Triple(id,'C-C-C')">C-C-C</a></li>
-    </ul>
+    <select class="selectpicker" id="<?php echo $algo; ?>s"data-style="btn-primary"  onchange="funcionextra(<?php echo $algo; ?>)">
+        <option hidden>OPCIONES</option>
+        <optgroup label="OPCIONES">
+        <option value="Optional" >OPTIONAL</option>
+        <option value="Union" >UNION</option>
+        <option value="And" >AND</option>
+        <option value="Filter" >FILTER</option>
+        </optgroup>
+        <optgroup label="TRIPLE">
+        <option value="V-C-V">V-C-V</option>
+        <option value="C-C-V">C-C-V</option>
+        <option value="V-C-C">V-C-C</option>
+        <option value="V-V-C">V-V-C</option>
+        <option value="C-V-V">C-V-V</option>
+        <option value="C-V-C">C-V-C</option>
+        <option value="V-V-V">V-V-V</option>
+        <option value="C-C-C">C-C-C</option>
+         </optgroup>
+    </select> 
 </div>
 <script type='text/javascript' src='CargarBoton.js'></script>

@@ -29,19 +29,29 @@
                 </div>
                 <!-- Para hacer los prefijos -->
                 <div class="col-md-12">
-                    <div class="form-inline">
-                        <div class="form-group has-feedback">
-                            <label class="control-label" for="search">Prefijos  </label>
-                            <input type="text" class="form-control" id="searchselectPrefijos" value="" onkeyup="busquedaSPrefijos2()" placeholder="buscar..."/>
-                            <span class="glyphicon glyphicon-search form-control-feedback"></span>
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <i class="fa fa-paperclip"></i>
+                            Prefijos
                         </div>
-                    </div>
-                    <br>
-                    <div>
-                        <select class="form-control" type="text" onchange="busquedaSPrefijos()" id="selectPrefijos">
-                            <option value="Todo">Todo</option>
-                        </select>
-                    </div>
+                        <div class="panel-body">
+                           <div class="table-responsive">
+                                <div class="form-inline">
+                                    <div class="form-group has-feedback">
+                                        <label class="control-label" for="search">Prefijos  </label>
+                                        <input type="text" class="form-control" id="searchselectPrefijos" value="" onkeyup="busquedaSPrefijos2()" placeholder="buscar..." data-toggle="tooltip" data-placement="right" title="Filtra el contenido de la lista de los prefijos."/>
+                                        <span class="glyphicon glyphicon-search form-control-feedback"></span>
+                                    </div>
+                                </div>
+                                <br>
+                                <div>
+                                    <select class="form-control" type="text" onchange="busquedaSPrefijos()" id="selectPrefijos" data-toggle="tooltip" data-placement="top" title="Filtra el contenido de Class y Property.">
+                                        <option value="Todo">Todo</option>
+                                    </select>
+                                </div>
+                            </div>                                     
+                        </div><!---->
+                    </div> <!-- fin´prefijos -->
                 </div>
                 <br>
                 <br>
@@ -53,9 +63,9 @@
                         <!-- Panel para la configuracio -->
                             <!-- Panel para el diseño -->
                         <div class="panel panel-primary">
-                            <div class="panel-heading">
+                            <div class="panel-heading"  data-toggle="tooltip" data-placement="bottom" title="Información de la base de datos.">
                                 <i class="fa fa-paperclip"></i>
-                                Esquema
+                                Esquema 
                             </div>
 
                             <div class="panel-body" >
@@ -63,8 +73,8 @@
                                         <div class="panel-heading">
                                                 
                                                 <ul class="nav nav-tabs">
-                                                    <li class="active"><a href="#tab1primary" data-toggle="tab">Class</a></li>
-                                                    <li><a href="#tab2primary" data-toggle="tab">Property</a></li>
+                                                    <li class="active"><a href="#tab1primary" data-toggle="tab"><p data-toggle="tooltip" data-placement="bottom" title="Lista de Class">Class</p></a></li>
+                                                    <li><a href="#tab2primary" data-toggle="tab"><p data-toggle="tooltip" data-placement="bottom" title="Lista de preperty">Property</p></a></li>
                                                     
                                                 </ul>
                                         </div>
@@ -72,7 +82,7 @@
                                             <div class="tab-content">
                                                 <div class="tab-pane fade in active" id="tab1primary">
                                                     <div class="table-responsive" style="height:300px; max-height: 10 ;overflow-y: scroll;">
-                                                        <div class="form-group has-feedback">
+                                                        <div class="form-group has-feedback" data-toggle="tooltip" data-placement="bottom" title="Filtra la lista de Class">
                                                             <label class="control-label" for="search"></label>
                                                             <input type="text" class="form-control" id="searchclass" value="" onkeyup="busquedaClass()" placeholder="buscar..."/>
                                                             <span class="glyphicon glyphicon-search form-control-feedback"></span>
@@ -86,7 +96,7 @@
                                                 </div>
                                                 <div class="tab-pane fade" id="tab2primary">
                                                     <div class="table-responsive" style="height:300px; max-height: 10 ;overflow-y: scroll;">
-                                                        <div class="form-group has-feedback">
+                                                        <div class="form-group has-feedback" data-toggle="tooltip" data-placement="bottom" title="Filtra la lista de Property">
                                                             <label class="control-label" for="search1"></label>
                                                             <input type="text" class="form-control" id="searchproperty" value="" onkeyup="busquedaProperty()" placeholder="buscar..."/>
                                                             <span class="glyphicon glyphicon-search form-control-feedback"></span>
@@ -107,43 +117,45 @@
                         <!-- Panel para los prefijos -->
                            
                                 <div class="panel panel-primary">
-                                    <div class="panel-heading">
+                                    <div class="panel-heading" data-toggle="tooltip" data-placement="bottom" title="Lista de Prefijos">
                                         <i class="fa fa-paperclip"></i>
                                         Prefijos
                                     </div>
                                     <div class="panel-body">
 
                                        <div class="table-responsive" style="height:300px; max-height: 10 ;overflow-y: scroll;">
-                                        <div class="form-group has-feedback">
-                                            <label class="control-label" for="search2"></label>
-                                            <input type="text" class="form-control" id="search2" data-type="search" placeholder="buscar..."/>
-                                            <span class="glyphicon glyphicon-search form-control-feedback"></span>
-                                        </div>
+                                            <div class="form-group has-feedback" data-toggle="tooltip" data-placement="bottom" title="Filtra la lista de Prefijos">
+                                                <label class="control-label" for="search2"></label>
+                                                <input type="text" class="form-control" id="search2" data-type="search" placeholder="buscar..."/>
+                                                <span class="glyphicon glyphicon-search form-control-feedback"></span>
+                                            </div>
 
-                                        <table class="table" id="tablaprefix">  
+                                            <table class="table" id="tablaprefix">  
 
-                                          <!-- Aplicadas en las filas -->
-                                          
-                                        </table>
-                                    </div>                                     
-                                </div><!---->
+                                              <!-- Aplicadas en las filas -->
+                                              
+                                            </table>
+                                        </div>                                     
+                                    </div><!---->
+                                </div> <!-- fin´prefijos -->
                             </div>
-                        </div>
-                    </div><!-- Panel general-->
+                        </div><!-- Panel general-->
                            
                             <!-- Botones en la superficie-->
                     <div  class="col-xs-8 ">
                         <div class="container-fluid"  >
                             <div class="from-group">
-                                <button type="button" class="btn btn-primary" id="boton" onclick="GetCampos()">Ejecutar SPARQL</button>
-                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#Modal1">Conexión</button>
+                                <button type="button" class="btn btn-primary" id="boton" onclick="GetCampos()" data-toggle="tooltip" data-placement="bottom" title="Ejecuta la consulta creada."><b>Ejecutar SPARQL</b></button>
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#Modal1"><b data-toggle="tooltip" data-placement="bottom" title="Información de conexión a la base de datos, esta información puede cambiar.">Conexión</b></button>
                                 <!-- <button type="button" class="btn btn-primary" onclick="window.location.reload()" >Recargar página</button>  -->
-                                <hr>                                
+                                <hr>
                             </div>
-                            <div class="from-group">
-
-                                <div id="selectbody"></div>
+                            <div  style="border-style: solid; border-color:#428bca;"> 
+                                <div class="from-group">
+                                    <div id="selectbody" data-toggle="tooltip" data-placement="top" title="Cuerpo del selct de la consulta."></div>
+                                </div>
                             </div>
+                            
                             <br>
                             <hr>
                         </div>
@@ -155,42 +167,42 @@
         ?>
 
                   
-            <b> WHERE</b>
+            <b data-toggle="tooltip" data-placement="top" title="Cuerpo de la consulta."> WHERE</b>
             <b>{</b>
-            <div class="container-fluid" >
+            <div class="container-fluid"  >
                 <div class="btn-group" id="<?php echo $algo; ?>">
-                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-                        OPCIONES <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu2">
-                        <li><a href="#" id="<?php echo $algo; ?>" onclick="Optional(id)">OPTIONAL</a></li>
-                        <li><a href="#" id="<?php echo $algo; ?>" onclick="Union(id)">UNION</a></li>
-                        <li><a href="#" id="<?php echo $algo; ?>" onclick="And(id)">AND</a></li>
-                        <li><a href="#" id="<?php echo $algo; ?>" onclick="Filter(id)">FILTER</a></li>
-                        <li class="divider" ></li>
-                        <li role="presentation" class="dropdown-header">TRIPLE</li>
-                        <li><a href="#" id="<?php echo $algo;?>" onclick="Triple(id,'V-C-V')">V-C-V</a></li>
-                        <li><a href="#" id="<?php echo $algo;?>" onclick="Triple(id,'C-C-V')">C-C-V</a></li>
-                        <li><a href="#" id="<?php echo $algo;?>" onclick="Triple(id,'V-C-C')">V-C-C</a></li>
-                        <li><a href="#" id="<?php echo $algo;?>" onclick="Triple(id,'V-V-C')">V-V-C</a></li>
-                        <li><a href="#" id="<?php echo $algo;?>" onclick="Triple(id,'C-V-V')">C-V-V</a></li>
-                        <li><a href="#" id="<?php echo $algo;?>" onclick="Triple(id,'C-V-C')">C-V-C</a></li>
-                        <li><a href="#" id="<?php echo $algo;?>" onclick="Triple(id,'V-V-V')">V-V-V</a></li>
-                        <li><a href="#" id="<?php echo $algo;?>" onclick="Triple(id,'C-C-C')">C-C-C</a></li>
-                    </ul>
+                    <select class="selectpicker" id="<?php echo $algo; ?>s"data-style="btn-primary"  onchange="funcionextra(<?php echo $algo; ?>)">
+                        <option hidden>OPCIONES</option>
+                        <optgroup label="OPCIONES">
+                        <option value="Optional" >OPTIONAL</option>
+                        <option value="Union" >UNION</option>
+                        <option value="And" >AND</option>
+                        <option value="Filter" >FILTER</option>
+                        </optgroup>
+                        <optgroup label="TRIPLE">
+                        <option value="V-C-V">V-C-V</option>
+                        <option value="C-C-V">C-C-V</option>
+                        <option value="V-C-C">V-C-C</option>
+                        <option value="V-V-C">V-V-C</option>
+                        <option value="C-V-V">C-V-V</option>
+                        <option value="C-V-C">C-V-C</option>
+                        <option value="V-V-V">V-V-V</option>
+                        <option value="C-C-C">C-C-C</option>
+                         </optgroup>
+                    </select> 
                 </div>
                 <p></p>
                 <b>}</b>
                 
                 <!-- Boton modal por el momento -->
                 
-                <div class="modal fade bs-example-modal-sm" id="Modal1" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"  aria-hidden="true">
+                <div class="modal fade bs-example-modal-sm" id="Modal1" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"  aria-hidden="true" data-keyboard="false" data-backdrop="static">
                     <div class="modal-dialog modal-sm">
                         <div class="modal-content">
                             <div class="modal-header">
                                 <i class="fa fa-gear"></i>
                                     Configuración de conexión
-                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"> &times;</button>
+                                <button type="button" class="close" onclick="cancelardatos()" data-dismiss="modal" aria-hidden="true"> &times;</button>
                             </div>
                             <div class="modal-body">
                                 <div class="panel-heading ">
@@ -216,7 +228,8 @@
                                 <p ALIGN=center>.</p>
                             
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
+                                <button data-toggle="tooltip" data-placement="top" title="Al guardar los datos, se actualizara la información de las Class, Property y Prefijos." type="button" class="btn btn-primary" onclick="cargardatos()" data-dismiss="modal">Cargar</button>
+                                <button type="button" class="btn btn-primary" onclick="cancelardatos()" data-dismiss="modal">Cerrar</button>
                             </div>
                         </div>
                     </div>
@@ -230,11 +243,11 @@
                         <div class="panel">
                             <div class="panel-heading">
                                 <!-- Mostar la consulta-->
-                                <div id="Consulta" ></div>
+                                <div id="Consulta" data-toggle="tooltip" data-placement="top" title="Texto de la consulta." ></div>
                                 <!-- Mostrar el error--> 
                                 <div  class="form-group has-error" id="Error"></div>
                                 <!-- Cargar la  respuesta-->
-                                <div id="principal1"></div> 
+                                <div id="principal1" data-toggle="tooltip" data-placement="top" title="respuesta de la base de datos."></div> 
                                 <div class="container" style="overflow:auto">
                                     <div class="table-responsive ">
                                         <table class="table table-hover"  id="principal">
@@ -279,5 +292,9 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
         <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" type="text/css" /> 
+
+        <!-- <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"> -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     </body>
 </html>

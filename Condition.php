@@ -3,22 +3,21 @@
     $algo =$_REQUEST['valor'];
 ?>
 <div class="btn-group" id="<?php echo $algo; ?>">
-    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-    CONDICIÓN<span class="caret"></span>
-  </button>
-    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu2" >
-        <li role="presentation" class="dropdown-header">Logicos</li>         
-        <li><a href="#" id="<?php echo $algo; ?>" onclick="YO(id,'Y')" >&#38;&#38;</a></li>               
-        <li><a href="#" id="<?php echo $algo; ?>" onclick="YO(id,'O')">||</a></li>
-        <li><a href="#" id="<?php echo $algo; ?>" onclick="YO(id,'N')">!</a><li>
-        <li class="divider" ></li>
-        <li role="presentation" class="dropdown-header">Comparativos</li>
-        <li><a href="#" id="<?php echo $algo;?>" onclick="Basica(id,'M')">&#62;</a></li>
-        <li><a href="#" id="<?php echo $algo;?>" onclick="Basica(id,'me')">&#60;</a></li>
-        <li><a href="#" id="<?php echo $algo;?>" onclick="Basica(id,'I')">&#61;</a></li>
-        <li><a href="#" id="<?php echo $algo;?>" onclick="Basica(id,'MI')">&le;</a></li>
-        <li><a href="#" id="<?php echo $algo;?>" onclick="Basica(id,'meI')">&ge;</a></li>
-        <li><a href="#" id="<?php echo $algo;?>" onclick="Basica(id,'NI')">&#33;&#61;</a></li>
-    </ul>
+   <select class="selectpicker" id="<?php echo $algo; ?>s2"data-style="btn-primary"  onchange="funcionextra2(<?php echo $algo; ?>)">
+        <option hidden>CONDICIÓN</option>
+        <optgroup label="Logicos">
+            <option value="Y" >&#38;&#38;</option>
+            <option value="O" >||</option>
+            <option value="N" >!</option>
+        </optgroup>
+         <optgroup  label ="Comparativos">
+            <option value="M" >&#62;</option>
+            <option value="me" >&#60;</option>
+            <option value="I" >&#61;</option>
+            <option value="MI" >&le;</option>
+            <option value="meI" >&ge;</option>
+            <option value="NI" >&#33;&#61;</option>
+        </optgroup>
+    </select> 
 </div>
 <script type='text/javascript' src='CargarBoton.js'></script>
