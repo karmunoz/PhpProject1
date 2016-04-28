@@ -2,7 +2,7 @@
 <?php 
     $algo =   $_REQUEST['valor'];
 ?>
-<div class="btn-group" id="<?php echo ($algo); ?>_AND" style="background-color: #8CB2FF" >
+<div class="btn-group" id="<?php echo ($algo); ?>_AND" style="background-color: #C5A3FF" >
     <button type="button" class="close" aria-hidden="true" onclick="borrarPanel2(<?php echo $algo; ?>,'_AND')">&times;</button>
     <ul>
         <li><strong> AND </strong>

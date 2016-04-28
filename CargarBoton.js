@@ -3,10 +3,10 @@
 */
 $(document).ready(function()
 {
-    $('#search2').keyup(function()
-    {
-        searchTable($(this).val(),'tablaprefix');
-    });
+    // $('#search2').keyup(function()
+    // {
+    //     searchTable($(this).val(),'tablaprefix');
+    // });
     $('[data-toggle="tooltip"]').tooltip();
     $("button").attr("aria-expanded","true");
 });
@@ -162,28 +162,37 @@ function cancelardatos()
 function cargardatos()
 {
     //eliminar div
-    ipServer = document.getElementById("ipServer").value;
-    grafo = document.getElementById("grafo").value;
-    endPoint = document.getElementById("endPoint").value;
-    document.getElementById("principal").innerHTML="";
-    document.getElementById("principal1").innerHTML="";
-    document.getElementById("Consulta").innerHTML="";
-    document.getElementById("Error").innerHTML="";
-    //elimiarc ontenido y listas
-    prefixArray =new Array();
-    document.getElementById("selectPrefijos").innerHTML = "";
-    $("#tablaproperty tr").remove();
-    $("#tablaclases tr").remove();
-    $("#tablaprefix tr").remove();
-    //console.log("debo eliminar");
-    classArray = [];
-    PropertyArray = [];
-    andPrefix("Todo","");
-    completo = 0;
-    //cargar los datos de nuevo
-    clases();
-    property();
-    console.log("prefixArray " +prefixArray);
+
+    var er = document.getElementById("ipServer").value;
+    var fo = document.getElementById("grafo").value;
+    var nt = document.getElementById("endPoint").value;
+    if( er =! ipServer || fo != grafo || nt !=endPoint)
+    {
+        console.log("hay cambio");
+        ipServer = document.getElementById("ipServer").value;
+        grafo = document.getElementById("grafo").value;
+        endPoint = document.getElementById("endPoint").value;
+        document.getElementById("principal").innerHTML="";
+        document.getElementById("principal1").innerHTML="";
+        document.getElementById("Consulta").innerHTML="";
+        document.getElementById("Error").innerHTML="";
+        //elimiarc ontenido y listas
+        prefixArray =new Array();
+        document.getElementById("selectPrefijos").innerHTML = "";
+        $("#tablaproperty tr").remove();
+        $("#tablaclases tr").remove();
+        $("#tablaprefix tr").remove();
+        //console.log("debo eliminar");
+        classArray = [];
+        PropertyArray = [];
+        andPrefix("Todo","");
+        completo = 0;
+        //cargar los datos de nuevo
+        clases();
+        property();
+        console.log("prefixArray " +prefixArray);
+    }
+    
 }
 /**
 *   funcion para agregar una prefijo al select de prefijo
@@ -258,7 +267,8 @@ function busquedaClass(textoclass)
 */
 function busquedaProperty()
 {
-    var textoclass = document.getElementById('searchproperty').value;
+    var textoclass = document.getElementById('sproperty').value;
+    console.log("entre aquí:"+textoclass+"-");
     $("#tablaproperty tr").remove();
     for (var i = 0; i < PropertyArray.length; i++) {
         if(PropertyArray[i].search(textoclass) != -1)

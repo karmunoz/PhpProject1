@@ -82,7 +82,7 @@
                                             <div class="tab-content">
                                                 <div class="tab-pane fade in active" id="tab1primary">
                                                     <div class="table-responsive" style="height:300px; max-height: 10 ;overflow-y: scroll;">
-                                                        <div class="form-group has-feedback" data-toggle="tooltip" data-placement="bottom" title="Filtra la lista de Class">
+                                                        <div class="form-group has-feedback" >
                                                             <label class="control-label" for="search"></label>
                                                             <input type="text" class="form-control" id="searchclass" value="" onkeyup="busquedaClass()" placeholder="buscar..."/>
                                                             <span class="glyphicon glyphicon-search form-control-feedback"></span>
@@ -96,9 +96,9 @@
                                                 </div>
                                                 <div class="tab-pane fade" id="tab2primary">
                                                     <div class="table-responsive" style="height:300px; max-height: 10 ;overflow-y: scroll;">
-                                                        <div class="form-group has-feedback" data-toggle="tooltip" data-placement="bottom" title="Filtra la lista de Property">
+                                                        <div class="form-group has-feedback">
                                                             <label class="control-label" for="search1"></label>
-                                                            <input type="text" class="form-control" id="searchproperty" value="" onkeyup="busquedaProperty()" placeholder="buscar..."/>
+                                                            <input type="text" class="form-control" id="sproperty" value="" onkeyup="busquedaProperty()" placeholder="buscar..."/>
                                                             <span class="glyphicon glyphicon-search form-control-feedback"></span>
                                                         </div>
                                                         <table class="order-table table" id="tablaproperty">
@@ -170,7 +170,7 @@
             <b data-toggle="tooltip" data-placement="top" title="Cuerpo de la consulta."> WHERE</b>
             <b>{</b>
             <div class="container-fluid"  >
-                <div class="btn-group" id="<?php echo $algo; ?>">
+                <div class="btn-group" id="<?php echo $algo; ?>" style="overflow-x: scroll; width:700px;">
                     <select class="selectpicker" id="<?php echo $algo; ?>s"data-style="btn-primary"  onchange="funcionextra(<?php echo $algo; ?>)">
                         <option hidden>OPCIONES</option>
                         <optgroup label="OPCIONES">
