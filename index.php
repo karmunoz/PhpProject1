@@ -28,30 +28,48 @@
                     </div>
                 </div>
                 <!-- Para hacer los prefijos -->
-                <div class="col-md-12">
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">
-                            <i class="fa fa-paperclip"></i>
-                            Prefijos
-                        </div>
-                        <div class="panel-body">
-                           <div class="table-responsive">
-                                <div class="form-inline">
-                                    <div class="form-group has-feedback">
-                                        <label class="control-label" for="search">Prefijos  </label>
-                                        <input type="text" class="form-control" id="searchselectPrefijos" value="" onkeyup="busquedaSPrefijos2()" placeholder="buscar..." data-toggle="tooltip" data-placement="right" title="Filtra el contenido de la lista de los prefijos."/>
-                                        <span class="glyphicon glyphicon-search form-control-feedback"></span>
+                <div class="col-md-12"> <!-- para colocar el boton al lado -->
+                    <div class="col-md-8">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                <i class="fa fa-paperclip"></i>
+                                Prefijos
+                            </div>
+                            <div class="panel-body">
+                               <div class="table-responsive">
+                                    <div class="form-inline">
+                                        <div class="form-group has-feedback">
+                                            <label class="control-label" for="search"></label>
+                                            <input type="text" class="form-control" id="searchselectPrefijos" value="" onkeyup="busquedaSPrefijos2()" placeholder="buscar..." data-toggle="tooltip" data-placement="right" title="Filtra el contenido de la lista de los prefijos."/>
+                                            <span class="glyphicon glyphicon-search form-control-feedback"></span>
+                                        </div>
                                     </div>
+                                    <br>
+                                    <div>
+                                        <select class="form-control" type="text" onchange="busquedaSPrefijos()" id="selectPrefijos" data-toggle="tooltip" data-placement="top" title="Filtra el contenido de Class y Property.">
+                                            <option value="Todo">Todo</option>
+                                        </select>
+                                    </div>
+                                </div>                                     
+                            </div><!---->
+                        </div> <!-- fin´prefijos -->
+                    </div>
+                    <div class="col-md-4">
+                        <div class="col-md-12">
+                            <div class="panel panel-primary">
+                                <div class="panel-heading">
+                                    <i class="fa fa-paperclip"></i>
+                                        End Point
                                 </div>
-                                <br>
-                                <div>
-                                    <select class="form-control" type="text" onchange="busquedaSPrefijos()" id="selectPrefijos" data-toggle="tooltip" data-placement="top" title="Filtra el contenido de Class y Property.">
-                                        <option value="Todo">Todo</option>
-                                    </select>
+                                <div class="panel-body">
+                                    <div class="alert alert-warning">
+                                        <div id="idenpoint" value="" style="overflow-x: scroll;" data-toggle="tooltip" data-placement="bottom" title="Enp Point conectado."></div>
+                                    </div>
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#Modal1"><b data-toggle="tooltip" data-placement="bottom" title="Información de conexión a la base de datos, esta información puede cambiar.">Conexión</b></button>
                                 </div>
-                            </div>                                     
-                        </div><!---->
-                    </div> <!-- fin´prefijos -->
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <br>
                 <br>
@@ -70,86 +88,59 @@
 
                             <div class="panel-body" >
                                 <div class="col-lg-15"><!---->
-                                        <div class="panel-heading">
+                                    <div class="panel-heading">
+                                            
+                                            <ul class="nav nav-tabs">
+                                                <li class="active"><a href="#tab1primary" data-toggle="tab"><p data-toggle="tooltip" data-placement="bottom" title="Lista de Class">Class</p></a></li>
+                                                <li><a href="#tab2primary" data-toggle="tab"><p data-toggle="tooltip" data-placement="bottom" title="Lista de property">Property</p></a></li>
                                                 
-                                                <ul class="nav nav-tabs">
-                                                    <li class="active"><a href="#tab1primary" data-toggle="tab"><p data-toggle="tooltip" data-placement="bottom" title="Lista de Class">Class</p></a></li>
-                                                    <li><a href="#tab2primary" data-toggle="tab"><p data-toggle="tooltip" data-placement="bottom" title="Lista de preperty">Property</p></a></li>
-                                                    
-                                                </ul>
-                                        </div>
-                                        <div class="panel-body">
-                                            <div class="tab-content">
-                                                <div class="tab-pane fade in active" id="tab1primary">
-                                                    <div class="table-responsive" style="height:300px; max-height: 10 ;overflow-y: scroll;">
-                                                        <div class="form-group has-feedback" >
-                                                            <label class="control-label" for="search"></label>
-                                                            <input type="text" class="form-control" id="searchclass" value="" onkeyup="busquedaClass()" placeholder="buscar..."/>
-                                                            <span class="glyphicon glyphicon-search form-control-feedback"></span>
-                                                        </div>
-                                                        <table  id="tablaclases" class="table">
-                                                          <!-- Aplicadas en las celdas (<td> o <th>) -->
-                                                            <tr>
-                                                            </tr>
-                                                        </table>
-                                                    </div>  
-                                                </div>
-                                                <div class="tab-pane fade" id="tab2primary">
-                                                    <div class="table-responsive" style="height:300px; max-height: 10 ;overflow-y: scroll;">
-                                                        <div class="form-group has-feedback">
-                                                            <label class="control-label" for="search1"></label>
-                                                            <input type="text" class="form-control" id="sproperty" value="" onkeyup="busquedaProperty()" placeholder="buscar..."/>
-                                                            <span class="glyphicon glyphicon-search form-control-feedback"></span>
-                                                        </div>
-                                                        <table class="order-table table" id="tablaproperty">
-                                                          <!-- Aplicadas en las celdas (<td> o <th>) -->
-                                                            <tr>
-                                                            </tr>
-                                                        </table>
-                                                    </div> 
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div><!---->
-                            </div>
-                        
-                        <!-- Panel para los prefijos -->
-                           
-                                <div class="panel panel-primary">
-                                    <div class="panel-heading" data-toggle="tooltip" data-placement="bottom" title="Lista de Prefijos">
-                                        <i class="fa fa-paperclip"></i>
-                                        Prefijos
+                                            </ul>
                                     </div>
                                     <div class="panel-body">
-
-                                       <div class="table-responsive" style="height:300px; max-height: 10 ;overflow-y: scroll;">
-                                            <div class="form-group has-feedback" data-toggle="tooltip" data-placement="bottom" title="Filtra la lista de Prefijos">
-                                                <label class="control-label" for="search2"></label>
-                                                <input type="text" class="form-control" id="search2" data-type="search" placeholder="buscar..."/>
-                                                <span class="glyphicon glyphicon-search form-control-feedback"></span>
+                                        <div class="tab-content">
+                                            <div class="tab-pane fade in active" id="tab1primary">
+                                                <div class="table-responsive" style="height:300px; max-height: 10 ;overflow-y: scroll;">
+                                                    <div class="form-group has-feedback" >
+                                                        <label class="control-label" for="search"></label>
+                                                        <input type="text" class="form-control" id="searchclass" value="" onkeyup="busquedaClass()" placeholder="buscar..."/>
+                                                        <span class="glyphicon glyphicon-search form-control-feedback"></span>
+                                                    </div>
+                                                    <table  id="tablaclases" class="table">
+                                                      <!-- Aplicadas en las celdas (<td> o <th>) -->
+                                                        <tr>
+                                                        </tr>
+                                                    </table>
+                                                </div>  
                                             </div>
-
-                                            <table class="table" id="tablaprefix">  
-
-                                              <!-- Aplicadas en las filas -->
-                                              
-                                            </table>
-                                        </div>                                     
-                                    </div><!---->
-                                </div> <!-- fin´prefijos -->
-                            </div>
-                        </div><!-- Panel general-->
+                                            <div class="tab-pane fade" id="tab2primary">
+                                                <div class="table-responsive" style="height:300px; max-height: 10 ;overflow-y: scroll;">
+                                                    <div class="form-group has-feedback">
+                                                        <label class="control-label" for="search1"></label>
+                                                        <input type="text" class="form-control" id="sproperty" value="" onkeyup="busquedaProperty()" placeholder="buscar..."/>
+                                                        <span class="glyphicon glyphicon-search form-control-feedback"></span>
+                                                    </div>
+                                                    <table class="order-table table" id="tablaproperty">
+                                                      <!-- Aplicadas en las celdas (<td> o <th>) -->
+                                                        <tr>
+                                                        </tr>
+                                                    </table>
+                                                </div> 
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div><!---->
+                        </div>
+                        </div>
+                        <div class="from-group">
+                                <button type="button" class="btn btn-primary" id="boton" onclick="GetCampos()" data-toggle="tooltip" data-placement="bottom" title="Ejecuta la consulta creada."><b>Ejecutar SPARQL</b></button>
+                                <button type="button" class="btn btn-primary" id="boton" onclick="Limpiar()" data-toggle="tooltip" data-placement="bottom" title="Limpiar todo."><b>Limpiar</b></button>
+                        </div>
+                    </div><!-- Panel general-->
                            
                             <!-- Botones en la superficie-->
                     <div  class="col-xs-8 ">
                         <div class="container-fluid"  >
-                            <div class="from-group">
-                                <button type="button" class="btn btn-primary" id="boton" onclick="GetCampos()" data-toggle="tooltip" data-placement="bottom" title="Ejecuta la consulta creada."><b>Ejecutar SPARQL</b></button>
-                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#Modal1"><b data-toggle="tooltip" data-placement="bottom" title="Información de conexión a la base de datos, esta información puede cambiar.">Conexión</b></button>
-                                <!-- <button type="button" class="btn btn-primary" onclick="window.location.reload()" >Recargar página</button>  -->
-                                <hr>
-                            </div>
                             <div  style="border-style: solid; border-color:#428bca;"> 
                                 <div class="from-group">
                                     <div id="selectbody" data-toggle="tooltip" data-placement="top" title="Cuerpo del selct de la consulta."></div>
@@ -169,8 +160,8 @@
                   
             <b data-toggle="tooltip" data-placement="top" title="Cuerpo de la consulta."> WHERE</b>
             <b>{</b>
-            <div class="container-fluid"  >
-                <div class="btn-group" id="<?php echo $algo; ?>" style="overflow-x: scroll; width:700px;">
+            <div class="col-xs-8 pull-left right" >
+                <div class="btn-group" id="<?php echo $algo; ?>" style="overflow-x: scroll; width:750px;">
                     <select class="selectpicker" id="<?php echo $algo; ?>s"data-style="btn-primary"  onchange="funcionextra(<?php echo $algo; ?>)">
                         <option hidden>OPCIONES</option>
                         <optgroup label="OPCIONES">

@@ -3,12 +3,7 @@
 */
 $(document).ready(function()
 {
-    // $('#search2').keyup(function()
-    // {
-    //     searchTable($(this).val(),'tablaprefix');
-    // });
     $('[data-toggle="tooltip"]').tooltip();
-    $("button").attr("aria-expanded","true");
 });
 
 function funcionextra(id)    
@@ -147,8 +142,30 @@ window.onload = function()
     ipServer = document.getElementById("ipServer").value;
     grafo = document.getElementById("grafo").value;
     endPoint = document.getElementById("endPoint").value;
+    document.getElementById("idenpoint").innerHTML = endPoint;
     clases();//carga las clases
     property();//cargar la lista del ?y  
+}
+function Limpiar()
+{
+    bootbox.confirm("¿Está seguro que desea limpiar todo?", function(result) {
+        if(result== true)
+        {
+            var x ="#"+1;
+            var valor = 1;
+            $(x).load('Opciones.php',{valor:valor});
+            document.getElementById("principal").innerHTML="";
+            document.getElementById("principal1").innerHTML="";
+            document.getElementById("Consulta").innerHTML="";//limpio y escondo
+            document.getElementById("Error").innerHTML="";
+            $('#selectbody').load('./select/body.php');//limpiio el select
+            document.getElementById("next").style.display = 'none';//escondo boton        
+        }
+        });
+    
+
+
+
 }
 /**
 *   funcion cuando cancela la carga de datos
@@ -172,6 +189,7 @@ function cargardatos()
         ipServer = document.getElementById("ipServer").value;
         grafo = document.getElementById("grafo").value;
         endPoint = document.getElementById("endPoint").value;
+        document.getElementById("idenpoint").innerHTML = endPoint;
         document.getElementById("principal").innerHTML="";
         document.getElementById("principal1").innerHTML="";
         document.getElementById("Consulta").innerHTML="";
@@ -202,7 +220,7 @@ function andPrefix(prefixname,prefixuri)
     var x = document.getElementById("selectPrefijos");
     var option = document.createElement("option");
     option.setAttribute("value",prefixname);
-    option.text = prefixname +"  "+ prefixuri;
+    option.text = ""+prefixname+" <"+ prefixuri+">";
     x.add(option);
 }
 /**
@@ -213,13 +231,13 @@ function busquedaSPrefijos()
     var valors = document.getElementById("selectPrefijos").value;
     if(valors === "Todo")
     {
-        busquedaClass("");
-        busquedaProperty("");
+        busquedaClass2("");
+        busquedaProperty2("");
     }
     else
     {
-        busquedaClass(valors);
-        busquedaProperty(valors);
+        busquedaClass2(valors);
+        busquedaProperty2(valors);
     }
 }
 /**
@@ -252,7 +270,7 @@ function busquedaClass()
         }
     };
 }
-function busquedaClass(textoclass)
+function busquedaClass2(textoclass)
 {
     $("#tablaclases tr").remove();
     for (var i = 0; i < classArray.length; i++) {
@@ -267,6 +285,7 @@ function busquedaClass(textoclass)
 */
 function busquedaProperty()
 {
+    console.log("Entre");
     var textoclass = document.getElementById('sproperty').value;
     console.log("entre aquí:"+textoclass+"-");
     $("#tablaproperty tr").remove();
@@ -277,8 +296,9 @@ function busquedaProperty()
         }
     };
 }
-function busquedaProperty(textoclass)
+function busquedaProperty2(textoclass)
 {
+    console.log("Entre2");
     $("#tablaproperty tr").remove();
     for (var i = 0; i < PropertyArray.length; i++) {
         if(PropertyArray[i].search(textoclass) != -1)

@@ -10,7 +10,6 @@ function hacerPeticionHTTP($query) {
     $grafo = $lista[2];//"http://localhost:8890/pdb"; //
     $format = "application/json";
     $endPoint = $lista[3];//"http://192.168.254.6:8890/sparql/";//
-
     $params = array(
         "default-graph-uri" => $grafo,
         "query" => $lista[0],
