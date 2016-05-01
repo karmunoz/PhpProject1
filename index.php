@@ -58,7 +58,7 @@
                         <div class="col-md-12">
                             <div class="panel panel-primary">
                                 <div class="panel-heading">
-                                    <i class="fa fa-paperclip"></i>
+                                    <i class="fa fa-gear"></i>
                                         End Point
                                 </div>
                                 <div class="panel-body">
@@ -87,7 +87,7 @@
                             </div>
 
                             <div class="panel-body" >
-                                <div class="col-lg-15"><!---->
+                                <div class="col-lg-12"><!---->
                                     <div class="panel-heading">
                                             
                                             <ul class="nav nav-tabs">
@@ -132,10 +132,15 @@
                             </div><!---->
                         </div>
                         </div>
-                        <div class="from-group">
-                                <button type="button" class="btn btn-primary" id="boton" onclick="GetCampos()" data-toggle="tooltip" data-placement="bottom" title="Ejecuta la consulta creada."><b>Ejecutar SPARQL</b></button>
-                                <button type="button" class="btn btn-primary" id="boton" onclick="Limpiar()" data-toggle="tooltip" data-placement="bottom" title="Limpiar todo."><b>Limpiar</b></button>
+                        <div class="container">
+                            <div class="btn-group" >
+                                <div class="from-group">
+                                    <button type="button" class="btn btn-primary" id="boton" onclick="GetCampos()" data-toggle="tooltip" data-placement="bottom" title="Ejecuta la consulta creada."><b>Ejecutar SPARQL</b></button>
+                                    <button type="button" class="btn btn-primary" id="boton" onclick="Limpiar()" data-toggle="tooltip" data-placement="bottom" title="Limpiar todo."><b>Limpiar</b></button>
+                                </div>
+                            </div>       
                         </div>
+                        
                     </div><!-- Panel general-->
                            
                             <!-- Botones en la superficie-->

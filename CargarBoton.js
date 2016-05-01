@@ -46,10 +46,6 @@ function funcionextra2(id)
         Basica(id,x);
     }
 }
-
-// $(function () {
-//   $('[data-toggle="tooltip"]').tooltip();
-// })
 /*
 * Para la busqueda en las tabla de prefijo, class and property
 */
@@ -76,11 +72,6 @@ function searchTable(inputVal,id)
         }
     });
 }
-/** 
- * @param {type} i
- * @returns {undefined}
- */
-
 var agregarcampox = 1;//variable para el botom +
 var formulario;
 var CamposImput;
@@ -99,12 +90,10 @@ var vartipoy="";
 var vartipoz="";
 var completo = 0;//para los name en prefijos que se repiten
 var prefixArray =  new Array();
-var variablesArray = new Array(1);
-variablesArray[0] = new Array("?x");
-variablesArray[1] = new Array("?z");
-variablesArray[2] = new Array("?y");
 var classArray = new Array();
 var PropertyArray = new Array();
+var tablaClases = new Array();
+var tablaProperty = new Array();
 var ipServer ="";
 var grafo ="";
 var endPoint ="";
@@ -159,13 +148,9 @@ function Limpiar()
             document.getElementById("Consulta").innerHTML="";//limpio y escondo
             document.getElementById("Error").innerHTML="";
             $('#selectbody').load('./select/body.php');//limpiio el select
-            document.getElementById("next").style.display = 'none';//escondo boton        
+            document.getElementById("next").style.display = 'none';//escondo boton 
         }
-        });
-    
-
-
-
+    });
 }
 /**
 *   funcion cuando cancela la carga de datos
@@ -203,6 +188,8 @@ function cargardatos()
         //console.log("debo eliminar");
         classArray = [];
         PropertyArray = [];
+        tablaProperty= [];
+        tablaClases = [];
         andPrefix("Todo","");
         completo = 0;
         //cargar los datos de nuevo
@@ -228,14 +215,20 @@ function andPrefix(prefixname,prefixuri)
 */
 function busquedaSPrefijos()
 {
+    tablaProperty= [];
+    tablaClases = [];
     var valors = document.getElementById("selectPrefijos").value;
     if(valors === "Todo")
     {
+        document.getElementById('searchclass').value ="";
+        document.getElementById('sproperty').value ="";
         busquedaClass2("");
         busquedaProperty2("");
     }
     else
     {
+        document.getElementById('searchclass').value ="";
+        document.getElementById('sproperty').value ="";
         busquedaClass2(valors);
         busquedaProperty2(valors);
     }
@@ -263,10 +256,10 @@ function busquedaClass()
 {
     var textoclass = document.getElementById('searchclass').value;
     $("#tablaclases tr").remove();
-    for (var i = 0; i < classArray.length; i++) {
-        if(classArray[i].search(textoclass) != -1)
+    for (var i = 0; i < tablaClases.length; i++) {
+        if(tablaClases[i].search(textoclass) != -1)
         {
-            agregarclases(classArray[i]);
+            agregarclases(tablaClases[i]);
         }
     };
 }
@@ -277,6 +270,7 @@ function busquedaClass2(textoclass)
         if(classArray[i].search(textoclass) != -1)
         {
             agregarclases(classArray[i]);
+            tablaClases.push(classArray[i]);
         }
     };
 }
@@ -285,25 +279,23 @@ function busquedaClass2(textoclass)
 */
 function busquedaProperty()
 {
-    console.log("Entre");
     var textoclass = document.getElementById('sproperty').value;
-    console.log("entre aquí:"+textoclass+"-");
     $("#tablaproperty tr").remove();
-    for (var i = 0; i < PropertyArray.length; i++) {
-        if(PropertyArray[i].search(textoclass) != -1)
+    for (var i = 0; i < tablaProperty.length; i++) {
+        if(tablaProperty[i].search(textoclass) != -1)
         {
-            agregarProperty(PropertyArray[i]);
+            agregarProperty(tablaProperty[i]);
         }
     };
 }
 function busquedaProperty2(textoclass)
 {
-    console.log("Entre2");
     $("#tablaproperty tr").remove();
     for (var i = 0; i < PropertyArray.length; i++) {
         if(PropertyArray[i].search(textoclass) != -1)
         {
             agregarProperty(PropertyArray[i]);
+            tablaProperty.push(PropertyArray[i]);
         }
     };
 }
@@ -350,6 +342,7 @@ function clases()
                     //console.log(cortar(res));
                     var valorprefix = uriPrefix2(res);
                     classArray.push(valorprefix);
+                    tablaClases.push(valorprefix);
                     agregarclases(valorprefix);
                     
                 }
@@ -393,6 +386,7 @@ function property()
                     var valorprefix = uriPrefix2(res);                   
                     agregarProperty(valorprefix);
                     PropertyArray.push(valorprefix);
+                    tablaProperty.push(valorprefix);
                 }
             }
         }
