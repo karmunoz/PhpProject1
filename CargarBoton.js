@@ -5,6 +5,67 @@ $(document).ready(function()
 {
     $('[data-toggle="tooltip"]').tooltip();
 });
+var agregarcampox = 1;//variable para el botom +
+var formulario;
+var CamposImput;
+var Campos;
+var valorNext;//para la paginación
+var valorConsulta;//para la consulta de la paginación
+var booleanNext=true;//para saber que fue llamado de next
+var paginaModal=-1;
+var iji =0; //para llevar la cuenta de los radio en modal
+var consultaModal="";
+var prefijos ="";
+var tipobusqueda ="";
+var idbusqueda ="";
+var vartipox="";
+var vartipoy="";
+var vartipoz="";
+var completo = 0;//para los name en prefijos que se repiten
+var prefixArray =  new Array();
+var classArray = new Array();
+var PropertyArray = new Array();
+var tablaClases = new Array();
+var tablaProperty = new Array();
+var ipServer ="";
+var grafo ="";
+var endPoint ="";
+
+window.onload = function()
+{
+    bootbox.dialog({
+    title: "Bienvenido",
+    message: 'Espere mientras carga las Clases y Property. <br> Recuerde que <b>V</b> representa una variable y <b>C</b> representa una constante o literal.',
+    buttons: {
+        main: {
+            label: "Aceptar",
+            className: "btn-primary",
+            callback: function() { }
+            }
+        }});
+    // Obtiene el formulario    
+    formulario = document.getElementById("1");
+    //Obtiene todos los tags que sean "input"
+    CamposImput = formulario.getElementsByTagName("input"); 
+    //obtener todos los tags que sean select
+    CamposSelect = formulario.getElementsByTagName("select"); 
+    //Obtener todos los tags que sean "div"
+    Campos = formulario.getElementsByTagName("DIV");
+    //esconder boton de las tablas de consulta
+    var next = document.getElementById("next").style.display = 'none';
+    //esconder botones de modal 
+    cargarphp();//cargar archivos php a la vista
+    //para manejar la paginación
+    valorNext = 0;
+    valorConsulta=""; 
+    //para los cargar datos 
+    ipServer = document.getElementById("ipServer").value;
+    grafo = document.getElementById("grafo").value;
+    endPoint = document.getElementById("endPoint").value;
+    document.getElementById("idenpoint").innerHTML = endPoint;
+    clases();//carga las clases
+    property();//cargar la lista del ?y  
+}
 
 function funcionextra(id)    
 {
@@ -72,69 +133,7 @@ function searchTable(inputVal,id)
         }
     });
 }
-var agregarcampox = 1;//variable para el botom +
-var formulario;
-var CamposImput;
-var Campos;
-var valorNext;//para la paginación
-var valorConsulta;//para la consulta de la paginación
-var booleanNext=true;//para saber que fue llamado de next
-var paginaModal=-1;
-var iji =0; //para llevar la cuenta de los radio en modal
-var consultaModal="";
-var prefijos ="";
-var tipobusqueda ="";
-var idbusqueda ="";
-var vartipox="";
-var vartipoy="";
-var vartipoz="";
-var completo = 0;//para los name en prefijos que se repiten
-var prefixArray =  new Array();
-var classArray = new Array();
-var PropertyArray = new Array();
-var tablaClases = new Array();
-var tablaProperty = new Array();
-var ipServer ="";
-var grafo ="";
-var endPoint ="";
 
-
-
-window.onload = function()
-{
-    bootbox.dialog({
-    title: "Bienvenido",
-    message: 'Espere mientras carga las Clases y Property. <br> Recuerde que <b>V</b> representa una variable y <b>C</b> representa una constante o literal.',
-    buttons: {
-        main: {
-            label: "Aceptar",
-            className: "btn-primary",
-            callback: function() { }
-            }
-        }});
-    // Obtiene el formulario	
-    formulario = document.getElementById("1");
-    //Obtiene todos los tags que sean "input"
-    CamposImput = formulario.getElementsByTagName("input");	
-    //obtener todos los tags que sean select
-    CamposSelect = formulario.getElementsByTagName("select"); 
-    //Obtener todos los tags que sean "div"
-    Campos = formulario.getElementsByTagName("DIV");
-    //esconder boton de las tablas de consulta
-    var next = document.getElementById("next").style.display = 'none';
-    //esconder botones de modal 
-    cargarphp();//cargar archivos php a la vista
-    //para manejar la paginación
-    valorNext = 0;
-    valorConsulta=""; 
-    //para los cargar datos 
-    ipServer = document.getElementById("ipServer").value;
-    grafo = document.getElementById("grafo").value;
-    endPoint = document.getElementById("endPoint").value;
-    document.getElementById("idenpoint").innerHTML = endPoint;
-    clases();//carga las clases
-    property();//cargar la lista del ?y  
-}
 function Limpiar()
 {
     bootbox.confirm("¿Está seguro que desea limpiar todo?", function(result) {
@@ -181,6 +180,7 @@ function cargardatos()
         document.getElementById("Error").innerHTML="";
         //elimiarc ontenido y listas
         prefixArray =new Array();
+        console.log("elimino los Array");
         document.getElementById("selectPrefijos").innerHTML = "";
         $("#tablaproperty tr").remove();
         $("#tablaclases tr").remove();
@@ -202,12 +202,12 @@ function cargardatos()
 /**
 *   funcion para agregar una prefijo al select de prefijo
 **/
-function andPrefix(prefixname,prefixuri)
+function andPrefix(prefixname,prefixuria)
 {
     var x = document.getElementById("selectPrefijos");
     var option = document.createElement("option");
     option.setAttribute("value",prefixname);
-    option.text = ""+prefixname+" <"+ prefixuri+">";
+    option.text = ""+prefixname+" <"+ prefixuria+">";
     x.add(option);
 }
 /**
@@ -766,7 +766,7 @@ function borrarPanel(id)
 {
     var alerta = "Elimino panel "+id;
     console.log(alerta);
-   
+    console.log(prefixArray);
         bootbox.confirm("¿Está seguro que desea eliminar el elemento ?", function(result) {
         if(result== true)
         {
@@ -774,7 +774,8 @@ function borrarPanel(id)
             var valor = id;
             $(x).load('Opciones.php',{valor:valor});            
         }
-        }); 
+        });
+    console.log(prefixArray);
 }
 /**
 * Eliminar el panel con un id que no sea numero
@@ -1050,8 +1051,12 @@ function iniciarConsulta(consulta)
     document.getElementById("principal").innerHTML="";
     document.getElementById("principal1").innerHTML="";
     console.log("consulta sin tranformar "+consulta);
-    consulta =prefixuri(consulta);
+    console.log(prefixArray);
+    consulta =prefixuri(consulta);    
     console.log("consulta tranformada  "+consulta);
+    consulta = consulta.replace(/%/g, "#####");
+    consulta = consulta.replace(/\+/g, "####");
+    consulta = consulta.replace(/&/g, "*****");
     var querySparql = consulta +" LIMIT "+10+" OFFSET "+(valorNext*10);
     var datos = "q=" + querySparql +"###"+ipServer+"###"+grafo+"###"+endPoint;
     console.log("----------------------"+datos);
@@ -1096,12 +1101,44 @@ function iniciarConsulta(consulta)
                 respuesta = respuesta+"<tr><td>"+(i+1)+"</td>" ;
                 
                 for (var objetos in lista){
+                //     k = JSON.stringify(auxCA[lista[objetos]]);
+                //     var cortada = k.split('"value":');
+                //     var cortadas = cortada[1].slice(1,cortada[1].length-2);
+                //     //console.log("Es esto"+cortadas);
+                //     respuesta = respuesta + "<td>"+uriPrefix2(cortadas) + "</td>" ;
+                // }
                     k = JSON.stringify(auxCA[lista[objetos]]);
-                    var cortada = k.split('"value":');
-                    var cortadas = cortada[1].slice(1,cortada[1].length-2);
-                    //console.log("Es esto"+cortadas);
-                    respuesta = respuesta + "<td>"+uriPrefix2(cortadas) + "</td>" ;
-                }
+                        var cortada = k.split('"value":');
+                        console.log(k+"tipo");
+                        var varr = k.split(",");
+                        var var2 = varr[0].split(":");//obtener el tipo
+                        var pr = var2[1];
+
+                        console.log(var2[1]);
+                        if((var2[1]).length == 5)
+                        {
+                            var cortadas = cortada[1].slice(1,cortada[1].length-2);
+                            var cortadasz = uriPrefix2(cortadas);
+                            respuesta = respuesta +  "<td>"+cortadasz+  "</td>" ;
+                        }
+                        else if((var2[1])== '"literal"')
+                        {
+                            console.log("literal+++");
+                            var var3 = k.split(",");
+                            var var4 = var3[1].split(":");
+                            var leng = varr[1].split(":");
+                            var cortadas = cortada[1].slice(1,cortada[1].length-2);
+                            var remplazo = leng[2].replace('\"','');
+                            remplazo = remplazo.replace('\"','');
+                            respuesta = respuesta +   "<td>" +cortadas +"\"@"+remplazo+ "</td>" ;
+                        }
+                        else
+                        {
+                            var cortadas = cortada[1].slice(1,cortada[1].length-2);
+                            var cortadasz = uriPrefix2(cortadas);
+                            respuesta = respuesta +  "<td>"+cortadasz+  "</td>" ;
+                        }
+            }
                 //por el momento doy el x y z manual
                     // respuesta =respuesta+"<tr><td> "+auxCA.x.value + "</td><td> " 
                     // +auxCA.y.value+ "</td><td> " +auxCA.z.value+"</td></tr>";
@@ -1114,8 +1151,7 @@ function iniciarConsulta(consulta)
             // $( "#principal" ).append('</table>'); 
             // // $( "#principal" ).append('</tbody></table>');
             // $( "#principal" ).append('</div>'); 
-        }
-        ,
+        } ,
         error: function (obj, error, objError){
             alert('No fue posible extraer la información.'+obj.responseText);
             var errores = obj.responseText.search("file_get_contents");
@@ -1340,7 +1376,7 @@ function Funcion(lista,i)
     }
     if(lista[i]=="Y")
     {
-        return  Funcion(lista,i*2)+ " ***** " + Funcion(lista,(i*2)+1)+ " ";
+        return  Funcion(lista,i*2)+ " *** " + Funcion(lista,(i*2)+1)+ " ";
     }
     if(lista[i]=="O")
     {
@@ -1674,10 +1710,6 @@ function uriPrefix2(uri){
             // {
             //     elemento[0] = prefixArray[i][0]+elemento[0].split(':')[1];
             // }
-            if(elemento[1].toString()==="http://dbpedia.org/property/8v5W/")
-            {
-                console.log(nameprefix+" "+prefixArray[i][1]+" "+elemento[1]+" "+prefixArray[i][0]+" "+elemento[0]);
-            }
             var namee = elemento[0].split(':');
             return prefixArray[i][0].toString()+namee[1];     
         }

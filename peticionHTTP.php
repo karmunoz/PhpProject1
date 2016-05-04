@@ -4,7 +4,10 @@
     echo hacerPeticionHTTP($q); 
 
 function hacerPeticionHTTP($query) {
-    $query = str_replace("*****", "&&", $query);
+    $query = str_replace("*****", "&", $query);
+    $query =str_replace('#####', '%', $query);
+    $query = str_replace('####', '+', $query);
+    $query = str_replace("***", " && ", $query);
     $lista =explode("###", $query); 
     $dirIpServer = $lista[1];  //"192.168.254.6";
     $grafo = $lista[2];//"http://localhost:8890/pdb"; //
