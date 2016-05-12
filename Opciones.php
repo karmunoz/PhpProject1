@@ -23,4 +23,3 @@
          </optgroup>
     </select> 
 </div>
-<script type='text/javascript' src='CargarBoton.js'></script>

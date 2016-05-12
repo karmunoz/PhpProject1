@@ -47,7 +47,7 @@
                                     <br>
                                     <div>
                                         <select class="form-control" type="text" onchange="busquedaSPrefijos()" id="selectPrefijos" data-toggle="tooltip" data-placement="top" title="Filtra el contenido de Class y Property.">
-                                            <option value="Todo">Todo</option>
+                                            <option value="Todo">Todo &#60; &#62;</option>
                                         </select>
                                     </div>
                                 </div>                                     
@@ -65,7 +65,7 @@
                                     <div class="alert alert-warning">
                                         <div id="idenpoint" value="" style="overflow-x: scroll;" data-toggle="tooltip" data-placement="bottom" title="Enp Point conectado."></div>
                                     </div>
-                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#Modal1"><b data-toggle="tooltip" data-placement="bottom" title="Información de conexión a la base de datos, esta información puede cambiar.">Conexión</b></button>
+                                    <button type="button" class="btn btn-primary" onclick="abrirmodal()" data-toggle="modal" data-target="#Modal1"><b data-toggle="tooltip" data-placement="bottom" title="Información de conexión a la base de datos, esta información puede cambiar.">Conexión</b></button>
                                 </div>
                             </div>
                         </div>
@@ -140,60 +140,72 @@
                                 </div>
                             </div>       
                         </div>
-                        
                     </div><!-- Panel general-->
-                           
-                            <!-- Botones en la superficie-->
+                            <!-- Select en la superficie-->
                     <div  class="col-xs-8 ">
-                        <div class="container-fluid"  >
-                            <div  style="border-style: solid; border-color:#428bca;"> 
-                                <div class="from-group">
-                                    <div id="selectbody" data-toggle="tooltip" data-placement="top" title="Cuerpo del selct de la consulta."></div>
+                        <div class="container-fluid"> 
+                            <div class="panel panel-primary">
+                                <div class="panel-heading"  data-toggle="tooltip" data-placement="bottom" title="Para confecionar la consulta.">
+                                    <i class="glyphicon glyphicon-pushpin"></i>
+                                    Select 
+                                </div>
+                                <div class="panel-body" >
+                                    <div class="col-lg-12">
+                                        <div class="from-group">
+                                            <div id="selectbody" data-toggle="tooltip" data-placement="top" title="Cuerpo del selct de la consulta."></div>
+                                        </div>
+                                        <br>
+                                        <hr>
+                                    </div>
                                 </div>
                             </div>
-                            
-                            <br>
-                            <hr>
                         </div>
                     </div>
                     <br>
-                                    <!-- boton desplegable -->
+                                    <!-- -->
         <?php 
             $algo = 1;
         ?>
-
-                  
-            <b data-toggle="tooltip" data-placement="top" title="Cuerpo de la consulta."> WHERE</b>
-            <b>{</b>
-            <div class="col-xs-8 pull-left right" >
-                <div class="btn-group" id="<?php echo $algo; ?>" style="overflow-x: scroll; width:750px;">
-                    <select class="selectpicker" id="<?php echo $algo; ?>s"data-style="btn-primary"  onchange="funcionextra(<?php echo $algo; ?>)">
-                        <option hidden>OPCIONES</option>
-                        <optgroup label="OPCIONES">
-                        <option value="Optional" >OPTIONAL</option>
-                        <option value="Union" >UNION</option>
-                        <option value="And" >AND</option>
-                        <option value="Filter" >FILTER</option>
-                        </optgroup>
-                        <optgroup label="TRIPLE">
-                        <option value="V-C-V">V-C-V</option>
-                        <option value="C-C-V">C-C-V</option>
-                        <option value="V-C-C">V-C-C</option>
-                        <option value="V-V-C">V-V-C</option>
-                        <option value="C-V-V">C-V-V</option>
-                        <option value="C-V-C">C-V-C</option>
-                        <option value="V-V-V">V-V-V</option>
-                        <option value="C-C-C">C-C-C</option>
-                         </optgroup>
-                    </select> 
+                <div  class="col-xs-8 pull-left right">
+                    <div class="container-fluid" style="width:750px;"> 
+                        <div class="panel panel-primary" >
+                            <div class="panel-heading"  data-toggle="tooltip" data-placement="bottom" title="Para confecionar la consulta.">
+                                <i class="glyphicon glyphicon-pushpin"></i>
+                                Where 
+                            </div>
+                            <div class="panel-body" style="overflow-x: scroll">
+                                <div class="col-lg-12">
+                                    <div class="btn-group" id="<?php echo $algo; ?>" ><!--  -->
+                                        <select class="selectpicker" id="<?php echo $algo; ?>s"data-style="btn-primary"  onchange="funcionextra(<?php echo $algo; ?>)">
+                                            <option hidden>OPCIONES</option>
+                                            <optgroup label="OPCIONES">
+                                            <option value="Optional" >OPTIONAL</option>
+                                            <option value="Union" >UNION</option>
+                                            <option value="And" >AND</option>
+                                            <option value="Filter" >FILTER</option>
+                                            </optgroup>
+                                            <optgroup label="TRIPLE">
+                                            <option value="V-C-V">V-C-V</option>
+                                            <option value="C-C-V">C-C-V</option>
+                                            <option value="V-C-C">V-C-C</option>
+                                            <option value="V-V-C">V-V-C</option>
+                                            <option value="C-V-V">C-V-V</option>
+                                            <option value="C-V-C">C-V-C</option>
+                                            <option value="V-V-V">V-V-V</option>
+                                            <option value="C-C-C">C-C-C</option>
+                                             </optgroup>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <p></p>
-                <b>}</b>
-                
+            
                 <!-- Boton modal por el momento -->
                 
                 <div class="modal fade bs-example-modal-sm" id="Modal1" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"  aria-hidden="true" data-keyboard="false" data-backdrop="static">
-                    <div class="modal-dialog modal-sm">
+                    <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
                                 <i class="fa fa-gear"></i>
@@ -201,9 +213,6 @@
                                 <button type="button" class="close" onclick="cancelardatos()" data-dismiss="modal" aria-hidden="true"> &times;</button>
                             </div>
                             <div class="modal-body">
-                                <div class="panel-heading ">
-                                    
-                                </div>
                                 <div class="panel-body">
                                     <form role="form">
                                         <div class="form-group">
@@ -218,7 +227,17 @@
                                             <label>End Point</label>
                                             <input class="form-control" id="endPoint" value="http://dbpedia.org/sparql">
                                         </div>
-                                    </form> 
+                                    </form>
+                                    <!-- boton para busqueda de grafo -->
+                                    <div class="modal-footer">
+                                        <button data-toggle="tooltip" data-placement="top" title="Buscar grafos en la base de datos." type="button" class="btn btn-primary" onclick="buscog()">Buscar Grafo</button>
+                                    </div>
+                                    <div>
+                                        <div class="table-responsive" style="max-height:200px; max-height:5;overflow-y:auto;" >
+                                        <table class="table table-hover"  id="cargagrafo" >
+                                        </table>
+                                    </div>
+                                    </div>
                                 </div>
                             </div> <!-- Fin cuerpo modal -->
                                 <p ALIGN=center>.</p>
@@ -239,23 +258,50 @@
                         <div class="panel">
                             <div class="panel-heading">
                                 <!-- Mostar la consulta-->
-                                <div id="Consulta" data-toggle="tooltip" data-placement="top" title="Texto de la consulta." ></div>
-                                <!-- Mostrar el error--> 
-                                <div  class="form-group has-error" id="Error"></div>
-                                <!-- Cargar la  respuesta-->
-                                <div id="principal1" data-toggle="tooltip" data-placement="top" title="respuesta de la base de datos."></div> 
-                                <div class="container" style="overflow:auto">
-                                    <div class="table-responsive ">
-                                        <table class="table table-hover"  id="principal">
-                                        </table>
+                                <div class="panel panel-primary">
+                                    <div class="panel-heading" data-toggle="tooltip" data-placement="top" title="Texto de la consulta." >
+                                        <i class="glyphicon glyphicon-pencil"></i>
+                                        Texto consulta
                                     </div>
-                                    <div id="next">
-                                        <ul class="pager">
-                                          <li class="previous"><a href="#" id="idprevious" onclick="previous()">&larr; Anterior</a></li>
-                                          <li class="next"><a href="#" id="isnext" onclick="next()"> Siguiente &rarr;</a></li>
-                                        </ul>
+                                    <div class="panel-body">
+                                        <div id="Consulta"></div>
                                     </div>
                                 </div>
+                                <!-- Mostrar el error-->
+                                <div class="panel panel-primary">
+                                    <div class="panel-heading" data-toggle="tooltip" data-placement="top" title="Errores producidos." >
+                                        <i class="glyphicon glyphicon-alert"></i>
+                                        Errores
+                                    </div>
+                                    <div class="panel-body">
+                                        <div  class="form-group has-error" id="Error"></div>
+                                    </div>
+                                </div>                                
+                                <!-- Cargar la  respuesta  glyphicon glyphicon-list -->
+                                <div class="panel panel-primary">
+                                    <div class="panel-heading" data-toggle="tooltip" data-placement="top" title="respuesta de la base de datos." >
+                                        <i class="glyphicon glyphicon-list"></i>
+                                        Respuesta
+                                    </div>
+                                    <div class="panel-body">
+                                        <div id="principal1"></div> 
+                                        <div class="container" style="overflow:auto">
+                                            <div class="table-responsive ">
+                                                <table class="table table-hover"  id="principal">
+                                                </table>
+                                            </div>
+                                            <div id="next">
+                                                <ul class="pager">
+                                                  <li class="previous"><a href="#" id="idprevious" onclick="previous()">&larr; Anterior</a></li>
+                                                  <li class="next"><a href="#" id="isnext" onclick="next()"> Siguiente &rarr;</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                
                             </div>
                         </div>
                     </div>

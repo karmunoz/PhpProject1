@@ -21,12 +21,12 @@ var idbusqueda ="";
 var vartipox="";
 var vartipoy="";
 var vartipoz="";
-var completo = 0;//para los name en prefijos que se repiten
-var prefixArray =  new Array();
-var classArray = new Array();
-var PropertyArray = new Array();
-var tablaClases = new Array();
-var tablaProperty = new Array();
+var completo ;//para los name en prefijos que se repiten
+var prefixArray;
+var classArray ;
+var PropertyArray;
+var tablaClases ;
+var tablaProperty ;
 var ipServer ="";
 var grafo ="";
 var endPoint ="";
@@ -43,6 +43,12 @@ window.onload = function()
             callback: function() { }
             }
         }});
+    prefixArray =  new Array();
+    classArray = new Array();
+    PropertyArray = new Array();
+    tablaClases = new Array();
+    tablaProperty = new Array();
+    completo = 0;
     // Obtiene el formulario    
     formulario = document.getElementById("1");
     //Obtiene todos los tags que sean "input"
@@ -66,9 +72,69 @@ window.onload = function()
     clases();//carga las clases
     property();//cargar la lista del ?y  
 }
+function abrirmodal()
+{
+    $("#cargagrafo tr").remove();
+}
+//funcion para buacar grafo en bd
+function buscog()
+{
+    //cargagrafo
+    //obtener campos
+    $("#cargagrafo tr").remove();
+    ipServer1 = document.getElementById("ipServer").value;
+    endPoint1 = document.getElementById("endPoint").value;
+    if(ipServer1!="" || endPoint1 !="" )
+    {
+        //consulto la bd
+        var querySparql = "select distinct ?g where{ GRAPH ?g {?s ?p ?o }}";
+    console.log(querySparql);
+    var datos = "q=" + querySparql +"###"+ipServer+"###"+"default"+"###"+endPoint;
+    $.ajax({
+        type: "POST",
+        url:"peticionHTTP.php",
+        async: true,
+        data:datos,
+        success:
+        function(datos)
+        {
+            var rtArray = datos.results.bindings;
+            var respuesta ="";
+            //console.log("Respuesta tamaño "+rtArray.length);
+                //obtener el  cuerpo de la lista
+            for(var i=0; i<rtArray.length; i++)
+            {
+                var auxCA = rtArray[i];
+                //Se extraen los valores
+                var lista = Object.keys(auxCA);
+                var k ; 
+                //console.log(lista.length);
+                for (var objetos in lista)
+                {
+                    k = JSON.stringify(auxCA[lista[objetos]]);
+                    var cortada = k.split('"value":'); 
+                    var varr = k.split(",");
+                    var res = varr[1].slice(9,varr[1].length-2);
+                    //console.log(cortar(res));
+                    var cadena = '<tr><td onclick="toqueesto(this.innerHTML)" id="'+res+'" >'+res+'</td></tr>';
+                    $('#cargagrafo').append(cadena);
+                    
+                }
+            }
+        }
 
+    });
+    }
+}
+function toqueesto(res)
+{
+    console.log(res);
+    document.getElementById("grafo").value = res;
+}
+//funcion para cargar los paneles
 function funcionextra(id)    
 {
+    //console.log(prefixArray);
     var idd = id+"s";
     var x = document.getElementById(idd).value;
     if(x.charAt(0)=== "V" || x.charAt(0)=="C")
@@ -91,8 +157,8 @@ function funcionextra(id)
                 Filter(id);
                 break;
         }
-
     }
+    //console.log(prefixArray);
 }
 function funcionextra2(id)
 {
@@ -582,7 +648,7 @@ function precionarTeclaz(id)
                             var var3 = k.split(",");
                             var var4 = var3[1].split(":");
                             var leng = varr[1].split(":");
-                            var cortadas = cortada[1].slice(1,cortada[1].length-2);
+                            var cortadas = cortada[1].slice(0,cortada[1].length-2);
                             var remplazo = leng[2].replace('\"','');
                             remplazo = remplazo.replace('\"','');
                             respuesta = respuesta + " <option value ='\""+cortadas +"\"@"+remplazo+"'/> " ;
@@ -766,7 +832,7 @@ function borrarPanel(id)
 {
     var alerta = "Elimino panel "+id;
     console.log(alerta);
-    console.log(prefixArray);
+    //console.log(prefixArray);
         bootbox.confirm("¿Está seguro que desea eliminar el elemento ?", function(result) {
         if(result== true)
         {
@@ -775,7 +841,7 @@ function borrarPanel(id)
             $(x).load('Opciones.php',{valor:valor});            
         }
         });
-    console.log(prefixArray);
+    //console.log(prefixArray);
 }
 /**
 * Eliminar el panel con un id que no sea numero
@@ -885,10 +951,10 @@ function GetCampos()
     var consulta;
     var select = stringSelect();
     consulta = select +" where { "+Funcion(lista,1)+" }";
-    var Consulta = select+ "<br> where { <br><p>"+Funcion2(lista,1)+"</p><br> }";
+    var Consulta = select+ "<br> where { <br><p>"+Funcion2(lista,1)+"</p>}";
     //consulta solo el cuerpo
     //alert("Consulta "+consulta);
-    $("#Consulta").append('<h4 class="bg-primary"> Consulta </h4> ');
+    //$("#Consulta").append('<h4 class="bg-primary"> Consulta </h4> ');
     $("#Consulta").append('<font size="3">'+Consulta +'</font>');
     //verificar que no este la palabra variable en la consulta
     //Variable
@@ -955,10 +1021,10 @@ function GetCampos()
     var consulta;
     var select = stringSelect();
     consulta = select +" where { "+Funcion(lista,1)+"} ";
-    var Consulta = select+ "<br> where { <br>"+Funcion2(lista,1)+"<br> }";
+    var Consulta = select+ "<br> where { <br>"+Funcion2(lista,1)+"}";
     //consulta solo el cuerpo
     //alert("Consulta "+consulta);
-    $("#Consulta").append('<h4 class="bg-primary"> Consulta </h4> ');
+    //$("#Consulta").append('<h4 class="bg-primary"> Consulta </h4> ');
     $("#Consulta").append('<font size="3">'+Consulta +'</font>');
  }
 function stringSelect()
@@ -1051,7 +1117,7 @@ function iniciarConsulta(consulta)
     document.getElementById("principal").innerHTML="";
     document.getElementById("principal1").innerHTML="";
     console.log("consulta sin tranformar "+consulta);
-    console.log(prefixArray);
+    //console.log(prefixArray);
     consulta =prefixuri(consulta);    
     console.log("consulta tranformada  "+consulta);
     consulta = consulta.replace(/%/g, "#####");
@@ -1072,7 +1138,7 @@ function iniciarConsulta(consulta)
             var rtArray = datos.results.bindings;
             //resultados
             //obtener el titulo de la tabla
-            $("#principal1").append('<h4 class="bg-primary"> Respuesta </h4>');
+            //$("#principal1").append('<h4 class="bg-primary"> Respuesta </h4>');
             //$( "#principal" ).append('<tr>'); 
             if(rtArray.length> 0)
             {
@@ -1109,7 +1175,7 @@ function iniciarConsulta(consulta)
                 // }
                     k = JSON.stringify(auxCA[lista[objetos]]);
                         var cortada = k.split('"value":');
-                        console.log(k+"tipo");
+                        //console.log(k+"tipo");
                         var varr = k.split(",");
                         var var2 = varr[0].split(":");//obtener el tipo
                         var pr = var2[1];
@@ -1123,18 +1189,18 @@ function iniciarConsulta(consulta)
                         }
                         else if((var2[1])== '"literal"')
                         {
-                            console.log("literal+++");
+                            //console.log("literal+++");
                             var var3 = k.split(",");
                             var var4 = var3[1].split(":");
                             var leng = varr[1].split(":");
-                            var cortadas = cortada[1].slice(1,cortada[1].length-2);
+                            var cortadas = cortada[1].slice(0,cortada[1].length-2);
                             var remplazo = leng[2].replace('\"','');
                             remplazo = remplazo.replace('\"','');
                             respuesta = respuesta +   "<td>" +cortadas +"\"@"+remplazo+ "</td>" ;
                         }
                         else
                         {
-                            var cortadas = cortada[1].slice(1,cortada[1].length-2);
+                            var cortadas = cortada[1].slice(0,cortada[1].length-2);
                             var cortadasz = uriPrefix2(cortadas);
                             respuesta = respuesta +  "<td>"+cortadasz+  "</td>" ;
                         }
@@ -1365,7 +1431,7 @@ function Funcion(lista,i)
     if(lista[i]=="N")
     {
         var valor = i +"x";
-        console.log(valor);
+        //console.log(valor);
         var retorno = " ! "+ document.getElementById(valor).value;
         return retorno;
     }
@@ -1477,6 +1543,7 @@ function Triple(i,tipo)
     //console.log(tipo);
     var ubicacion = "./triples/"+tipo+".php";
     $(oID).load(ubicacion,{valor:valor});
+    //console.log(prefixArray);
     
 }
 /* Pasar a la siguiente tabla
@@ -1504,7 +1571,7 @@ function prefixuri(consulta)
     
     var listac = consulta.split(" ");
     consulta="";
-    console.log("+++++++++++++++++"+consulta+" "+listac.length);
+    //console.log("+++++++++++++++++"+consulta+" "+listac.length);
     for (var j = 0; j < listac.length; j++) 
     {
 
@@ -1519,10 +1586,10 @@ function prefixuri(consulta)
             //console.log(corta2+"//////"+list1[0]+"///////"+valora);
             if (corta2==(list1[0]+":"))
             {
-                console.log("Encontr el prefijo "+ corta2);
+                //console.log("Encontr el prefijo "+ corta2);
                 var res  =listac[j].replace(corta2,valora);
                 listac[j] = "<"+res+">";
-                console.log(listac[j]);
+                //console.log(listac[j]);
             }    
         }
     }
@@ -1563,7 +1630,7 @@ function drop(ev) {
     var idinput = document.getElementById(data).id;
     var idcosa = ev.target.id;
     var letrs = idcosa.replace(/\d/g,"");
-    console.log(letrs+ " id "+ idcosa);
+    //console.log(letrs+ " id "+ idcosa);
     if(letrs =="x" || letrs =="y" || letrs =="z")
     {
        document.getElementById(idcosa).value = idinput; 
@@ -1825,7 +1892,7 @@ function valordex(idx, tipot)
         vartipoy = document.getElementById((idx+"y")).value;
         vartipox = document.getElementById((idx+"x")).value;
     }
-    console.log(vartipox+" "+vartipoy+" "+vartipoz);
+    //console.log(vartipox+" "+vartipoy+" "+vartipoz);
     if( vartipox=="undefined" || vartipox === "Variable" || vartipox === "" )
     {
        vartipox="?xxx"; 
@@ -1939,7 +2006,7 @@ function uriabuscar()
                         var var3 = k.split(",");
                         var var4 = var3[1].split(":");
                         var leng = varr[1].split(":");
-                        var cortadas = cortada[1].slice(1,cortada[1].length-2);
+                        var cortadas = cortada[1].slice(0,cortada[1].length-2);
                         var remplazo = leng[2].replace('\"','');
                         remplazo = remplazo.replace('\"','');
                         var cortadasz = cortadas +"\"@"+remplazo;
