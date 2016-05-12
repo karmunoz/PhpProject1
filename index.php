@@ -145,14 +145,14 @@
                     <div  class="col-xs-8 ">
                         <div class="container-fluid"> 
                             <div class="panel panel-primary">
-                                <div class="panel-heading"  data-toggle="tooltip" data-placement="bottom" title="Para confecionar la consulta.">
+                                <div class="panel-heading" data-toggle="tooltip" data-placement="top" title="Cuerpo del select de la consulta.">
                                     <i class="glyphicon glyphicon-pushpin"></i>
                                     Select 
                                 </div>
                                 <div class="panel-body" >
                                     <div class="col-lg-12">
                                         <div class="from-group">
-                                            <div id="selectbody" data-toggle="tooltip" data-placement="top" title="Cuerpo del selct de la consulta."></div>
+                                            <div id="selectbody" ></div>
                                         </div>
                                         <br>
                                         <hr>
@@ -279,7 +279,7 @@
                                 </div>                                
                                 <!-- Cargar la  respuesta  glyphicon glyphicon-list -->
                                 <div class="panel panel-primary">
-                                    <div class="panel-heading" data-toggle="tooltip" data-placement="top" title="respuesta de la base de datos." >
+                                    <div class="panel-heading" data-toggle="tooltip" data-placement="top" title="Respuesta de la consulta." >
                                         <i class="glyphicon glyphicon-list"></i>
                                         Respuesta
                                     </div>

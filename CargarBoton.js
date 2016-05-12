@@ -100,7 +100,6 @@ function buscog()
         {
             var rtArray = datos.results.bindings;
             var respuesta ="";
-            //console.log("Respuesta tamaño "+rtArray.length);
                 //obtener el  cuerpo de la lista
             for(var i=0; i<rtArray.length; i++)
             {
@@ -117,8 +116,7 @@ function buscog()
                     var res = varr[1].slice(9,varr[1].length-2);
                     //console.log(cortar(res));
                     var cadena = '<tr><td onclick="toqueesto(this.innerHTML)" id="'+res+'" >'+res+'</td></tr>';
-                    $('#cargagrafo').append(cadena);
-                    
+                    $('#cargagrafo').append(cadena);                    
                 }
             }
         }
@@ -158,7 +156,6 @@ function funcionextra(id)
                 break;
         }
     }
-    //console.log(prefixArray);
 }
 function funcionextra2(id)
 {
@@ -199,7 +196,6 @@ function searchTable(inputVal,id)
         }
     });
 }
-
 function Limpiar()
 {
     bootbox.confirm("¿Está seguro que desea limpiar todo?", function(result) {
@@ -228,8 +224,6 @@ function cancelardatos()
 }
 function cargardatos()
 {
-    //eliminar div
-
     var er = document.getElementById("ipServer").value;
     var fo = document.getElementById("grafo").value;
     var nt = document.getElementById("endPoint").value;
@@ -262,8 +256,7 @@ function cargardatos()
         clases();
         property();
         console.log("prefixArray " +prefixArray);
-    }
-    
+    }    
 }
 /**
 *   funcion para agregar una prefijo al select de prefijo
@@ -499,332 +492,6 @@ function salio(id,xyz)
     console.log("no existe la variable");
     variablesArray[variablesArray.length] = new Array(varvalor);
 }
-//funcion para ayuda de variables
-// id= identificador, number= 1 x, 2 y, 3 z 
-function precionaTeclavariable(id,number)
-{
-    document.getElementById("Error").innerHTML="";
-    
-    var iddetriple = id+"_TRIPLE";
-    var contaa = 0;
-    $('input', $('#'+iddetriple)).each(function() 
-    {
-        var varubicacion = $(this).attr("id")[1];
-        //console.log("-"+varubicacion+"-");
-        if(number== varubicacion )
-        {
-            console.log("encontre el valor");
-            
-            var varvalue = this.value;
-            //console.log("valor "+varvalue+"---");
-            //verificar que empiese con un ?
-            if(varvalue[0]=='?')
-            {
-                console.log("es variable");
-                //debo agregar a la lista las variables que hay
-                var campoid = number+id;
-                var respuesta = "";
-                for (var i = 0; i < variablesArray.length; i++) 
-                {
-                    console.log("variables "+variablesArray[i][0]);
-                    respuesta= respuesta + " <option value ="+variablesArray[i][0]+"/> " ;
-                }
-                $("#"+campoid).html(respuesta);
-            }
-            else// para decir que debe ser una variable
-            {
-                console.log("no es variable");
-                var mensajeerror = "El valor ingresado no es una variable, debe empesar con '?'";
-                $( "#Error" ).append('<label class="control-label" for="inputError">Error: '+mensajeerror+' </label>' );
-            }
-            return;
-        }
-        
-        console.log("valor "+this.value);
-    });
-}
-//Para cuando77 se preciona un boton en el campo ?z
-function precionarTeclaz(id)
-{
-
-    //verificar que los campos ?x e ?y no este bacios
-    // Si el tipo de campo es una caja de texto
-    var iddetriple = id+"_TRIPLE";
-    var consulta = " select DISTINCT ?zzzzzz where{ ";
-    var idqueva=0;
-    var salir= false;
-    //console.log(iddetriple);
-    $('input', $('#'+iddetriple)).each(function () 
-    {
-        //verificar que el campo no este vacio
-        //verificar que las variables no se repitan
-        //console.log(this.value);
-        idqueva++;        
-        var variabley="";
-        console.log("**"+this.value+"**");
-        if(idqueva==3)
-        {
-            if(this.value==="" || this.value==="undefined")
-            {
-                console.log("Campo vacio ++");
-                salir =true;
-                return false;
-            }
-            variabley=this.value;
-            variabley = variabley.replace(/\"/g,"");
-            variabley = variabley.replace(/'/g,"");
-
-            consulta =consulta+ " ?zzzzzz FILTER regex(?zzzzzz, '"+ variabley+"' )";
-        }
-        else if(idqueva==1)
-        {
-            if(this.value=="" || this.value=="undefined")
-            {
-               consulta =consulta+ " ?xxxx";
-            }
-            else
-            {
-                consulta =consulta+ " "+this.value;
-            }
-        }
-        else if(idqueva==2)
-        {
-            if(this.value=="" || this.value=="undefined")
-            {
-               consulta =consulta+ " ?yyyyyy";
-            }
-            else
-            {
-                consulta =consulta+ " "+this.value;
-            }
-        }
-    });
-    console.log(consulta); 
-    consulta = prefixuri(consulta);
-    if(salir==false)
-    {
-        var querySparql = consulta +" } LIMIT 5";
-        console.log("consulta en z "+querySparql);
-        var datos = "q=" + querySparql +"###"+ipServer+"###"+grafo+"###"+endPoint;
-        console.log("aqui");
-        $.ajax({
-            type: "POST",
-            url:"peticionHTTP.php",
-            async: true,
-            data:datos,
-            success:
-            function(datos)
-            {
-                var rtArray = datos.results.bindings;
-                var respuesta ="";
-                console.log("no se que es ");
-                    //obtener el  cuerpo de la lista
-                for(var i=0; i<rtArray.length; i++)
-                {
-                    var auxCA = rtArray[i];
-                    //Se extraen los valores
-                    
-                    var lista = Object.keys(auxCA);
-                    var k ;
-                    comilla2="";
-                                 
-                    for (var objetos in lista)
-                    {
-                        k = JSON.stringify(auxCA[lista[objetos]]);
-                        var cortada = k.split('"value":');
-                        console.log(k+"tipo");
-                        var varr = k.split(",");
-                        var var2 = varr[0].split(":");//obtener el tipo
-                        var pr = var2[1];
-                        if((var2[1]).length == 5)
-                        {
-                            var cortadas = cortada[1].slice(1,cortada[1].length-2);
-                            var cortadasz = uriPrefix2(cortadas);
-                            respuesta = respuesta + " <option value ='"+cortadasz+"'/> " ;
-                        }
-                        else if((var2[1]).length == 9)
-                        {
-                            console.log("literal");
-                            var var3 = k.split(",");
-                            var var4 = var3[1].split(":");
-                            var leng = varr[1].split(":");
-                            var cortadas = cortada[1].slice(0,cortada[1].length-2);
-                            var remplazo = leng[2].replace('\"','');
-                            remplazo = remplazo.replace('\"','');
-                            respuesta = respuesta + " <option value ='\""+cortadas +"\"@"+remplazo+"'/> " ;
-                        }
-                    }
-                }
-                var campoid = "z"+id;
-                console.log("RESPUESTA DE LA HACION "+respuesta);     
-                $("#"+campoid).html(respuesta);
-            }
-            ,error: function (obj, error, objError)
-            {
-                console.log(error+" aaaaaaaaaaaaaa");
-                console.log(objError+" eeee");
-                console.log(obj+" aaaaaaaaaaaaaa");
-            }
-        });   
-    }
-    
-    console.log("hhhh"); 
-} 
-
- function precionarTeclax(id)
- {
-    // for (var i = 0; i < prefixArray.length; i++)
-    // {
-    //     console.log(prefixArray[i][0]+"--"+prefixArray[i][1]);
-    // };
-    //verificar que los campos ?x e ?y no este bacios
-    // Si el tipo de campo es una caja de texto
-    var iddetriple = id+"_TRIPLE";
-    var consulta = " select DISTINCT ?xxxxxxx where{ ";
-    var idqueva=0;
-    var comilla="";
-    var comilla2="";
-    var comilla3="";
-     var variabley="";
-    //console.log(iddetriple);
-    $('input', $('#'+iddetriple)).each(function () {
-        //verificar que el campo no este vacio
-        //verificar que las variables no se repitan
-        console.log(this.value);
-        idqueva++;        
-       
-        if(idqueva==1)
-        {
-            if(this.value=="" || this.value=="undefined")
-            {
-                console.log("Campo vacio");
-                return;
-            }
-            variabley=this.value;
-            var txtx = variabley.split("\"");
-            var txtx2 = variabley.split("'");
-            if (txtx.length>1) 
-            {
-                console.log("Tiene comillas");
-                comilla="'";
-                comilla2="&quot";
-                variabley =  this.value.replace ("\"","");
-            }
-            if ( txtx2.length>1) 
-            {
-                console.log("Tiene comillas");
-                comilla="\"";
-                comilla2="&quot";
-                variabley =  variabley.replace ("'","");
-            }
-            console.log("Texto split"+txtx);
-
-            consulta =consulta+ " ?xxxxxxx ";
-        }
-        else if(idqueva==3)
-        {
-            if(this.value=="" || this.value=="undefined")
-            {
-               consulta =consulta+ " ?zzzz FILTER regex(?xxxxxxx, "+comilla+ variabley+comilla+")";
-            }
-            else
-            {
-                consulta =consulta+ " "+this.value+" FILTER regex(?xxxxxxx, "+comilla+ variabley+comilla+")";
-            }
-        }
-        else if(idqueva==2)
-        {
-            if(this.value=="" || this.value=="undefined")
-            {
-               consulta =consulta+ " ?yyyyyy";
-            }
-            else
-            {
-                consulta =consulta+ " "+this.value;
-            }
-        }
-
-    });
-    console.log("Consulta del x "+consulta); 
-    consulta = prefixuri(consulta);
-    var querySparql = consulta +" } LIMIT 5";
-    var datos = "q=" + querySparql +"###"+ipServer+"###"+grafo+"###"+endPoint;
-    console.log("Datos: ----"+datos);
-    $.ajax({
-        type: "POST",
-        url:"peticionHTTP.php",
-        async: true,
-        data:datos ,
-        success:
-        function(datos){
-            console.log(datos);
-            var rtArray = datos.results.bindings;
-            console.log(rtArray);
-            var respuesta ="";
-                //obtener el  cuerpo de la lista
-            for(var i=0; i<rtArray.length; i++){
-                var auxCA = rtArray[i];
-                //Se extraen los valores
-                
-                var lista = Object.keys(auxCA);
-                var k ;
-                             
-                for (var objetos in lista){
-                    k = JSON.stringify(auxCA[lista[objetos]]);
-                    var cortada = k.split('"value":');
-                    var cortadas = cortada[1].slice(1,cortada[1].length-2);
-                    var cortadas = uriPrefix2(cortadas);
-                     respuesta = respuesta + " <option value ='"+cortadas +"'/> " 
-                }
-            }
-            var campoid = "x"+id;
-            console.log("RESPUESTA DE LA HACION "+respuesta);
-            $("#"+campoid).html(respuesta);
-            
-               
-        }
-        ,error: function (obj, error, objError){
-        }
-    });
-
-            var campox = '#'+id+"x";
-            var campoid = "x"+id;
-            var availableTags = $("#"+campoid).find('option').map(function () {
-            return this.value;
-            }).get();
-            $(campox).autocomplete({ source: availableTags });
-   return;
- }
- //
-  function precionarTeclay(id)
- {
-     var iddetriple = id+"_TRIPLE";
- }
- //funcion para cargar ?y a la lista
- function cargarlistay(id)
- {
-    var respuesta ="";
-    var max = 0;
-   /*$('#tablaproperty tr').each(function() {
-    if (!this.rowIndex) return; // skip first row
-    var customerId = this.cells[0].innerHTML;
-    //console.log(customerId); 
-    if(max < 10)
-    {
-       //respuesta = respuesta + " <option value ='"+customerId+"'/> " ; 
-       respuesta = respuesta + " <option value ='"+"hola"+"'/> " ; 
-    }
-    max = max+1;
-}); */
-    var campoid = "y"+id;
-    respuesta = " <option value ='nada'/> " ;
-    console.log("RESPUESTA DE LA HACION yyyy "+respuesta);     
-    $("#"+campoid).html(respuesta);
-
-    //$("#"+campoid).html(respuesta);
-    console.log($("#"+campoid));
-    return;
- }
 /**
 * Eliminar el panel
 */
@@ -841,7 +508,6 @@ function borrarPanel(id)
             $(x).load('Opciones.php',{valor:valor});            
         }
         });
-    //console.log(prefixArray);
 }
 /**
 * Eliminar el panel con un id que no sea numero
@@ -1137,9 +803,6 @@ function iniciarConsulta(consulta)
 
             var rtArray = datos.results.bindings;
             //resultados
-            //obtener el titulo de la tabla
-            //$("#principal1").append('<h4 class="bg-primary"> Respuesta </h4>');
-            //$( "#principal" ).append('<tr>'); 
             if(rtArray.length> 0)
             {
                 var cabeza = rtArray[0];
@@ -1167,12 +830,6 @@ function iniciarConsulta(consulta)
                 respuesta = respuesta+"<tr><td>"+(i+1)+"</td>" ;
                 
                 for (var objetos in lista){
-                //     k = JSON.stringify(auxCA[lista[objetos]]);
-                //     var cortada = k.split('"value":');
-                //     var cortadas = cortada[1].slice(1,cortada[1].length-2);
-                //     //console.log("Es esto"+cortadas);
-                //     respuesta = respuesta + "<td>"+uriPrefix2(cortadas) + "</td>" ;
-                // }
                     k = JSON.stringify(auxCA[lista[objetos]]);
                         var cortada = k.split('"value":');
                         //console.log(k+"tipo");
@@ -1213,10 +870,6 @@ function iniciarConsulta(consulta)
                 document.getElementById("next").style.display = 'block';
                 //console.log(respuesta);
             }
-            // alert(respuesta);
-            // $( "#principal" ).append('</table>'); 
-            // // $( "#principal" ).append('</tbody></table>');
-            // $( "#principal" ).append('</div>'); 
         } ,
         error: function (obj, error, objError){
             alert('No fue posible extraer la información.'+obj.responseText);
@@ -1546,8 +1199,8 @@ function Triple(i,tipo)
     //console.log(prefixArray);
     
 }
-/* Pasar a la siguiente tabla
-*   
+/* 
+*   Pasar a la siguiente tabla
 */
 function next()
 {
@@ -1571,7 +1224,6 @@ function prefixuri(consulta)
     
     var listac = consulta.split(" ");
     consulta="";
-    //console.log("+++++++++++++++++"+consulta+" "+listac.length);
     for (var j = 0; j < listac.length; j++) 
     {
 
@@ -1636,12 +1288,12 @@ function drop(ev) {
        document.getElementById(idcosa).value = idinput; 
     }
 }
+//para hacer crear el prefix
 function eliminarcaracteres(stringToReplace){
     var specialChars = "!@$^&%*()+=-[]{}|:<>?,.";
     for (var i = 0; i < specialChars.length; i++) {
         stringToReplace = stringToReplace.replace(new RegExp("\\" + specialChars[i], 'g'), '');
     }
-    //specialChars = "jhjh008767n870";
 
  stringToReplace=stringToReplace.replace(new RegExp("[0-9]", "g"), "");
 
@@ -1767,16 +1419,6 @@ function uriPrefix2(uri){
 
         if(prefixArray[i][1].toString() === elemento[1].toString())
         {
-              //console.log("elemento ya agregado "+ elemento[1]);
-            // if((nameprefix+':') === prefixArray[i][0].toString())
-            // {
-            //     //console.log("elemento ya agregado "+ elemento[1]);
-            //     return elemento[0]; 
-            // }
-            // else // debo cambiar el nameprefix
-            // {
-            //     elemento[0] = prefixArray[i][0]+elemento[0].split(':')[1];
-            // }
             var namee = elemento[0].split(':');
             return prefixArray[i][0].toString()+namee[1];     
         }
@@ -1839,19 +1481,6 @@ function Agregarcampox()
         s.appendChild(option);
     }
     agregarcampox=agregarcampox+1;
-    // var idcam = "campo"+agregarcampox;
-    // var capa = document.getElementById("selcampo");
-    // var x = document.createElement("INPUT");
-    // //<input class="form-control" id="campo0" type="text" placeholder="variable" value="">
-    // x.setAttribute("class", "form-control");
-    // x.setAttribute("id", idcam);
-    // x.setAttribute("type","text");
-    // x.setAttribute("placeholder","variable");
-    // x.setAttribute("value","");
-    // x.setAttribute("ondrop","drop(event)");
-    // x.setAttribute("ondragover","allowDrop(event)");
-    // capa.appendChild(x);
-    // agregarcampox=agregarcampox+1;
 }
 // funcion para eliminar un campo en el select
 function Eliminarcampox()
@@ -1980,12 +1609,6 @@ function uriabuscar()
                 var k ;
                             
                 for (var objetos in lista){
-                    // k = JSON.stringify(auxCA[lista[objetos]]);
-                    // var cortada = k.split('"value":');
-                    // var cortadas = cortada[1].slice(1,cortada[1].length-2);
-                    // var cortadas = uriPrefix2(cortadas);
-                    // agregarFilabusqueda(cortadas,iji);
-                    // iji=iji+1;
                     //
                     k = JSON.stringify(auxCA[lista[objetos]]);
                     var cortada = k.split('"value":');
