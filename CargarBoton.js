@@ -27,9 +27,9 @@ var classArray ;
 var PropertyArray;
 var tablaClases ;
 var tablaProperty ;
-var ipServer ="";
-var grafo ="";
-var endPoint ="";
+var ipServer ;
+var grafo ;
+var endPoint ;
 
 window.onload = function()
 {
@@ -84,12 +84,14 @@ function buscog()
     $("#cargagrafo tr").remove();
     ipServer1 = document.getElementById("ipServer").value;
     endPoint1 = document.getElementById("endPoint").value;
+
     if(ipServer1!="" || endPoint1 !="" )
     {
-        //consulto la bd
+        ipServer = document.getElementById("ipServer").value;
+        endPoint = document.getElementById("endPoint").value;
         var querySparql = "select distinct ?g where{ GRAPH ?g {?s ?p ?o }}";
-    console.log(querySparql);
-    var datos = "q=" + querySparql +"###"+ipServer+"###"+"default"+"###"+endPoint;
+    console.log(querySparql+"###"+ipServer1+"###"+"default"+"###"+endPoint1);
+    var datos = "q=" + querySparql +"###"+ipServer1+"###"+"default"+"###"+endPoint1;
     $.ajax({
         type: "POST",
         url:"peticionHTTP.php",
@@ -846,18 +848,30 @@ function iniciarConsulta(consulta)
                         }
                         else if((var2[1])== '"literal"')
                         {
-                            //console.log("literal+++");
+                            console.log(k);
                             var var3 = k.split(",");
-                            var var4 = var3[1].split(":");
-                            var leng = varr[1].split(":");
-                            var cortadas = cortada[1].slice(0,cortada[1].length-2);
-                            var remplazo = leng[2].replace('\"','');
-                            remplazo = remplazo.replace('\"','');
-                            respuesta = respuesta +   "<td>" +cortadas +"\"@"+remplazo+ "</td>" ;
+                            if(var3.length===3)
+                            {
+                                var var4 = var3[1].split(":");
+                                var leng = varr[1].split(":");
+                                console.log(leng);
+                                var cortadas = cortada[1].slice(0,cortada[1].length-2);
+                                var remplazo = leng[2].replace('\"','');
+                                remplazo = remplazo.replace('\"','');
+                                respuesta = respuesta +   "<td>" +cortadas +"\"@"+remplazo+ "</td>" ;
+                            }
+                            else
+                            {
+                                var var4 = var3[1].split(":");
+                                console.log(leng);
+                                var cortadas = cortada[1].slice(0,cortada[1].length-1);
+                                respuesta = respuesta +   "<td>" +cortadas +"</td>" ;
+                            }
+                            
                         }
                         else
                         {
-                            var cortadas = cortada[1].slice(0,cortada[1].length-2);
+                            var cortadas = cortada[1].slice(0,cortada[1].length-1);
                             var cortadasz = uriPrefix2(cortadas);
                             respuesta = respuesta +  "<td>"+cortadasz+  "</td>" ;
                         }
