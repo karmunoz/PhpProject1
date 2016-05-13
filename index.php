@@ -9,6 +9,7 @@
         <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
         <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+        <!-- <link rel="stylesheet" href="./js/335cssbootstrap.min.css"> -->
         <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
         <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
         <link rel="icon" type="image/png" href="icono.png" />
@@ -99,7 +100,7 @@
                                     <div class="panel-body">
                                         <div class="tab-content">
                                             <div class="tab-pane fade in active" id="tab1primary">
-                                                <div class="table-responsive" style="height:300px; max-height: 10 ;overflow-y: scroll;">
+                                                <div class="table-responsive" style="height:300px; mix-height: 10 ;overflow-y: scroll;">
                                                     <div class="form-group has-feedback" >
                                                         <label class="control-label" for="search"></label>
                                                         <input type="text" class="form-control" id="searchclass" value="" onkeyup="busquedaClass()" placeholder="buscar..."/>
