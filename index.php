@@ -14,10 +14,6 @@
         <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
         <link rel="icon" type="image/png" href="icono.png" />
         <!-- Para las tablas -->
-        
-
-
-        
     </head>
     <body>
         
@@ -155,8 +151,6 @@
                                         <div class="from-group">
                                             <div id="selectbody" ></div>
                                         </div>
-                                        <br>
-                                        <hr>
                                     </div>
                                 </div>
                             </div>

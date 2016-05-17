@@ -838,8 +838,11 @@ function iniciarConsulta(consulta)
                         var varr = k.split(",");
                         var var2 = varr[0].split(":");//obtener el tipo
                         var pr = var2[1];
+                        //VOY A VER SI MANEJO LA COMA
 
-                        console.log(var2[1]);
+
+                        //FIN DEL MAJEJO DE LA COMA
+                        
                         if((var2[1]).length == 5)
                         {
                             var cortadas = cortada[1].slice(1,cortada[1].length-2);
@@ -850,7 +853,9 @@ function iniciarConsulta(consulta)
                         {
                             console.log(k);
                             var var3 = k.split(",");
-                            if(var3.length===3)
+                            var var3largo = k.split(":")
+                            console.log(" Largo "+ var3largo.length);
+                            if(var3largo.length === 5)
                             {
                                 var var4 = var3[1].split(":");
                                 var leng = varr[1].split(":");
@@ -863,7 +868,6 @@ function iniciarConsulta(consulta)
                             else
                             {
                                 var var4 = var3[1].split(":");
-                                console.log(leng);
                                 var cortadas = cortada[1].slice(0,cortada[1].length-1);
                                 respuesta = respuesta +   "<td>" +cortadas +"</td>" ;
                             }
@@ -1630,26 +1634,68 @@ function uriabuscar()
                     var varr = k.split(",");
                     var var2 = varr[0].split(":");//obtener el tipo
                     var pr = var2[1];
+                    // if((var2[1]).length == 5)
+                    // {
+                    //     var cortadas = cortada[1].slice(1,cortada[1].length-2);
+                    //     var cortadasz = uriPrefix2(cortadas);
+                    //     agregarFilabusqueda(cortadasz,iji);
+                    //     iji=iji+1;
+                    // }
+                    // else if((var2[1]).length == 9)
+                    // {
+                    //     console.log("literal");
+                    //     var var3 = k.split(",");
+                    //     var var4 = var3[1].split(":");
+                    //     var leng = varr[1].split(":");
+                    //     var cortadas = cortada[1].slice(0,cortada[1].length-2);
+                    //     var remplazo = leng[2].replace('\"','');
+                    //     remplazo = remplazo.replace('\"','');
+                    //     var cortadasz = cortadas +"\"@"+remplazo;
+                    //     agregarFilabusqueda(cortadasz,iji);
+                    //     iji=iji+1;
+                    // }
+                    ///
                     if((var2[1]).length == 5)
-                    {
-                        var cortadas = cortada[1].slice(1,cortada[1].length-2);
-                        var cortadasz = uriPrefix2(cortadas);
-                        agregarFilabusqueda(cortadasz,iji);
-                        iji=iji+1;
-                    }
-                    else if((var2[1]).length == 9)
-                    {
-                        console.log("literal");
-                        var var3 = k.split(",");
-                        var var4 = var3[1].split(":");
-                        var leng = varr[1].split(":");
-                        var cortadas = cortada[1].slice(0,cortada[1].length-2);
-                        var remplazo = leng[2].replace('\"','');
-                        remplazo = remplazo.replace('\"','');
-                        var cortadasz = cortadas +"\"@"+remplazo;
-                        agregarFilabusqueda(cortadasz,iji);
-                        iji=iji+1;
-                    }
+                        {
+                            var cortadas = cortada[1].slice(1,cortada[1].length-2);
+                            var cortadasz = uriPrefix2(cortadas);
+                            agregarFilabusqueda(cortadasz,iji);
+                            iji=iji+1;
+                        }
+                        else if((var2[1])== '"literal"')
+                        {
+                            console.log(k);
+                            var var3 = k.split(",");
+                            var var3largo = k.split(":")
+                            console.log(" Largo "+ var3largo.length);
+                            if(var3largo.length === 5)
+                            {
+                                var var4 = var3[1].split(":");
+                                var leng = varr[1].split(":");
+                                console.log(leng);
+                                var cortadas = cortada[1].slice(0,cortada[1].length-2);
+                                var remplazo = leng[2].replace('\"','');
+                                remplazo = remplazo.replace('\"','');
+                                cortadasz = cortadas +"\"@"+remplazo ;
+                                agregarFilabusqueda(cortadasz,iji);
+                                iji=iji+1;
+                            }
+                            else
+                            {
+                                var var4 = var3[1].split(":");
+                                var cortadas = cortada[1].slice(0,cortada[1].length-1);
+                                agregarFilabusqueda(cortadas,iji);
+                                iji=iji+1;
+                            }
+                            
+                        }
+                        else
+                        {
+                            var cortadas = cortada[1].slice(0,cortada[1].length-1);
+                            var cortadasz = uriPrefix2(cortadas);
+                            agregarFilabusqueda(cortadasz,iji);
+                            iji=iji+1;
+                        }
                 }
                 document.getElementById("idsiguiente").style.display="block";
             }
