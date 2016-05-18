@@ -7,12 +7,11 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!--  Para el menu -->
         <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-        <!-- <link rel="stylesheet" href="./js/335cssbootstrap.min.css"> -->
-        <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
-        <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
-        <link rel="icon" type="image/png" href="icono.png" />
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="css/3.3.5booststrap.min.css">
+        <link rel="stylesheet" href="css/3.1.1bootstrap.min.css">
+        <link rel="stylesheet" href="css/4.1.0font-awesome.min.css">
+        <link rel="icon" type="image/png" href="img/icono.png" />
         <!-- Para las tablas -->
     </head>
     <body>
@@ -21,7 +20,7 @@
             <div class="row">
                 <div class="panel">
                     <div class="panel-heading" id="0" >
-                             <h1 class="text-primary"> <img alt="center" src="logoflor.jpg" />Interfaz gráfica para consultas SPARQL </h1>     
+                             <h1 class="text-primary"> <img alt="center" src="img/logoflor.jpg" />Interfaz gráfica para consultas SPARQL </h1>     
                     </div>
                 </div>
                 <!-- Para hacer los prefijos -->
@@ -313,25 +312,25 @@
         <!-- Archivos Js -->
         
 
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-        <script type='text/javascript' src='CargarBoton.js'></script>
-        <script src="plugins/jquery/jquery-2.1.0.min.js"></script>
-        <script src="plugins/jquery-ui/jquery-ui.min.js"></script>
-        <script src="plugins/bootstrap/bootstrap.min.js" type="text/javascript"></script>
-        <script src="plugins/justified-gallery/jquery.justifiedgallery.min.js" type="text/javascript"></script>
-        <script src="plugins/tinymce/tinymce.min.js" type="text/javascript"></script>
-        <script src="plugins/tinymce/jquery.tinymce.min.js" type="text/javascript"></script>
+        <script src="jquery/1.11.1jquery.min.js"></script>
+        <script type='text/javascript' src='js/CargarBoton.js'></script>
+        <script src="js/jquery-2.1.0.min.js"></script>
+        <script src="js/jquery-ui.min.js"></script>
+        <script src="js/bootstrap.min.js" type="text/javascript"></script>
+        <!-- <script src="js/jquery.justifiedgallery.min.js" type="text/javascript"></script> -->
+        <script src="js/tinymce.min.js" type="text/javascript"></script>
+        <script src="js/jquery.tinymce.min.js" type="text/javascript"></script>
         <script src="js/devoops.js" type="text/javascript"></script>        
-        <script type="text/javascript" src="bootbox.js" ></script>
-        <script type="text/javascript" src="bootbox.min.js" ></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script type="text/javascript" src="js/bootbox.js" ></script>
+        <script type="text/javascript" src="js/bootbox.min.js" ></script>
+        <script src="jquery/1.9.jquery.min.js"></script>
 
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
-        <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" type="text/css" /> 
+        <script src="jquery/1.7jquery.min.js"></script>
+        <script src="jquery/1.8jquery-ui.min.js"></script>
+        <link rel="stylesheet" href="css/1.8jquery-ui.css" type="text/css" /> 
 
         <!-- <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"> -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+        <script src="js/1.12.0jquery.min.js"></script>
+        <script src="js/3.3.6bootstrap.min.js"></script>
     </body>
 </html>
