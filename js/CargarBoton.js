@@ -1458,7 +1458,12 @@ function uriPrefix2(uri){
         if(prefixArray[i][1].toString() === elemento[1].toString())
         {
             var namee = elemento[0].split(':');
-            return prefixArray[i][0].toString()+namee[1];     
+            var namee2 =namee[1];
+            for (var iiii = 2; iiii < namee.length; iiii++) {
+                namee2 = namee2 +":"+ namee[iiii];
+            }
+            //console.log(namee2 +"aaaaaaa");
+            return prefixArray[i][0].toString()+namee2;     
         }
     };
     //verificar el nombre
@@ -1658,9 +1663,9 @@ function uriabuscar()
                     {
                         console.log("esto es 5aaa ");
                         var cortadas = cortada[1].slice(1,cortada[1].length-2);
-                        console.log(cortadas);
+                        //console.log(cortadas);
                         var cortadasz = uriPrefix2(cortadas);
-                        console.log(cortadasz);
+                        //console.log(cortadasz);
                         agregarFilabusqueda(cortadasz,iji);
                         iji=iji+1;
                     }
