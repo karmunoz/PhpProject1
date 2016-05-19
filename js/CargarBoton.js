@@ -562,7 +562,7 @@ function borrarPanelfilter2(id,id2)
 function GetCampos()
 {
     for(var i=0; i< CamposImput.length; i++) 
-    {	
+    {   
         // Si el tipo de campo es una caja de texto
         if(CamposImput[i].type == "text")
         {            
@@ -1327,7 +1327,7 @@ function drop(ev) {
 }
 //para hacer crear el prefix
 function eliminarcaracteres(stringToReplace){
-    var specialChars = "!@$^&%*()+=-[]{}|:<>?,.";
+    var specialChars = "!@$^&%*()+=-[]{}|<>?,.";
     for (var i = 0; i < specialChars.length; i++) {
         stringToReplace = stringToReplace.replace(new RegExp("\\" + specialChars[i], 'g'), '');
     }
@@ -1450,6 +1450,7 @@ function uriPrefix2(uri){
             }
         }
     }
+    console.log("aaaaaaaaaaaaaaaa  "+elemento[1]+" "+nameprefix);
     //ver si esta en el arreglo
     for (var i = 0; i < prefixArray.length; i++) {
 
@@ -1653,32 +1654,13 @@ function uriabuscar()
                     var varr = k.split(",");
                     var var2 = varr[0].split(":");//obtener el tipo
                     var pr = var2[1];
-                    // if((var2[1]).length == 5)
-                    // {
-                    //     var cortadas = cortada[1].slice(1,cortada[1].length-2);
-                    //     var cortadasz = uriPrefix2(cortadas);
-                    //     agregarFilabusqueda(cortadasz,iji);
-                    //     iji=iji+1;
-                    // }
-                    // else if((var2[1]).length == 9)
-                    // {
-                    //     console.log("literal");
-                    //     var var3 = k.split(",");
-                    //     var var4 = var3[1].split(":");
-                    //     var leng = varr[1].split(":");
-                    //     var cortadas = cortada[1].slice(0,cortada[1].length-2);
-                    //     var remplazo = leng[2].replace('\"','');
-                    //     remplazo = remplazo.replace('\"','');
-                    //     var cortadasz = cortadas +"\"@"+remplazo;
-                    //     agregarFilabusqueda(cortadasz,iji);
-                    //     iji=iji+1;
-                    // }
-                    ///
                     if((var2[1]).length == 5)
                     {
-                        console.log("esto es 5 ");
+                        console.log("esto es 5aaa ");
                         var cortadas = cortada[1].slice(1,cortada[1].length-2);
+                        console.log(cortadas);
                         var cortadasz = uriPrefix2(cortadas);
+                        console.log(cortadasz);
                         agregarFilabusqueda(cortadasz,iji);
                         iji=iji+1;
                     }
