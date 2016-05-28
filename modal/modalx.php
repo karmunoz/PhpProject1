@@ -1,4 +1,4 @@
-<div id="modalx" class="modal fade" role="dialog">
+<div id="modalx" class="modal fade" role="dialog" data-keyboard="false" data-backdrop="static">
   <div class="modal-dialog">
 
     <!-- Modal content-->

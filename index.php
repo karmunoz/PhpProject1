@@ -55,11 +55,12 @@
                             <div class="panel panel-primary">
                                 <div class="panel-heading">
                                     <i class="fa fa-gear"></i>
-                                        End Point
+                                        Endpoint
                                 </div>
                                 <div class="panel-body">
-                                    <div class="alert alert-warning">
-                                        <div id="idenpoint" value="" style="overflow-x: scroll;" data-toggle="tooltip" data-placement="bottom" title="Enp Point conectado."></div>
+                                    <div class="alert alert-warning" style="overflow-x: scroll;">
+                                        <div id="idenpoint" value=""  data-toggle="tooltip" data-placement="bottom" title="Endpoint conectado."></div>
+                                        <div id="idgrafo" value=""  data-toggle="tooltip" data-placement="bottom" title="Grafo conectado."></div>
                                     </div>
                                     <button type="button" class="btn btn-primary" onclick="abrirmodal()" data-toggle="modal" data-target="#Modal1"><b data-toggle="tooltip" data-placement="bottom" title="Información de conexión a la base de datos, esta información puede cambiar.">Conexión</b></button>
                                 </div>
@@ -197,7 +198,23 @@
                 </div>
             
                 <!-- Boton modal por el momento -->
-                
+                <!-- Modal -->
+                  <div class="modal fade" id="myModal" role="dialog" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+                    <div class="modal-dialog modal-sm">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <button type="button" class="close" data-toggle="modal" data-target="#Modal1"  data-dismiss="modal">&times;</button>
+                          <h4 class="modal-title">Bienvenido</h4>
+                        </div>
+                        <div class="modal-body">
+                          <p>Me complace darle la más cordial bienvenida a IGC. <br> Recuerde que <b>V</b> representa una variable y <b>C</b> representa una constante o literal.</p>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-default" onclick="cargarConex()"  data-toggle="modal" data-target="#Modal1" data-dismiss="modal">Cerrar</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div> <!--  Fin molad de bienvenida -->
                 <div class="modal fade bs-example-modal-sm" id="Modal1" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"  aria-hidden="true" data-keyboard="false" data-backdrop="static">
                     <div class="modal-dialog">
                         <div class="modal-content">
@@ -209,16 +226,16 @@
                             <div class="modal-body">
                                 <div class="panel-body">
                                     <form role="form">
-                                        <div class="form-group">
+                                        <!-- <div class="form-group"> 
                                             <label>Ip Server</label>
                                             <input class="form-control" id="ipServer" value="http://dbpedia.org/sparql">
                                         </div>
                                         <div class="form-group">
                                             <label>Grafo</label>
                                             <input class="form-control" id="grafo" value="http://dbpedia.org">
-                                        </div>
+                                        </div> -->
                                         <div class="form-group">
-                                            <label>End Point</label>
+                                            <label>Endpoint</label>
                                             <input class="form-control" id="endPoint" value="http://dbpedia.org/sparql">
                                         </div>
                                     </form>
@@ -258,7 +275,7 @@
                                         Texto consulta
                                     </div>
                                     <div class="panel-body">
-                                        <div id="Consulta"></div>
+                                        <div id="Consulta" style="font-family:courier;"></div>
                                     </div>
                                 </div>
                                 <!-- Mostrar el error-->

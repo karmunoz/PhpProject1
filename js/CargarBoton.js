@@ -1,3 +1,4 @@
+
 /*
 * Para la busqueda en las tabla de prefijo, class and property
 */
@@ -14,6 +15,7 @@ var valorConsulta;//para la consulta de la paginación
 var booleanNext=true;//para saber que fue llamado de next
 var paginaModal=-1;
 var iji =0; //para llevar la cuenta de los radio en modal
+var num1 =0;
 var consultaModal="";
 var prefijos ="";
 var tipobusqueda ="";
@@ -30,19 +32,13 @@ var tablaProperty ;
 var ipServer ;
 var grafo ;
 var endPoint ;
-
+var identi;
 window.onload = function()
 {
-    bootbox.dialog({
-    title: "Bienvenido",
-    message: 'Espere mientras carga las Clases y Property. <br> Recuerde que <b>V</b> representa una variable y <b>C</b> representa una constante o literal.',
-    buttons: {
-        main: {
-            label: "Aceptar",
-            className: "btn-primary",
-            callback: function() { }
-            }
-        }});
+    identi = Math.random();
+    $(window).load(function(){
+    $('#myModal').modal('show');});
+    
     prefixArray =  new Array();
     classArray = new Array();
     PropertyArray = new Array();
@@ -65,12 +61,17 @@ window.onload = function()
     valorNext = 0;
     valorConsulta=""; 
     //para los cargar datos 
-    ipServer = document.getElementById("ipServer").value;
-    grafo = document.getElementById("grafo").value;
-    endPoint = document.getElementById("endPoint").value;
-    document.getElementById("idenpoint").innerHTML = endPoint;
-    clases();//carga las clases
-    property();//cargar la lista del ?y  
+    //ipServer = document.getElementById("ipServer").value;
+    //grafo = document.getElementById("grafo").value;
+    // endPoint = document.getElementById("endPoint").value;
+    // document.getElementById("idenpoint").innerHTML = endPoint;
+    // clases();//carga las clases
+    // property();//cargar la lista del ?y  
+}
+function cargarConex()
+{   
+    $("#myModal").modal('hide');
+    console.log("acepto");
 }
 function abrirmodal()
 {
@@ -82,16 +83,26 @@ function buscog()
     //cargagrafo
     //obtener campos
     $("#cargagrafo tr").remove();
-    ipServer1 = document.getElementById("ipServer").value;
+    //ipServer1 = document.getElementById("ipServer").value;
     endPoint1 = document.getElementById("endPoint").value;
-
+    var ubi = (document.getElementById("endPoint").value).lastIndexOf("/");
+    var t = endPoint1.substring(0, ubi);
+    if(ubi == endPoint1.length-1 )
+    {
+        console.log("tiene / al final")
+        t = endPoint1.substring(0, ubi);
+        ubi = t.lastIndexOf("/");
+        t = t.substring(0,ubi);
+    }    
+    ipServer1 = t;
     if(ipServer1!="" || endPoint1 !="" )
     {
-        ipServer = document.getElementById("ipServer").value;
-        endPoint = document.getElementById("endPoint").value;
+        ipServer = ipServer1;
+        endPoint = endPoint1;
         var querySparql = "select distinct ?g where{ GRAPH ?g {?s ?p ?o }}";
-    console.log(querySparql+"###"+ipServer1+"###"+"default"+"###"+endPoint1);
-    var datos = "q=" + querySparql +"###"+ipServer1+"###"+"default"+"###"+endPoint1;
+    console.log(querySparql+"###"+ipServer1+"###"+"default"+"###"+endPoint1+"###"+identi);
+    var datos = "q=" + querySparql +"###"+ipServer1+"###"+"default"+"###"+endPoint1+"###"+identi;
+    num1=0;
     $.ajax({
         type: "POST",
         url:"peticionHTTP.php",
@@ -117,8 +128,12 @@ function buscog()
                     var varr = k.split(",");
                     var res = varr[1].slice(9,varr[1].length-2);
                     //console.log(cortar(res));
-                    var cadena = '<tr><td onclick="toqueesto(this.innerHTML)" id="'+res+'" >'+res+'</td></tr>';
-                    $('#cargagrafo').append(cadena);                    
+                    //var cadena = '<tr><td onclick="toqueesto(this.innerHTML)" id="'+res+'" >'+res+'</td></tr>';
+                    var aaa = '<div class="radio"><label><input type="radio" id="'+num1+'" name="deacuerdo1">'+res+'</label></div>'
+                    var cadena = '<tr><td>'+aaa+'</td></tr>';
+                    num1++; 
+                    $('#cargagrafo').append(cadena);
+                                     
                 }
             }
         }
@@ -126,11 +141,11 @@ function buscog()
     });
     }
 }
-function toqueesto(res)
-{
-    console.log(res);
-    document.getElementById("grafo").value = res;
-}
+// function toqueesto(res)
+// {
+//     console.log(res);
+//     document.getElementById("grafo").value = res;
+// }
 //funcion para cargar los paneles
 function funcionextra(id)    
 {
@@ -225,40 +240,103 @@ function cancelardatos()
     document.getElementById("endPoint").value =endPoint; 
 }
 function cargardatos()
-{
-    var er = document.getElementById("ipServer").value;
-    var fo = document.getElementById("grafo").value;
-    var nt = document.getElementById("endPoint").value;
-    if( er =! ipServer || fo != grafo || nt !=endPoint)
+{   
+    var resultadom=""; 
+    var porNombre=document.getElementsByName("deacuerdo1");
+    // Recorremos todos los valores del radio button para encontrar el
+    // seleccionado
+    var selwect = true;
+    for(var i=0;i<porNombre.length;i++)
     {
-        console.log("hay cambio");
-        ipServer = document.getElementById("ipServer").value;
-        grafo = document.getElementById("grafo").value;
+        if(porNombre[i].checked)
+        {
+            resultadom=porNombre[i].id;
+            selwect = false;
+        }
+    }
+    var lotengo="";
+    if (selwect == false)
+    {
+        console.log("resultado: "+ resultadom );
+        var t=document.getElementById('cargagrafo'); 
+        var f=t.getElementsByTagName('td');
+        lotengo = f[resultadom].childNodes[0].innerText;
+        console.log(lotengo);
+    }
+    $("#cargagrafo tr").remove();
+    //ipServer1 = document.getElementById("ipServer").value;
+    endPoint1 = document.getElementById("endPoint").value;
+    var ubi = (document.getElementById("endPoint").value).lastIndexOf("/");
+    var t = endPoint1.substring(0, ubi);
+    if(ubi == endPoint1.length-1 )
+    {
+        console.log("tiene / al final")
+        t = endPoint1.substring(0, ubi);
+        ubi = t.lastIndexOf("/");
+        t = t.substring(0,ubi);
+    }    
+    ipServer1 = t;
+    var nt = document.getElementById("endPoint").value;
+    if( lotengo !="")
+    {
         endPoint = document.getElementById("endPoint").value;
+        ipServer =ipServer1;
+        grafo = lotengo;
         document.getElementById("idenpoint").innerHTML = endPoint;
+        document.getElementById("idgrafo").innerHTML = grafo;
         document.getElementById("principal").innerHTML="";
         document.getElementById("principal1").innerHTML="";
         document.getElementById("Consulta").innerHTML="";
         document.getElementById("Error").innerHTML="";
-        //elimiarc ontenido y listas
         prefixArray =new Array();
-        console.log("elimino los Array");
         document.getElementById("selectPrefijos").innerHTML = "";
         $("#tablaproperty tr").remove();
         $("#tablaclases tr").remove();
         $("#tablaprefix tr").remove();
-        //console.log("debo eliminar");
         classArray = [];
         PropertyArray = [];
         tablaProperty= [];
         tablaClases = [];
         andPrefix("Todo","");
         completo = 0;
-        //cargar los datos de nuevo
         clases();
         property();
         console.log("prefixArray " +prefixArray);
-    }    
+    }
+    //
+    // var er = document.getElementById("ipServer").value;
+    // var fo = document.getElementById("grafo").value;
+    // var nt = document.getElementById("endPoint").value;
+    // if( er =! ipServer || fo != grafo || nt !=endPoint)
+    // {
+    //     console.log("hay cambio");
+    //     ipServer = document.getElementById("ipServer").value;
+    //     grafo = document.getElementById("grafo").value;
+    //     endPoint = document.getElementById("endPoint").value;
+    //     document.getElementById("idenpoint").innerHTML = endPoint;
+    //     document.getElementById("principal").innerHTML="";
+    //     document.getElementById("principal1").innerHTML="";
+    //     document.getElementById("Consulta").innerHTML="";
+    //     document.getElementById("Error").innerHTML="";
+    //     //elimiarc ontenido y listas
+    //     prefixArray =new Array();
+    //     console.log("elimino los Array");
+    //     document.getElementById("selectPrefijos").innerHTML = "";
+    //     $("#tablaproperty tr").remove();
+    //     $("#tablaclases tr").remove();
+    //     $("#tablaprefix tr").remove();
+    //     //console.log("debo eliminar");
+    //     classArray = [];
+    //     PropertyArray = [];
+    //     tablaProperty= [];
+    //     tablaClases = [];
+    //     andPrefix("Todo","");
+    //     completo = 0;
+    //     //cargar los datos de nuevo
+    //     clases();
+    //     property();
+    //     console.log("prefixArray " +prefixArray);
+    // }    
 }
 /**
 *   funcion para agregar una prefijo al select de prefijo
@@ -374,7 +452,7 @@ function clases()
 {
     var querySparql = "select distinct ?c where{?x rdf:type ?c }";
     console.log(querySparql);
-    var datos = "q=" + querySparql +"###"+ipServer+"###"+grafo+"###"+endPoint;
+    var datos = "q=" + querySparql +"###"+ipServer+"###"+grafo+"###"+endPoint +"###"+identi;
     $.ajax({
         type: "POST",
         url:"peticionHTTP.php",
@@ -417,7 +495,7 @@ function property()
 {
     var querySparql = "select distinct ?y where{?x ?y ?z}";
     console.log(querySparql);
-    var datos = "q=" + querySparql +"###"+ipServer+"###"+grafo+"###"+endPoint;
+    var datos = "q=" + querySparql +"###"+ipServer+"###"+grafo+"###"+endPoint +"###"+identi;
     $.ajax({
         type: "POST",
         url:"peticionHTTP.php",
@@ -693,7 +771,7 @@ function GetCampos()
     //consulta solo el cuerpo
     //alert("Consulta "+consulta);
     //$("#Consulta").append('<h4 class="bg-primary"> Consulta </h4> ');
-    $("#Consulta").append('<font size="3">'+Consulta +'</font>');
+    $("#Consulta").append('<font face=" size="3">'+Consulta +'</font>');
  }
 function stringSelect()
 {
@@ -792,7 +870,7 @@ function iniciarConsulta(consulta)
     consulta = consulta.replace(/\+/g, "####");
     consulta = consulta.replace(/&/g, "*****");
     var querySparql = consulta +" LIMIT "+10+" OFFSET "+(valorNext*10);
-    var datos = "q=" + querySparql +"###"+ipServer+"###"+grafo+"###"+endPoint;
+    var datos = "q=" + querySparql +"###"+ipServer+"###"+grafo+"###"+endPoint+"###"+identi;
     console.log("----------------------"+datos);
     
     $.ajax({
@@ -902,7 +980,7 @@ function iniciarConsulta(consulta)
             }
         } ,
         error: function (obj, error, objError){
-            alert('No fue posible extraer la información.'+obj.responseText);
+            //alert('No fue posible extraer la información.'+obj.responseText);
             var errores = obj.responseText.search("file_get_contents");
             if(errores != -1)
             {
@@ -1450,7 +1528,7 @@ function uriPrefix2(uri){
             }
         }
     }
-    console.log("aaaaaaaaaaaaaaaa  "+elemento[1]+" "+nameprefix);
+    //console.log("aaaaaaaaaaaaaaaa  "+elemento[1]+" "+nameprefix);
     //ver si esta en el arreglo
     for (var i = 0; i < prefixArray.length; i++) {
 
@@ -1626,7 +1704,7 @@ function uriabuscar()
     } 
     setInterval("reloj()",31000);
     $( "#infomodal" ).append('<div class="alert alert-success" id="reloj">Realizando consulta... </div>');
-    var datos = "q=" + querySparql +"###"+ipServer+"###"+grafo+"###"+endPoint;
+    var datos = "q=" + querySparql +"###"+ipServer+"###"+grafo+"###"+endPoint+"###"+identi;
     //console.log("Datos: "+datos);
     $.ajax({
         type: "POST",

@@ -52,6 +52,8 @@
     	<option>COUNT</option>
     	<option>MAX</option>
     	<option>MIN</option>
+      <option>SUM</option>
+
   	</select>
 	<label>(</label>
   <select class="form-control" id="valueop">
