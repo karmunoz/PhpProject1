@@ -31,7 +31,7 @@ var tablaClases ;
 var tablaProperty ;
 var ipServer ;
 var grafo ;
-var endPoint ;
+var endPoint= "http://dbpedia.org/sparql" ;
 var identi;
 window.onload = function()
 {
@@ -64,7 +64,7 @@ window.onload = function()
     //ipServer = document.getElementById("ipServer").value;
     //grafo = document.getElementById("grafo").value;
     // endPoint = document.getElementById("endPoint").value;
-    // document.getElementById("idenpoint").innerHTML = endPoint;
+    document.getElementById("idenpoint").innerHTML = endPoint;
     // clases();//carga las clases
     // property();//cargar la lista del ?y  
 }
@@ -76,10 +76,20 @@ function cargarConex()
 function abrirmodal()
 {
     $("#cargagrafo tr").remove();
+    document.getElementById("mensajemodal").innerHTML="";
 }
 //funcion para buacar grafo en bd
+function reloj1()
+{
+    var algor =document.getElementById("mensajemodal").innerHTML;
+    if(algor ==="Realizando consulta...")
+    {
+        document.getElementById("mensajemodal").innerHTML="No hubo respuesta, verifique URL.";
+    }
+}
 function buscog()
 {
+    document.getElementById("mensajemodal").innerHTML="";
     //cargagrafo
     //obtener campos
     $("#cargagrafo tr").remove();
@@ -99,10 +109,12 @@ function buscog()
     {
         ipServer = ipServer1;
         endPoint = endPoint1;
-        var querySparql = "select distinct ?g where{ GRAPH ?g {?s ?p ?o }}";
+    document.getElementById("mensajemodal").innerHTML="Realizando consulta...";
+    var querySparql = "select distinct ?g where{ GRAPH ?g {?s ?p ?o }}";
     console.log(querySparql+"###"+ipServer1+"###"+"default"+"###"+endPoint1+"###"+identi);
     var datos = "q=" + querySparql +"###"+ipServer1+"###"+"default"+"###"+endPoint1+"###"+identi;
     num1=0;
+    setInterval("reloj1()",31000);
     $.ajax({
         type: "POST",
         url:"peticionHTTP.php",
@@ -113,7 +125,12 @@ function buscog()
         {
             var rtArray = datos.results.bindings;
             var respuesta ="";
-                //obtener el  cuerpo de la lista
+            //console.log(rtArray+" kk "+rtArray.indexOf("Warning"));
+            if(rtArray.length <= 0 )
+            {
+                document.getElementById("mensajemodal").innerHTML="No hubo respuesta, verifique URL.";
+            }
+            else{document.getElementById("mensajemodal").innerHTML="";}
             for(var i=0; i<rtArray.length; i++)
             {
                 var auxCA = rtArray[i];
@@ -235,8 +252,8 @@ function Limpiar()
 */
 function cancelardatos()
 {
-    document.getElementById("ipServer").value = ipServer;
-    document.getElementById("grafo").value  = grafo;
+    //document.getElementById("ipServer").value = ipServer;
+    //document.getElementById("grafo").value  = grafo;
     document.getElementById("endPoint").value =endPoint; 
 }
 function cargardatos()
@@ -450,6 +467,8 @@ function cargarphp()
 //funcion para cargar las clases
 function clases()
 {
+    document.getElementById("Error").innerHTML="";
+    $( "#Error" ).append('<label class="control-label" for="inputError">Buscando Class...</label> ');
     var querySparql = "select distinct ?c where{?x rdf:type ?c }";
     console.log(querySparql);
     var datos = "q=" + querySparql +"###"+ipServer+"###"+grafo+"###"+endPoint +"###"+identi;
@@ -461,6 +480,7 @@ function clases()
         success:
         function(datos)
         {
+            document.getElementById("Error").innerHTML="";
             var rtArray = datos.results.bindings;
             var respuesta ="";
             //console.log("Respuesta tamaño "+rtArray.length);
@@ -493,6 +513,8 @@ function clases()
 //funcion para cargar las property
 function property()
 {
+    document.getElementById("Error").innerHTML="";
+    $( "#Error" ).append('<label class="control-label" for="inputError">Buscando Property...</label> ');
     var querySparql = "select distinct ?y where{?x ?y ?z}";
     console.log(querySparql);
     var datos = "q=" + querySparql +"###"+ipServer+"###"+grafo+"###"+endPoint +"###"+identi;
@@ -504,7 +526,7 @@ function property()
         success:
         function(datos)
         {
-
+           document.getElementById("Error").innerHTML="";
            var rtArray = datos.results.bindings;
            //console.log("Datos: "+rtArray);
             var respuesta ="";
@@ -872,7 +894,8 @@ function iniciarConsulta(consulta)
     var querySparql = consulta +" LIMIT "+10+" OFFSET "+(valorNext*10);
     var datos = "q=" + querySparql +"###"+ipServer+"###"+grafo+"###"+endPoint+"###"+identi;
     console.log("----------------------"+datos);
-    
+    document.getElementById("Error").innerHTML="";
+    $( "#Error" ).append('<label class="control-label" for="inputError">Realizando consulta...</label> ');
     $.ajax({
         type: "POST",
         url:"peticionHTTP.php",
@@ -898,8 +921,10 @@ function iniciarConsulta(consulta)
                 //obtener el  cuerpo de la lista
                 if(rtArray.length ===0)
                 {
+                    document.getElementById("Error").innerHTML="";
                     $( "#Error" ).append('<label class="control-label" for="inputError">Su consulta no obtuvo resultado</label> ');
                 }
+                else{ document.getElementById("Error").innerHTML="";}
             for(var i=0; i<rtArray.length; i++){
                 var auxCA = rtArray[i];
                 //Se extraen los valores
@@ -960,11 +985,11 @@ function iniciarConsulta(consulta)
                             var cortadas = cortada[1].slice(0,cortada[1].length-1);
                             var cortadasz = uriPrefix2(cortadas);
                             var datapir = k.split('"datatype":');
-                            console.log(datapir);
+                            //console.log(datapir);
                             if(datapir[1] !== undefined)
                             {
                                 var atapir = datapir[1].split('"');
-                                console.log("Es la url ...."+atapir[1]);
+                                //console.log("Es la url ...."+atapir[1]);
                                 cortadasz = cortadasz+"^^&#60;"+atapir[1]+"&#62;";
                             }
                             respuesta = respuesta +  "<td>"+cortadasz+  "</td>" ;

@@ -192,6 +192,7 @@
                                         </select>
                                     </div>
                                 </div>
+                                <div>Recuerde que V representa una variable y C representa una constante o literal.</div>
                             </div>
                         </div>
                     </div>
@@ -243,13 +244,12 @@
                                     <div class="modal-footer">
                                         <button data-toggle="tooltip" data-placement="top" title="Buscar grafos en la base de datos." type="button" class="btn btn-primary" onclick="buscog()">Buscar Grafo</button>
                                     </div>
-                                    <div>
                                         <div class="table-responsive" style="max-height:200px; max-height:5;overflow-y:auto;" >
-                                        <table class="table table-hover"  id="cargagrafo" >
-                                        </table>
+                                            <table class="table table-hover"  id="cargagrafo" >
+                                            </table>
+                                        </div>
+                                        <div id="mensajemodal"></div>
                                     </div>
-                                    </div>
-                                </div>
                             </div> <!-- Fin cuerpo modal -->
                                 <p ALIGN=center>.</p>
                             
@@ -280,9 +280,9 @@
                                 </div>
                                 <!-- Mostrar el error-->
                                 <div class="panel panel-primary">
-                                    <div class="panel-heading" data-toggle="tooltip" data-placement="top" title="Errores producidos." >
+                                    <div class="panel-heading" data-toggle="tooltip" data-placement="top" title="Mensajes producidos." >
                                         <i class="glyphicon glyphicon-alert"></i>
-                                        Errores
+                                        Mensajes
                                     </div>
                                     <div class="panel-body">
                                         <div  class="form-group has-error" id="Error"></div>

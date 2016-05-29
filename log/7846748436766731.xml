@@ -1,0 +1,2 @@
+<?xml version="1.0"?>
+<consultas><consulta0>select distinct ?g where{ GRAPH ?g {?s ?p ?o }}###http://dbpedia.org###default###http://dbpedia.org/sparql###0.7846748436766731</consulta0></consultas>
