@@ -31,7 +31,7 @@ var tablaClases ;
 var tablaProperty ;
 var ipServer ;
 var grafo ;
-var endPoint= "http://dbpedia.org/sparql" ;
+var endPoint= "http://es.dbpedia.org/sparql" ;
 var identi;
 window.onload = function()
 {
