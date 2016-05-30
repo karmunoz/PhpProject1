@@ -237,7 +237,7 @@
                                         </div> -->
                                         <div class="form-group">
                                             <label>Endpoint</label>
-                                            <input class="form-control" id="endPoint" value="http://es.dbpedia.org/sparql">
+                                            <input class="form-control" id="endPoint" value="http://data.utpl.edu.ec/ambar/sparql">
                                         </div>
                                     </form>
                                     <!-- boton para busqueda de grafo -->
