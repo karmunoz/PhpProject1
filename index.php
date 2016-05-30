@@ -173,13 +173,13 @@
                                     <div class="btn-group" id="<?php echo $algo; ?>" ><!--  -->
                                         <select class="selectpicker" id="<?php echo $algo; ?>s"data-style="btn-primary"  onchange="funcionextra(<?php echo $algo; ?>)">
                                             <option hidden>OPCIONES</option>
-                                            <optgroup label="OPCIONES">
+                                            <optgroup label="GRAPH PATTERN">
                                             <option value="Optional" >OPTIONAL</option>
                                             <option value="Union" >UNION</option>
                                             <option value="And" >AND</option>
                                             <option value="Filter" >FILTER</option>
                                             </optgroup>
-                                            <optgroup label="TRIPLE">
+                                            <optgroup label="TRIPLE PATTERN">
                                             <option value="V-C-V">V-C-V</option>
                                             <option value="C-C-V">C-C-V</option>
                                             <option value="V-C-C">V-C-C</option>
